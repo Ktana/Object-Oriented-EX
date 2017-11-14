@@ -281,6 +281,11 @@ public class toCSVtoKML {
 		pw.close();
 	}
 
+	/**
+	*this function gets the path of CSV file and write a KML file.
+	*@param fileName need to be a path on your computer this is a String.
+	*@return KML file to chosen path.
+	*/
 	public static void toKML(String fileName) {
 		try {
 			FileReader fr = new FileReader(fileName);
