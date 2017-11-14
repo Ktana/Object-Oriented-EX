@@ -1,6 +1,6 @@
 /**
  * @authors Alona(321894834) + Alex(319451514)
- * This function read KML file and write it to CSV table 
+ * This function read CSV files, filter data and write it to KML file 
  */
 
 import java.io.BufferedReader;
