@@ -27,7 +27,7 @@ public class toCSVtoKML {
 	public static List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
 
 	/**
-	 * @credit readCSV function (surround) see:
+	 * @credit writeCSV function (surround) see:
 	 * https://stackoverflow.com/questions/30073980/java-writing-strings-to-a-csv-file 
 	 */
 
@@ -280,10 +280,10 @@ public class toCSVtoKML {
 		pw.write(sb.toString());
 		pw.close();
 	}
-
+	
 	/**
 	*this function gets the path of CSV file and write a KML file.
-	*@param fileName need to be a path on your computer this is a String.
+	*@param fileName	need to be a path on your computer this is a String.
 	*@return KML file to chosen path.
 	*/
 	public static void toKML(String fileName) {
@@ -431,6 +431,7 @@ public class toCSVtoKML {
 		mergeData(output_path +"RESULT");
 		
 		toKML("C:\\ex0\\OUT\\RESULT_Merged.csv");
+		
 	}
 
 
