@@ -1,4 +1,7 @@
-/**
+ /** describes the head line (the labels) on the input file, 
+ * it contains private Strings that matching the labels on the original file, 
+ * getters of the values and one constructor that gets the relevant values from the header line.
+ * Main use: saving data about the devise that collect the data.
  * @authors Alona + Alex
  */
 public class CSV_header_row
