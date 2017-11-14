@@ -1,5 +1,5 @@
 /**
- * @authors Alona(321894834) + Alex(319451514)
+ * @authors Alona + Alex
  */
 public class CSV_header_row
 {
