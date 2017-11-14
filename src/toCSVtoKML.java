@@ -1,5 +1,5 @@
 /**
- * @authors Alona(321894834) + Alex(319451514)
+ * @authors Alona + Alex
  * This function read CSV files, filter data and write it to KML file 
  */
 
