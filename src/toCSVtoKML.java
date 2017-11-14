@@ -27,12 +27,12 @@ public class toCSVtoKML {
 	public static List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
 
 	/**
-	 * @credit writeCSV function (surround) see:
+	 * @credit readCSV function (surround) see:
 	 * https://stackoverflow.com/questions/30073980/java-writing-strings-to-a-csv-file 
 	 */
 
 
-	public static void writeCSV(String fileName){	
+	public static void readCSV(String fileName){	
 		CSV_header_row header_row =null;
 		String line=null;
 
@@ -421,7 +421,7 @@ public class toCSVtoKML {
 		}
 
 		for (int i = 0; i < fileNameArray.size(); i++) {
-			writeCSV(fileNameArray.get(i));
+			readCSV(fileNameArray.get(i));
 		}
 		mergeData(output_path +"RESULT");
 		
