@@ -1,5 +1,5 @@
 /**
- * @authors Alona(321894834) + Alex(319451514)
+ * @authors Alona + Alex
  */
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
