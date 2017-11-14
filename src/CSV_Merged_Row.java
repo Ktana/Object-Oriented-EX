@@ -1,12 +1,21 @@
-/**
- * @authors Alona + Alex
- */
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 
+/** this class represents a row from Union output file.
+ * Contains private String variables: 5 key labels and one more " extends " key that
+ * contains the 40 more dynamic variables. Getters and one constructor that gets 2 Strings: 
+ * the first is the keys of data (they separated by ',') and the second String is the "extension" 
+ * (also separated by ','). Also – the constructor make sure that the extension does not het over 40 
+ * (if we lack of data – it will be spaces).
+ * The class contains five comparators (ID, time, alt, lon, lat) for each comparator object 
+ * has been done @Override to the Compare function.
+ * The class also contains CompareByTime function and CompareByPlace function that we will use on the filter.
+ * @authors Alona + Alex
+ */
 public class CSV_Merged_Row {
 	
 	//Comparator by time
