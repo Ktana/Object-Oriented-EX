@@ -1,12 +1,6 @@
-/** in this class we define List<CSV_row> variable that gets data from input file, and List<SCV_Merged_row> 
- * that gets data that will appear on output file.
- * readCSV function – gets file name of input path and read the information from this file into rowList object.
- * mergeData function – collects filtered data from rowList (by the signal) and make another object called 
- * rowMergeList, and now we able to filter by several criteria's (ID, time) by the comparator object that 
- * defined in SCV_Merged_row class.
- * createCSV_Merged_File function – gets output name and the mergedRowList object and creates the output file.
- * toKML function – gets the path of  Union CSV file that was created by us and create KML file into our 'OUT' folder.
- * @authors Alona + Alex 
+/**
+ * @authors Alona(321894834) + Alex(319451514)
+ * This function read KML file and write it to CSV table 
  */
 
 import java.io.BufferedReader;
@@ -15,29 +9,34 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.jsefa.xml.XmlIOFactory;
+import org.jsefa.xml.XmlSerializer;
+import org.jsefa.xml.namespace.QName;
 
 public class toCSVtoKML {
 	private static StringBuilder sb = new StringBuilder();
 	public static List<CSV_row> rowList = new ArrayList<CSV_row>();
 	public static List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
-
-	/**this function gets the path of CSV file and read it.
-	 *then, use CSV_row and CSV_header_row objects in order to fill it with the data from the file.
-	 *@see CSV_row	CSV_row object class
-	 *@see CSV_header_row	CSV_header_row object class
-	 *@param fileName	need to be a path on your computer this is a String.
-	 *@credit readCSV function (surround) see: https://stackoverflow.com/questions/30073980/java-writing-strings-to-a-csv-file 
-	 *@return void
+	public static List<Placemark> PlacemarkList = new ArrayList<Placemark>();
+	
+	/**
+	 * @credit writeCSV function (surround) see:
+	 * https://stackoverflow.com/questions/30073980/java-writing-strings-to-a-csv-file 
 	 */
+
+
 	public static void readCSV(String fileName){	
 		CSV_header_row header_row =null;
 		String line=null;
@@ -79,16 +78,15 @@ public class toCSVtoKML {
 		}
 	}
 
-	/**this function collects filtered data from rowList (by the signal) and make another object called rowMergeList, 
-	 *and now we able to filter by several criteria's (ID, time) by the comparator object that defined in 
-	 *CSV_Merged_row class.
-	 *@see CSV_Merged_row		CSV_Merged_row object class
-	 *@param fileName	need to be a path on your computer this is a String.
-	 *@credit https://metanit.com/java/tutorial/10.7.php
-	 *@return void
-	 */
-	public static void mergeData(String fileName){
-		Stream<CSV_row> CSV_Stream = rowList.stream().sorted(CSV_row.LVLComparator);
+	public static void mergeData(String fileName)
+	{
+
+		/* from https://metanit.com/java/tutorial/10.7.php
+		 * ***************Groupping**********
+		 */
+
+		@SuppressWarnings("unchecked")
+		Stream<CSV_row> CSV_Stream = rowList.stream().sorted(MyComparatorFactory.getComparator(CSV_row.class, "ByLVL"));
 
 		Map<String, List< CSV_row >> CSV_GrouppedBy = CSV_Stream.collect(
 				Collectors.groupingBy(CSV_row::getCriterionForGroup));
@@ -133,6 +131,10 @@ public class toCSVtoKML {
 		Collections.sort(rowMergeList, CSV_Merged_Row.IDComparator);
 
 		CreateCSV_Merged_File(getFName(fileName) + "_Merged.csv",rowMergeList);
+		/*
+		 ******************************************
+		 */
+
 
 		//Sort by CHNL
 		//Collections.sort(rowList, CSV_row.CHNLComparator );
@@ -150,14 +152,12 @@ public class toCSVtoKML {
 		//Collections.sort(rowList, CSV_row.LVLComparator);
 
 		System.out.println("Done Sort/filter --> Location: C:/ex0/OUT/");
+
+
+
 	}
 
-	 /**this function gets output name and the mergedRowList object and then creates the output file.
-	 *@param String fileName		need to be a path on your computer this is a String.
-	 *@param List<CSV_Merged_Row> mergedRowList
-	 *@see CSV_Merged_Row 	CSV_Merged_Row
-	 *@return void
-	 */
+
 	public static void CreateCSV_Merged_File(String fileName,List<CSV_Merged_Row> mergedRowList){
 		//Write in file
 		PrintWriter pw = null;
@@ -237,144 +237,243 @@ public class toCSVtoKML {
 
 	}
 
-	private static String getFName(String fileName) {
+
+	public static String getFName(String fileName) {
 		int lastPos= fileName.lastIndexOf(".");
 		if(lastPos < 0) return fileName;
+
 		return fileName.substring(0, lastPos);
 	}
 
-	 /**this function gets the path of CSV file and write a KML file.
-	 *@param fileName	need to be a path on your computer this is a String.
-	 *@return KML file to chosen path.
-	 */
-	public static void toKML(String fileName) {
+	public static void writeToCsv(String fileName,List<CSV_row> rowList)
+	{
+		//Write in file
+		PrintWriter pw = null;
 		try {
-			FileReader fr = new FileReader(fileName);
-			BufferedReader bf = new BufferedReader(fr);
-			String line = bf.readLine();
-			line = bf.readLine();
-			PrintWriter pw = new PrintWriter(new File(fileName+".kml"));
+			pw = new PrintWriter(new File(fileName));
 
+			sb = new StringBuilder();
 
-			pw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>   ");
-			pw.write("\n");
-			pw.write("<kml xmlns=\"http://earth.google.com/kml/2.0\">   ");
-			pw.write("\n");
-			pw.write("<Document>   ");
-			pw.write("\n");
-
-			while(line!=null) {
-				String [] allData = line.split(",");
-				//1
-				if(allData.length>5) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[5]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[6]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[7]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//2
-				if(allData.length>9) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[9]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[10]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[11]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//3
-				if(allData.length>13) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[13]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[14]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[15]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//4
-				if(allData.length>17) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[17]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[18]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[19]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//5
-				if(allData.length>21) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[21]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[22]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[23]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//6
-				if(allData.length>25) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[25]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[26]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[27]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//7
-				if(allData.length>29) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[29]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[30]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[31]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//8
-				if(allData.length>33) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[33]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[34]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[35]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//9
-				if(allData.length>37) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[37]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[38]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[39]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-				//10
-				if(allData.length>43) {
-					pw.write("<Placemark>");
-					pw.write("<name><![CDATA["+allData[41]+"]]></name>\n");
-					pw.write("<description><![CDATA[BSSID: <b>"+allData[42]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[43]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
-					pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
-					pw.write("</Placemark>\n");
-					pw.write("\n");
-				}
-
-				line = bf.readLine();
+			for (int i = 0; i < rowList.size(); i++) 
+			{
+				sb.append(rowList.get(i).getMAC());
+				sb.append(',');
+				sb.append(rowList.get(i).getSSID());
+				sb.append(',');
+				sb.append(rowList.get(i).getAuthMode());
+				sb.append(',');
+				sb.append(rowList.get(i).getFirstSeen());
+				sb.append(',');
+				sb.append(rowList.get(i).getChannel());
+				sb.append(',');
+				sb.append(rowList.get(i).getRSSI());
+				sb.append(',');
+				sb.append(rowList.get(i).getCurrentLatitude());
+				sb.append(',');
+				sb.append(rowList.get(i).getCurrentLongitude());
+				sb.append(',');
+				sb.append(rowList.get(i).getAltitudeMeters());
+				sb.append(',');
+				sb.append(rowList.get(i).getAccuracyMeters());
+				sb.append(',');
+				sb.append(rowList.get(i).getType());
+				sb.append('\n');
 			}
-
-			pw.write("</Document>");
-			pw.write("\n");
-			pw.write("</kml>");
-			pw.close();
-
-			System.out.println("Done write kml file --> Location: C:/ex0/OUT/");
-			fr.close();
-			bf.close();
-		}
-		catch (IOException e){
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+
+		pw.write(sb.toString());
+		pw.close();
+	}
+	
+	/**
+	*this function gets the path of CSV file and write a KML file.
+	*@param fileName	need to be a path on your computer this is a String.
+	*@return KML file to chosen path.
+	*/
+
+	public static StringWriter ExportPlacemarkListToXML() {
+			
+		 XmlSerializer serializer = XmlIOFactory.createFactory(Placemark.class).createSerializer();
+		 StringWriter writer = new StringWriter();
+		 serializer.open(writer);
+		 serializer.getLowLevelSerializer().writeXmlDeclaration("1.0", "UTF-8");	
+		 serializer.getLowLevelSerializer().writeStartElement(QName.create("kml"));
+		 serializer.getLowLevelSerializer().writeStartElement(QName.create("Document"));
+		 		 
+		 for (Placemark object : PlacemarkList) {
+		 serializer.write(object);
+		 }
+		 serializer.getLowLevelSerializer().writeEndElement();
+		 serializer.getLowLevelSerializer().writeEndElement();
+		 
+		 serializer.close(true);
+		 System.out.println(writer);
+		 return writer;
+		}
+
+	public static void createPlacemarkListFromCsvFile()
+	{
+		final String cdata = "<![CDATA[{0}]]>"; 
+		for (int i = 0; i < rowList.size(); i++) {
+			String name = cdata.replace("{0}", rowList.get(i).getSSID());
+			String description = "BSSID: <b>"+rowList.get(i).getMAC()+
+					"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+rowList.get(i).getChannel()+
+					"</b><br/>Timestamp: <b></b><br/>Date: <b>"+rowList.get(i).getFirstSeen()+
+					"</b>";
+			description = cdata.replace("{0}", description);
+			String CurrentLongitude = rowList.get(i).getCurrentLongitude();
+			String CurrentLattitude = rowList.get(i).getCurrentLatitude();
+			Placemark tmp = new Placemark(name,description,"",new Point(CurrentLongitude,CurrentLattitude));
+			PlacemarkList.add(tmp);
+		}
+	}
+	
+	public static void saveToKMLFile(StringWriter XML_data, String fileName)
+	{
+		//Write in file
+				PrintWriter pw = null;
+				try {
+					pw = new PrintWriter(new File(fileName));	
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+
+				pw.write(XML_data.toString().replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("<kml>", "<kml xmlns=\"http://earth.google.com/kml/2.0\">   "));
+				pw.close();
+	}
+	
+	
+	
+	public static void toKML(String fileName) {
+		
+		
+//		try {
+//			FileReader fr = new FileReader(fileName);
+//			BufferedReader bf = new BufferedReader(fr);
+//			String line = bf.readLine();
+//			line = bf.readLine();
+//			PrintWriter pw = new PrintWriter(new File(fileName+".kml"));
+//
+//
+//			pw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>   ");
+//			pw.write("\n");
+//			pw.write("<kml xmlns=\"http://earth.google.com/kml/2.0\">   ");
+//			pw.write("\n");
+//			pw.write("<Document>   ");
+//			pw.write("\n");
+//
+//			while(line!=null) {
+//				String [] allData = line.split(",");
+//				//1
+//				if(allData.length>5) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[5]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[6]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[7]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//2
+//				if(allData.length>9) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[9]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[10]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[11]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//3
+//				if(allData.length>13) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[13]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[14]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[15]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//4
+//				if(allData.length>17) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[17]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[18]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[19]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//5
+//				if(allData.length>21) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[21]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[22]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[23]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//6
+//				if(allData.length>25) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[25]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[26]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[27]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//7
+//				if(allData.length>29) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[29]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[30]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[31]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//8
+//				if(allData.length>33) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[33]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[34]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[35]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//9
+//				if(allData.length>37) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[37]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[38]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[39]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//				//10
+//				if(allData.length>43) {
+//				pw.write("<Placemark>");
+//				pw.write("<name><![CDATA["+allData[41]+"]]></name>\n");
+//				pw.write("<description><![CDATA[BSSID: <b>"+allData[42]+"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+allData[43]+"</b><br/>Timestamp: <b></b><br/>Date: <b>"+allData[0]+"</b>]]></description><styleUrl>#green</styleUrl>\n");
+//				pw.write("<Point><coordinates>"+allData[2]+" ,"+allData[3]+"</coordinates></Point>\n");
+//				pw.write("</Placemark>\n");
+//				pw.write("\n");
+//				}
+//
+//				line = bf.readLine();
+//			}
+//
+//			pw.write("</Document>");
+//			pw.write("\n");
+//			pw.write("</kml>");
+//			pw.close();
+//
+//			System.out.println("Done write kml file --> Location: C:/ex0/OUT/");
+//			fr.close();
+//			bf.close();
+//		}
+//		catch (IOException e){
+//			e.printStackTrace();
+//		}
 	}
 
-	/////////////////////////////////MAIN://///////////////////////////////////
-	
 	public static void main(String[] args){
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
@@ -392,7 +491,15 @@ public class toCSVtoKML {
 			readCSV(fileNameArray.get(i));
 		}
 		mergeData(output_path +"RESULT");
-
-		toKML("C:\\ex0\\OUT\\RESULT_Merged.csv");
+		
+	//	toKML("C:\\ex0\\OUT\\RESULT_Merged.csv");
+		
+		createPlacemarkListFromCsvFile();
+		StringWriter XML_data = ExportPlacemarkListToXML();
+		saveToKMLFile(XML_data,output_path + "RESULT.kml");
+		
 	}
+
+
+
 }

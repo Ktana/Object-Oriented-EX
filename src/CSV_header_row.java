@@ -1,9 +1,10 @@
- /** describes the head line (the labels) on the input file, 
- * it contains private Strings that matching the labels on the original file, 
- * getters of the values and one constructor that gets the relevant values from the header line.
- * Main use: saving data about the devise that collect the data.
- * @authors Alona + Alex
+import org.jsefa.xml.annotation.XmlDataType;
+import org.jsefa.xml.annotation.XmlElement;
+
+/**
+ * @authors Alona(321894834) + Alex(319451514)
  */
+
 public class CSV_header_row
 {
 	private String wifi  = "";
@@ -14,7 +15,8 @@ public class CSV_header_row
 	private String display  = "";
 	private String board  = "";
 	private String brand  = "";
-		
+	
+	
 	public CSV_header_row()
 	{
 		this.wifi= "";
