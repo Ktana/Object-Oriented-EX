@@ -1,13 +1,10 @@
 /**
  * @authors Alona(321894834) + Alex(319451514)
  */ 
-import java.util.Date;
 
 import org.jsefa.xml.annotation.XmlDataType;
 import org.jsefa.xml.annotation.XmlElement;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Comparator; 
 
 @XmlDataType(defaultElementName = "Placemark")

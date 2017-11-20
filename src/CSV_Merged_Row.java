@@ -131,7 +131,7 @@ public class CSV_Merged_Row {
 	public boolean compareByTime(String operator,String time)
 	{
 		if(time == "") return false;
-    	SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    	SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     	
     	try
     	{
@@ -160,13 +160,6 @@ public class CSV_Merged_Row {
 	    
 		return (this.Lon+this.Lat+this.Alt).compareTo(criterion) == 0;
 		
-//		int res = Math.abs(Double.compare(Double.parseDouble (this.Lon) , Double.parseDouble (Lon))) +
-//				  Math.abs(Double.compare(Double.parseDouble (this.Lat) , Double.parseDouble (Lat))) +
-//				  Math.abs(Double.compare(Double.parseDouble (this.Alt) , Double.parseDouble (Alt))) ; 
-//    	if (res == 0)
-//    		return true;
-//    	
-//    	return false;
 	};
 }
 

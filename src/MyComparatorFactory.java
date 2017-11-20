@@ -48,7 +48,7 @@ public class MyComparatorFactory extends MyComparator {
 						@Override
 						public int compare(CSV_row r1, CSV_row r2) {
 							if(r1.getFirstSeen() == "" || r2.getFirstSeen() == "") return 0;
-							SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm");
+							SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 							try
 							{
 								Date d1 = formator.parse(r1.getFirstSeen());
