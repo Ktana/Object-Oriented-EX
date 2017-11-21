@@ -1,12 +1,19 @@
-/**
- * @authors Alona(321894834) + Alex(319451514)
- */ 
-
 import org.jsefa.xml.annotation.XmlDataType;
 import org.jsefa.xml.annotation.XmlElement;
-
 import java.util.Comparator; 
 
+ /** describes the structure of the rows in input files. 
+ * This class implements from interface: Comparable<CSV_row>. 
+ * Has been done an @Override to CompareTo function (that not in use right now). 
+ * This class contains private String variables and private CSV_header_row variable, 
+ * getters of the values and one constructor that gets the values of the first line, and CSV_header_row object.
+ * There is a function called getCriterionForGroup that returns the key for filtering the rows 
+ * (by: time, model, longitude, altitude, latitude).
+ * In addition – was defined five comparators for the filter by: time, model, longitude, altitude, 
+ * latitude, SSID. For each comparator object has been done @Override to the Compare function.
+ * Main use: creates the data rows on Union CSV file.
+ * @authors Alona + Alex
+ */
 @XmlDataType(defaultElementName = "Placemark")
 public class CSV_row //implements Comparable <CSV_row> 
 {
