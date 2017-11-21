@@ -13,7 +13,8 @@ public class TimeStamp {
 
 	public TimeStamp(String date)
 	{
-		this.when = date;	
+		this.when = LocalDateTime.parse(date , DateTimeFormatter.ofPattern( "yyyy-MM-dd HH:mm:ss" )
+			).toString()+"Z";	
 	}
 
 
