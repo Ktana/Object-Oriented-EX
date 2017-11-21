@@ -297,6 +297,10 @@ public class toCSVtoKML {
 		pw.close();
 	}
 
+	/*
+	 * This function creates the format of KML and assembles it as a full KML string
+	 * */
+
 	public static StringWriter ExportPlacemarkListToXML() {
 		XmlSerializer serializer = XmlIOFactory.createFactory(Placemark.class).createSerializer();
 		StringWriter writer = new StringWriter();
@@ -313,6 +317,11 @@ public class toCSVtoKML {
 		System.out.println(writer);
 		return writer;
 	}
+
+	/*
+	 * This function initializes the KML Placemark tags as a list with data collected from CSV 
+	 * original file we got
+	 * */
 
 	public static void createPlacemarkListFromCsvFile(){
 		final String cdata = "<![CDATA[{0}]]>"; 
@@ -331,6 +340,11 @@ public class toCSVtoKML {
 			PlacemarkList.add(tmp);
 		}
 	}
+
+/*
+ * @param StringWriter XML_data, String fileName
+ * this function writes into KML file of the name it gets the data it got
+ * */
 
 	public static void saveToKMLFile(StringWriter XML_data, String fileName){
 		//Write in file
