@@ -98,7 +98,8 @@ public class JunitTesting extends TestCase {
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
 		String original_file_path = "C:/ex0/Test/RESULT_Merged_Correct.csv";
-		String new_file_path = toCSVtoKML.getFName(output_path +"RESULT") + "_Merged.csv";
+		String new_file_path = "C:\\ex0\\OUT\\RESULT_Merged.csv"; 
+				//toCSVtoKML.getFName(output_path +"RESULT") + "_Merged.csv";
 
 		List<String> fileNameArray = new ArrayList<String>();
 		Path folder = Paths.get(input_path);
@@ -136,7 +137,8 @@ public class JunitTesting extends TestCase {
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
 		String original_file_path = "C:/ex0/Test/RESULT_Merged_Correct.csv";
-		String new_file_path = toCSVtoKML.getFName(output_path +"RESULT") + "_Merged.csv";
+		String new_file_path = "C:\\ex0\\OUT\\RESULT_Merged.csv";
+				//toCSVtoKML.getFName(output_path +"RESULT") + "_Merged.csv";
 
 		List<String> fileNameArray = new ArrayList<String>();
 		Path folder = Paths.get(input_path);
@@ -178,7 +180,7 @@ public class JunitTesting extends TestCase {
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
 		String original_file_path = "C:/ex0/Test/RESULT_Merged_Correct.kml";
-		String new_file_path = "C:\\ex0\\OUT\\RESULT_Merged.csv.kml";
+		String new_file_path = "C:\\ex0\\OUT\\RESULT.kml";
 
 		List<String> fileNameArray = new ArrayList<String>();
 		Path folder = Paths.get(input_path);
@@ -192,7 +194,6 @@ public class JunitTesting extends TestCase {
 		for (int i = 0; i < fileNameArray.size(); i++) {
 			toCSVtoKML.readCSV(fileNameArray.get(i));
 		}
-		toCSVtoKML.toKML(new_file_path);
 		
 		byte[] fileORIGBytes, fileNEWBytes;
 		try {
@@ -216,7 +217,7 @@ public class JunitTesting extends TestCase {
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
 		String original_file_path = "C:\\ex0\\OUT\\RESULT_Merged.csv.kml";
-		String new_file_path = "C:\\ex0\\OUT\\RESULT_Merged.csv.kml";
+		String new_file_path = "C:\\ex0\\OUT\\RESULT.kml";
 
 		List<String> fileNameArray = new ArrayList<String>();
 		Path folder = Paths.get(input_path);
@@ -230,7 +231,7 @@ public class JunitTesting extends TestCase {
 		for (int i = 0; i < fileNameArray.size(); i++) {
 			toCSVtoKML.readCSV(fileNameArray.get(i));
 		}
-		toCSVtoKML.toKML(new_file_path);
+		
 		
 		byte[] fileORIGBytes, fileNEWBytes;
 		try {
