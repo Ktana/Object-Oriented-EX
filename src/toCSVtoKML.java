@@ -1,8 +1,3 @@
-/**
- * @authors Alona(321894834) + Alex(319451514)
- * This function read KML file and write it to CSV table 
- */
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,23 +14,34 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.jsefa.xml.XmlIOFactory;
 import org.jsefa.xml.XmlSerializer;
 import org.jsefa.xml.namespace.QName;
 
+/** in this class we define List<CSV_row> variable that gets data from input file, and List<SCV_Merged_row> 
+ * that gets data that will appear on output file.
+ * readCSV function – gets file name of input path and read the information from this file into rowList object.
+ * mergeData function – collects filtered data from rowList (by the signal) and make another object called 
+ * rowMergeList, and now we able to filter by several criteria's (ID, time) by the comparator object that 
+ * defined in SCV_Merged_row class.
+ * createCSV_Merged_File function – gets output name and the mergedRowList object and creates the output file.
+ * toKML function – gets the path of  Union CSV file that was created by us and create KML file into our 'OUT' folder.
+ * @authors Alona + Alex 
+ */
 public class toCSVtoKML {
 	private static StringBuilder sb = new StringBuilder();
 	public static List<CSV_row> rowList = new ArrayList<CSV_row>();
 	public static List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
 	public static List<Placemark> PlacemarkList = new ArrayList<Placemark>();
 
-	/**
-	 * @credit writeCSV function (surround) see:
-	 * https://stackoverflow.com/questions/30073980/java-writing-strings-to-a-csv-file 
+	/**this function gets the path of CSV file and read it.
+	 *then, use CSV_row and CSV_header_row objects in order to fill it with the data from the file.
+	 *@see CSV_row	CSV_row object class
+	 *@see CSV_header_row	CSV_header_row object class
+	 *@param fileName	need to be a path on your computer this is a String.
+	 *@credit readCSV function (surround) see: https://stackoverflow.com/questions/30073980/java-writing-strings-to-a-csv-file 
+	 *@return void
 	 */
-
-
 	public static void readCSV(String fileName){	
 		CSV_header_row header_row =null;
 		String line=null;
@@ -46,29 +52,23 @@ public class toCSVtoKML {
 
 			line = bf.readLine();
 
-			while(line != null) 
-			{
+			while(line != null) {
 				//separate all values between ","
 				String [] strs = line.split(",");
 
-				if(strs.length == 8) //The  First header row, should be inserted into CSV_row in the next iteration
-				{
+				if(strs.length == 8) //The  First header row, should be inserted into CSV_row in the next iteration{
 					header_row = new CSV_header_row(strs[0],strs[1],strs[2], strs[3], strs[4], strs[5], strs[6], strs[7]);
 					line = bf.readLine();
 				}
-				else if(strs.length == 11)
-				{
+				else if(strs.length == 11){
 					CSV_row row= new CSV_row(strs[0],strs[1],strs[2], strs[3], strs[4], strs[5], strs[6], strs[7], strs[8],strs[9],strs[10],header_row );
 					rowList.add(row);
 				}
-				else
-				{
+				else{
 					//Do nothing: row is not valid (there are not enough columns in file )
 				}
-
 				line = bf.readLine();
 			}
-
 			fr.close();
 			bf.close();
 		}
@@ -77,9 +77,15 @@ public class toCSVtoKML {
 		}
 	}
 
-	public static void mergeData(String fileName)
-	{
-
+	/**this function collects filtered data from rowList (by the signal) and make another object called rowMergeList, 
+	 *and now we able to filter by several criteria's (ID, time) by the comparator object that defined in 
+	 *CSV_Merged_row class.
+	 *@see CSV_Merged_row		CSV_Merged_row object class
+	 *@param fileName	need to be a path on your computer this is a String.
+	 *@credit https://metanit.com/java/tutorial/10.7.php
+	 *@return void
+	 */
+	public static void mergeData(String fileName){
 		/* from https://metanit.com/java/tutorial/10.7.php
 		 * ***************Groupping**********
 		 */
@@ -151,12 +157,14 @@ public class toCSVtoKML {
 		//Collections.sort(rowList, CSV_row.LVLComparator);
 
 		System.out.println("Done Sort/filter --> Location: C:/ex0/OUT/");
-
-
-
 	}
 
-
+	 /**this function gets output name and the mergedRowList object and then creates the output file.
+	 *@param String fileName		need to be a path on your computer this is a String.
+	 *@param List<CSV_Merged_Row> mergedRowList
+	 *@see CSV_Merged_Row 	CSV_Merged_Row
+	 *@return void
+	 */
 	public static void CreateCSV_Merged_File(String fileName,List<CSV_Merged_Row> mergedRowList){
 		//Write in file
 		PrintWriter pw = null;
@@ -236,25 +244,29 @@ public class toCSVtoKML {
 
 	}
 
-
-	public static String getFName(String fileName) {
+	/**
+	 *@param fileName	a string  that represents a file path
+	 *@return name of the file without the file format.
+	 */
+	private static String getFName(String fileName) {
 		int lastPos= fileName.lastIndexOf(".");
 		if(lastPos < 0) return fileName;
-
 		return fileName.substring(0, lastPos);
 	}
 
-	public static void writeToCsv(String fileName,List<CSV_row> rowList)
-	{
+	/**this function gets the path of CSV file and List of CSV_row and writes a file.
+	 *@see CSV_row	CSV_row object class
+	 *@param fileName	need to be a path on your computer this is a String.
+	 *@param rowList	an object that was created for that function.
+	 *@return void
+	 */
+	public static void writeToCsv(String fileName,List<CSV_row> rowList){
 		//Write in file
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(new File(fileName));
-
 			sb = new StringBuilder();
-
-			for (int i = 0; i < rowList.size(); i++) 
-			{
+			for (int i = 0; i < rowList.size(); i++) {
 				sb.append(rowList.get(i).getMAC());
 				sb.append(',');
 				sb.append(rowList.get(i).getSSID());
@@ -281,19 +293,11 @@ public class toCSVtoKML {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
 		pw.write(sb.toString());
 		pw.close();
 	}
 
-	/**
-	 *this function gets the path of CSV file and write a KML file.
-	 *@param fileName	need to be a path on your computer this is a String.
-	 *@return KML file to chosen path.
-	 */
-
 	public static StringWriter ExportPlacemarkListToXML() {
-
 		XmlSerializer serializer = XmlIOFactory.createFactory(Placemark.class).createSerializer();
 		StringWriter writer = new StringWriter();
 		serializer.open(writer);
@@ -301,9 +305,7 @@ public class toCSVtoKML {
 		serializer.getLowLevelSerializer().writeStartElement(QName.create("kml"));
 		serializer.getLowLevelSerializer().writeStartElement(QName.create("Document"));
 
-		for (Placemark object : PlacemarkList) {
-			serializer.write(object);
-		}
+		for (Placemark object : PlacemarkList) serializer.write(object);
 		serializer.getLowLevelSerializer().writeEndElement();
 		serializer.getLowLevelSerializer().writeEndElement();
 
@@ -312,8 +314,7 @@ public class toCSVtoKML {
 		return writer;
 	}
 
-	public static void createPlacemarkListFromCsvFile()
-	{
+	public static void createPlacemarkListFromCsvFile(){
 		final String cdata = "<![CDATA[{0}]]>"; 
 		for (int i = 0; i < rowList.size(); i++) {
 			String name = cdata.replace("{0}", rowList.get(i).getSSID());
@@ -328,12 +329,9 @@ public class toCSVtoKML {
 			Placemark tmp = new Placemark(name,description,"",new Point(CurrentLongitude,CurrentLattitude),new TimeStamp(date));
 			PlacemarkList.add(tmp);
 		}
-
 	}
 
-
-	public static void saveToKMLFile(StringWriter XML_data, String fileName)
-	{
+	public static void saveToKMLFile(StringWriter XML_data, String fileName){
 		//Write in file
 		PrintWriter pw = null;
 		try {
@@ -345,9 +343,9 @@ public class toCSVtoKML {
 		pw.write(XML_data.toString().replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("<kml>", "<kml xmlns=\"http://earth.google.com/kml/2.0\">   "));
 		pw.close();
 	}
-	
-	public static void toKML(String fileName) {}
 
+	/////////////////////////////////MAIN://///////////////////////////////////
+	
 	public static void main(String[] args){
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
@@ -369,9 +367,5 @@ public class toCSVtoKML {
 		createPlacemarkListFromCsvFile();
 		StringWriter XML_data = ExportPlacemarkListToXML();
 		saveToKMLFile(XML_data,output_path + "RESULT.kml");
-
 	}
-
-
-
 }
