@@ -320,8 +320,9 @@ public class toCSVtoKML {
 			String name = cdata.replace("{0}", rowList.get(i).getSSID());
 			String description = "BSSID: <b>"+rowList.get(i).getMAC()+
 					"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+rowList.get(i).getChannel()+
-					"</b><br/>Timestamp: <b></b><br/>Date: <b>"+rowList.get(i).getFirstSeen()+
-					"</b>";
+					"</b><br/>Timestamp: <b></b>"//<br/>Date: <b>"
+					+rowList.get(i).getFirstSeen();
+					//"</b>";
 			description = cdata.replace("{0}", description);
 			String CurrentLongitude = rowList.get(i).getCurrentLongitude();
 			String CurrentLattitude = rowList.get(i).getCurrentLatitude();
