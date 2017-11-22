@@ -51,7 +51,7 @@ public class CSV_row //implements Comparable <CSV_row>
 		this.MAC  = MAC;
 		this.SSID  = SSID;
 		this.AuthMode  = AuthMode;
-		this.FirstSeen  = FirstSeen;
+		this.FirstSeen  = DateFormat.adjustTime(FirstSeen);
 		this.Channel  = Channel;
 		this.RSSI  = RSSI;
 		this.CurrentLatitude  = CurrentLatitude;
