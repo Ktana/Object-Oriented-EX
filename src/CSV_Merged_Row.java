@@ -31,7 +31,7 @@ public class CSV_Merged_Row {
 	public CSV_Merged_Row(String prefix, String suffix){
 		String[] prefix_arr = prefix.split(",");
 		try{
-		this.Time = prefix_arr[0];
+		this.Time = DateFormat.adjustTime(prefix_arr[0]);
 		this.ID = prefix_arr[1];
 		this.Lat = prefix_arr[2];
 		this.Lon = prefix_arr[3];
