@@ -56,7 +56,8 @@ public class toCSVtoKML {
 				//separate all values between ","
 				String [] strs = line.split(",");
 
-				if(strs.length == 8) //The  First header row, should be inserted into CSV_row in the next iteration{
+				if(strs.length == 8) //The  First header row, should be inserted into CSV_row in the next iteration
+				{
 					header_row = new CSV_header_row(strs[0],strs[1],strs[2], strs[3], strs[4], strs[5], strs[6], strs[7]);
 					line = bf.readLine();
 				}
