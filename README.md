@@ -1,4 +1,4 @@
-## Year 2 – semester A – Object Oriented Course – Report EX0 
+## Year 2 – semester A – Object Oriented Course – Report 
 ## Names: Alex Fishman & Alona Kondratenko
 
 ### Input:
