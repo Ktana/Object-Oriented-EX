@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 import org.jsefa.xml.XmlIOFactory;
 import org.jsefa.xml.XmlSerializer;
 import org.jsefa.xml.namespace.QName;
@@ -107,28 +108,54 @@ public class toCSVtoKML {
 				String CHANEL = csv_row.getChannel();
 				String SIGNAL = csv_row.getRSSI();
 				suffix = suffix + ","+SSID+","+MAC+","+CHANEL+","+SIGNAL;
+				//System.out.println("\nsuffix="+suffix);
 			}
 
 			rowMergeList.add(new CSV_Merged_Row(prefix,suffix));
 		} 
 
-		//Filter from http://qaru.site/questions/289/what-is-the-best-way-to-filter-a-java-collection
+		/*
+		 * Filter 
+		 * @author: http://qaru.site/questions/289/what-is-the-best-way-to-filter-a-java-collection
+		 * */
+		
 
 		//By Alt
 		//		    rowMergeList = rowMergeList.stream()
 		//		    	    .filter(r -> r.getAlt().compareTo("52") == 0).collect(Collectors.toList());
 
 		//By ID
-		//		    rowMergeList = rowMergeList.stream()
-		//		    	    .filter(r -> r.getID().contains("IPHONE")).collect(Collectors.toList());
+//				    rowMergeList = rowMergeList.stream()
+//				    	    .filter(r -> r.getID().contains("IPHONE")).collect(Collectors.toList());
 
 		//By Time
 		//		    rowMergeList = rowMergeList.stream()
 		//		    	    .filter(r -> r.compareByTime(">","28/10/2017  20:10:00")).collect(Collectors.toList());
 
-		//By Place Lat,Lon.Alt 34.87115922	32.09115523	54
-		//	rowMergeList = rowMergeList.stream()
-		//			.filter(r -> r.compareByPlace("34.87115922"+"32.09115523"+"54")).collect(Collectors.toList());
+		//By Place Lat,Lon,Alt 34.87115922	32.09115523	54 ---> "34.87115922"+"32.09115523"+"54"
+//			rowMergeList = rowMergeList.stream()
+//					.filter(r -> r.compareByPlace(32.1685,34.813,38)).collect(Collectors.toList());
+		
+		//By MAC
+		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
+		String mac="3c:1e:04:03:7f:17";
+		rowMergeMACList = rowMergeList.stream()
+				.filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
+		//System.out.println(rowMergeMACList.toString());
+		for (int i = 0; i < rowMergeMACList.size(); i++) {
+			if(rowMergeMACList.get(i).compareByMAC(mac)){
+				String alt = rowMergeMACList.get(i).getAlt();
+				String lat = rowMergeMACList.get(i).getLat();
+				String lon = rowMergeMACList.get(i).getLon();
+				String sig = rowMergeMACList.get(i).getMacSignal(mac);
+				
+				System.out.println("("+lat+","+lon+","+alt+"),"+" Signal="+sig+"\n");
+			}
+		}
+//		CSV_Merged_Row r = new CSV_Merged_Row("", "");
+//		System.out.println(r.get);
+		
+		
 
 		//Comparator from https://javadevblog.com/primer-sortirovki-s-pomoshh-yu-java-comparable-i-comparator.html
 		//Sort by TIME
@@ -176,8 +203,8 @@ public class toCSVtoKML {
 
 			sb.append("Time,");
 			sb.append("ID,");
-			sb.append("Lat,");
 			sb.append("Lon,");
+			sb.append("Lat,");
 			sb.append("Alt,");
 			sb.append("SSID1,");
 			sb.append("MAC1,");
@@ -315,7 +342,7 @@ public class toCSVtoKML {
 		serializer.getLowLevelSerializer().writeEndElement();
 
 		serializer.close(true);
-		System.out.println(writer);
+		//System.out.println(writer);
 		return writer;
 	}
 

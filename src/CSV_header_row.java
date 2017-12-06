@@ -1,6 +1,8 @@
 import org.jsefa.xml.annotation.XmlDataType;
 import org.jsefa.xml.annotation.XmlElement;
 
+
+
  /** describes the head line (the labels) on the input file, 
  * it contains private Strings that matching the labels on the original file, 
  * getters of the values and one constructor that gets the relevant values from the header line.
