@@ -203,16 +203,17 @@ public class CSV_Merged_Row {
 
 	public boolean compareByMAC(String mac) {
 		// TODO Auto-generated method stub
-		if(this.getMAC1() == "") return false;
-		if(this.getMAC2() == "") return false;
-		if(this.getMAC3() == "") return false;
-		if(this.getMAC4() == "") return false;
-		if(this.getMAC5() == "") return false;
-		if(this.getMAC6() == "") return false;
-		if(this.getMAC7() == "") return false;
-		if(this.getMAC8() == "") return false;
-		if(this.getMAC9() == "") return false;
-		if(this.getMAC10() == "") return false;
+		if((this.getMAC1() == "") &&
+		(this.getMAC2() == "") &&
+		(this.getMAC3() == "") &&
+		(this.getMAC4() == "") &&
+		(this.getMAC5() == "") &&
+		(this.getMAC6() == "") &&
+		(this.getMAC7() == "") &&
+		(this.getMAC8() == "") &&
+		(this.getMAC9() == "") &&
+		(this.getMAC10() == ""))
+			return false;
 		
 		if(this.getMAC1().compareTo(mac) == 0)
 			return true;
