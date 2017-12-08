@@ -139,27 +139,27 @@ public class CSV_Merged_Row {
 	public String getExtension() {return Extension;}
 	
 	public String getMAC1() { String [] mac = this.Extension.split(","); return mac[1];}
-	public String getMAC2() {String [] mac = this.Extension.split(","); if(mac.length>5)if(!mac[5].isEmpty()) return mac[5];return "";}
-	public String getMAC3() {String [] mac = this.Extension.split(","); if(mac.length>9)if(!mac[9].isEmpty()) return mac[9];return "";}
-	public String getMAC4() {String [] mac = this.Extension.split(","); if(mac.length>13)if(!mac[13].isEmpty()) return mac[13];return "";}
-	public String getMAC5() {String [] mac = this.Extension.split(","); if(mac.length>17)if(!mac[17].isEmpty()) return mac[17];return "";}
-	public String getMAC6() {String [] mac = this.Extension.split(","); if(mac.length>21)if(!mac[21].isEmpty()) return mac[21];return "";}
-	public String getMAC7() {String [] mac = this.Extension.split(","); if(mac.length>25)if(!mac[25].isEmpty()) return mac[25];return "";}
-	public String getMAC8() {String [] mac = this.Extension.split(","); if(mac.length>29)if(!mac[29].isEmpty()) return mac[29];return "";}
-	public String getMAC9() {String [] mac = this.Extension.split(","); if(mac.length>33)if(!mac[33].isEmpty()) return mac[33];return "";}
-	public String getMAC10(){String [] mac = this.Extension.split(","); if(mac.length>37)if(!mac[37].isEmpty()) return mac[37];return "";}
+	public String getMAC2() {String [] mac = this.Extension.split(","); if(mac.length>5){if(!mac[5].isEmpty()) return mac[5];}return "";}
+	public String getMAC3() {String [] mac = this.Extension.split(","); if(mac.length>9){if(!mac[9].isEmpty()) return mac[9];}return "";}
+	public String getMAC4() {String [] mac = this.Extension.split(","); if(mac.length>13){if(!mac[13].isEmpty()) return mac[13];}return "";}
+	public String getMAC5() {String [] mac = this.Extension.split(","); if(mac.length>17){if(!mac[17].isEmpty()) return mac[17];}return "";}
+	public String getMAC6() {String [] mac = this.Extension.split(","); if(mac.length>21){if(!mac[21].isEmpty()) return mac[21];}return "";}
+	public String getMAC7() {String [] mac = this.Extension.split(","); if(mac.length>25){if(!mac[25].isEmpty()) return mac[25];}return "";}
+	public String getMAC8() {String [] mac = this.Extension.split(","); if(mac.length>29){if(!mac[29].isEmpty()) return mac[29];}return "";}
+	public String getMAC9() {String [] mac = this.Extension.split(","); if(mac.length>33){if(!mac[33].isEmpty()) return mac[33];}return "";}
+	public String getMAC10(){String [] mac = this.Extension.split(","); if(mac.length>37){if(!mac[37].isEmpty()) return mac[37];}return "";}
 	
 	
 	public String getSignal1() { String [] signal = this.Extension.split(","); return signal[3];}
-	public String getSignal2() {String [] signal = this.Extension.split(","); if(signal.length>5)if(!signal[7].isEmpty()) return signal[7];return "";}
-	public String getSignal3() {String [] signal = this.Extension.split(","); if(signal.length>9)if(!signal[11].isEmpty()) return signal[11];return "";}
-	public String getSignal4() {String [] signal = this.Extension.split(","); if(signal.length>13)if(!signal[15].isEmpty()) return signal[15];return "";}
-	public String getSignal5() {String [] signal = this.Extension.split(","); if(signal.length>17)if(!signal[19].isEmpty()) return signal[19];return "";}
-	public String getSignal6() {String [] signal = this.Extension.split(","); if(signal.length>21)if(!signal[23].isEmpty()) return signal[23];return "";}
-	public String getSignal7() {String [] signal = this.Extension.split(","); if(signal.length>25)if(!signal[27].isEmpty()) return signal[27];return "";}
-	public String getSignal8() {String [] signal = this.Extension.split(","); if(signal.length>29)if(!signal[31].isEmpty()) return signal[31];return "";}
-	public String getSignal9() {String [] signal = this.Extension.split(","); if(signal.length>33)if(!signal[35].isEmpty()) return signal[35];return "";}
-	public String getSignal10(){String [] signal = this.Extension.split(","); if(signal.length>39)if(!signal[39].isEmpty()) return signal[39];return "";}
+	public String getSignal2() {String [] signal = this.Extension.split(","); if(signal.length>5){if(!signal[7].isEmpty()) return signal[7];}return "";}
+	public String getSignal3() {String [] signal = this.Extension.split(","); if(signal.length>9){if(!signal[11].isEmpty()) return signal[11];}return "";}
+	public String getSignal4() {String [] signal = this.Extension.split(","); if(signal.length>13){if(!signal[15].isEmpty()) return signal[15];}return "";}
+	public String getSignal5() {String [] signal = this.Extension.split(","); if(signal.length>17){if(!signal[19].isEmpty()) return signal[19];}return "";}
+	public String getSignal6() {String [] signal = this.Extension.split(","); if(signal.length>21){if(!signal[23].isEmpty()) return signal[23];}return "";}
+	public String getSignal7() {String [] signal = this.Extension.split(","); if(signal.length>25){if(!signal[27].isEmpty()) return signal[27];}return "";}
+	public String getSignal8() {String [] signal = this.Extension.split(","); if(signal.length>29){if(!signal[31].isEmpty()) return signal[31];}return "";}
+	public String getSignal9() {String [] signal = this.Extension.split(","); if(signal.length>33){if(!signal[35].isEmpty()) return signal[35];}return "";}
+	public String getSignal10(){String [] signal = this.Extension.split(","); if(signal.length>39){if(!signal[39].isEmpty()) return signal[39];}return "";}
 	
 	//Filter functions
 	public boolean compareByTime(String operator,String time)
