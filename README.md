@@ -1,4 +1,4 @@
-## Year 2 – semester A – Object Oriented Course – Report 
+# Year 2 – semester A – Object Oriented Course – Report 
 ## Names: Alex Fishman & Alona Kondratenko
 
 ### Input:
@@ -15,8 +15,8 @@ the program takes all the CSV format files that there is on the given path and c
 ### The chosen fields: 
 6 permanent columns that represents the time and the coordinates, and 40 dynamic columns that filtered by the strongest signal (he is a part of the data). In addition – the file can be filtered by tome and ID.
 
-
-### The program combined from 10 classes:
+## The program combined from 6 packages plus one pack from the internet:
+### Global package:
 -**_CSVheaderrow_** – describes the head line (the labels) on the input file, it contains private Strings that matching the labels on the original file, getters of the values and one constructor that gets the relevant values from the header line.
 Main use: saving data about the devise that collect the data.
 
@@ -33,17 +33,9 @@ Contains private String variables: 5 key labels and one more " extends " key tha
 The class contains five comparators (ID, time, alt, lon, lat) for each comparator object  has been done @Override to the Compare function.
 The class also contains CompareByTime function and CompareByPlace function that we will use on the filter.
 
+-**_Full_Coortinate_** - class that represents coordinate that include altitude, longitude and latitude and also MAC's signal of this specific coordinate.
+
 -**_DateFormat_** - class that keeps the format of date.
-
--**_MyComparator_** - class that implements comparator.
-
--**_MyComparatorFactory_** - class that contains all the comparators together.
-
--**_Placemark_** - class that keeps the format of place - all the data of specific point (of place).
-
--**_Point_** - class that gives coordinations (lables) for KML file.
-
--**_TimeStamp_** - class that keeps timestamp format.
 
 -**_toCSVtoKML_** in this class we define List<CSV_row> variable that gets data from input file, and List<SCV_Merged_row> that gets data that will appear on output file. It contains the following functions:
 
@@ -60,3 +52,36 @@ The class also contains CompareByTime function and CompareByPlace function that 
 -_createPlacemarkListFromCsvFile_ - his function initializes the KML Placemark tags as a list with data collected from CSV original file we got.
 
 -_saveToKMLFile_ - this function writes into KML file of the name it gets the data it got.
+
+
+### Compatator package:
+-**_MyComparator_** - class that implements comparator.
+
+-**_MyComparatorFactory_** - class that contains all the comparators together.
+
+### KML package:
+-**_Placemark_** - class that keeps the format of place - all the data of specific point (of place).
+
+-**_Point_** - class that gives coordinations (lables) for KML file.
+
+-**_TimeStamp_** - class that keeps timestamp format.
+
+### Algorithmes package:
+-**_Algo_1_** - First Algorithm that takes 3 coordinations of givem MAC number and returns one new coordinate that closest to them all.
+
+-**_Algo_2_** -  Second Algorithm that takes 3 MAC's and 3 signals, then returns one coordinate that closest to them all. this coordinate represents a place on map that we can't really see.
+
+### Junit package.
+
+### org.jsefa package:
+For writing KML file, we used A library named "org.jsefa" that we found on the internet (this library included in src folder on Github).
+ We chose that library because of several things:
+o	Its free to use
+o	Its creates the exact file that we need
+o	We can view the source files
+o	It makes it easier to debug
+
+### GUI package (not used yet):
+-**_FolderFilter_** - 
+-**_Frame1_** -
+
