@@ -27,8 +27,8 @@ public class Algo_2 {
 		int index = 0;
 		int[]s1 = new int[10];
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
-		List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
-		
+		List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
+		//System.out.println(rowMergeList.toString());
 		rowMergeMACList = rowMergeList.stream().filter(r ->  r.compareByMAC(mac1)).collect(Collectors.toList());
 		String buffer = "";
 		for (int i = 0; i < rowMergeMACList.size(); i++) {
@@ -202,6 +202,7 @@ public class Algo_2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		toCSVtoKML.run();
 		Full_Coordinate fc2 = new Full_Coordinate();
 		fc2 = algorithm_2("14:ae:db:3d:b1:52",-90,"cc:b2:55:e8:4c:e6",-54, "30:e1:71:c5:17:eb",-76);
 		System.out.println(fc2);

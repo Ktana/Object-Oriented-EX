@@ -1,6 +1,12 @@
 package Algorithms;
 
 import Global.*;
+
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +27,7 @@ public class Algo_1 {
 		int[]a = new int[10];
 		//////////// sort By MAC: /////////////////////////////
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
-		List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
-		rowMergeList = toCSVtoKML.getRowMergeList();
+		List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
 		rowMergeMACList = rowMergeList.stream()
 				.filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
 		String buffer = "";
@@ -99,12 +104,15 @@ public class Algo_1 {
 		//////////////////////////////////////////////////////
 		return final_coo;
 	}
+	
+	
 
 
 	public static void main(String[] args) {
+		toCSVtoKML.run();
 		Full_Coordinate fc = new Full_Coordinate();
 		fc = algorithm_1("14:ae:db:3d:b1:52");
-		System.out.println(fc);
+		System.out.println("\n"+fc);
 
 	}
 

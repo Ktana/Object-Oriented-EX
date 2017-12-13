@@ -39,10 +39,10 @@ public class toCSVtoKML {
 	public static List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
 	public static List<Placemark> PlacemarkList = new ArrayList<Placemark>();
 
-	
 	public static List<CSV_Merged_Row> getRowMergeList() {
 		return rowMergeList;
 	}
+	
 	/**this function gets the path of CSV file and read it.
 	 *then, use CSV_row and CSV_header_row objects in order to fill it with the data from the file.
 	 *@see CSV_row	CSV_row object class
@@ -149,14 +149,14 @@ public class toCSVtoKML {
 		String mac="3c:1e:04:03:7f:17";//"ec:8c:a2:48:f1:98";////"3c:1e:04:03:7f:17" 14:cc:20:c8:83:9c;
 		rowMergeMACList = rowMergeList.stream()
 				.filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
-		System.out.println(rowMergeMACList.toString());
+		//System.out.println(rowMergeMACList.toString());
 		for (int i = 0; i < rowMergeMACList.size(); i++) {
 				String alt = rowMergeMACList.get(i).getAlt();
 				String lat = rowMergeMACList.get(i).getLat();
 				String lon = rowMergeMACList.get(i).getLon();
 				String sig = rowMergeMACList.get(i).getMacSignal(mac);
 				
-				System.out.println("("+lat+","+lon+","+alt+"),"+" Signal="+sig+"\n");
+				//System.out.println("("+lat+","+lon+","+alt+"),"+" Signal="+sig+"\n");
 		}
 		
 		
@@ -390,9 +390,7 @@ public class toCSVtoKML {
 		pw.close();
 	}
 
-	/////////////////////////////////MAIN://///////////////////////////////////
-	
-	public static void main(String[] args){
+	public static void run() {
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
 
@@ -413,6 +411,13 @@ public class toCSVtoKML {
 		createPlacemarkListFromCsvFile();
 		StringWriter XML_data = ExportPlacemarkListToXML();
 		saveToKMLFile(XML_data,output_path + "RESULT.kml");
+	}
+		
+	
+	/////////////////////////////////MAIN://///////////////////////////////////
+	
+	public static void main(String[] args){
+		run();
 	}
 	
 }
