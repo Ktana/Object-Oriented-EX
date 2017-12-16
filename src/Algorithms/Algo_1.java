@@ -22,15 +22,15 @@ public class Algo_1 {
 	 * @author Alona+Alex
 	 */
 	public static Full_Coordinate algorithm_1(String mac) {
-		Full_Coordinate[]C = new Full_Coordinate[10];
-		int indexSig = 0;
-		int[]a = new int[10];
 		//////////// sort By MAC: /////////////////////////////
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
 		List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
 		rowMergeMACList = rowMergeList.stream()
 				.filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
 		String buffer = "";
+		Full_Coordinate[]C = new Full_Coordinate[rowMergeMACList.size()];
+		int indexSig = 0;
+		int[]a = new int[rowMergeMACList.size()];
 		for (int i = 0; i < rowMergeMACList.size(); i++) {
 			if(rowMergeMACList.get(i).compareByMAC(mac)){
 				String alt = rowMergeMACList.get(i).getAlt();
