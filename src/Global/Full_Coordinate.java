@@ -47,6 +47,7 @@ public class Full_Coordinate {
 	 * @author Alona+Alex
 	 */
 	public Full_Coordinate(String fc) {
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(fc).useDelimiter(",");
 		this.lat = sc.nextDouble();
 		this.lon = sc.nextDouble();
