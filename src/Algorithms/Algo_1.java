@@ -2,11 +2,11 @@ package Algorithms;
 
 import Global.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 
 public class Algo_1 {
-	
+
 	/** First Algorithm that takes 3 coordinations and returns one new coordinate that closest to them all
 	 * @param mac	MAC contains 6 pairs of hexadecimal numbers and separated by ':'  
 	 * @return	Full_Coordinate object
@@ -25,8 +25,7 @@ public class Algo_1 {
 		//////////// sort By MAC: /////////////////////////////
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
 		List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
-		rowMergeMACList = rowMergeList.stream()
-				.filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
+		rowMergeMACList = rowMergeList.stream().filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
 		String buffer = "";
 		Full_Coordinate[]C = new Full_Coordinate[rowMergeMACList.size()];
 		int indexSig = 0;
@@ -47,7 +46,7 @@ public class Algo_1 {
 		}
 		///////SET 3 coordinates by the biggest signals///////
 		Arrays.sort(a);
-		
+
 		double sig1=0, sig2=0, sig3=0;
 		int i=a.length-1;
 		boolean f = true;
@@ -104,16 +103,56 @@ public class Algo_1 {
 		//////////////////////////////////////////////////////
 		return final_coo;
 	}
-	
-	
 
+	/**@param filename a string  that represents a file path
+	 *@return creates new file in chosen location, this file contains all MAC's and coordinates
+	 */
+	public static void runAlgo1(String filename) {
+		String line=null;
+		try {
+			PrintWriter pw = new PrintWriter(new File("C:/ex0/ex2/out/MAC_Algo1.csv"));
+			FileReader fr = new FileReader(filename);
+			BufferedReader bf = new BufferedReader(fr);
+			StringBuilder sb = new StringBuilder();
+			line = bf.readLine();
+			line = bf.readLine();
+			sb.append("MAC");
+			sb.append(',');
+			sb.append("Alt");
+			sb.append(',');
+			sb.append("Lat");
+			sb.append(',');
+			sb.append("Lon");
+			sb.append('\n');
+			while(line != null) {
+				String [] strs = line.split(",");
+				for(int i=6; i<strs.length; i=i+4) {
+					Full_Coordinate fc = algorithm_1(strs[i]);
+					sb.append(strs[i]);
+					sb.append(',');
+					sb.append(fc.getAlt());
+					sb.append(',');
+					sb.append(fc.getLat());
+					sb.append(',');
+					sb.append(fc.getLon());
+					sb.append('\n');
+				}
+				line = bf.readLine();
+			}
+			fr.close();
+			bf.close();
+			pw.write(sb.toString());
+			pw.close();
+		}
+		catch (IOException e){e.printStackTrace();}
+
+		System.out.println("Done running Algo1 --> Location: C:/ex0/ex2/out/");
+	}
 
 	public static void main(String[] args) {
 		toCSVtoKML.run();
-		Full_Coordinate fc = new Full_Coordinate();
-		fc = algorithm_1("14:ae:db:3d:b1:52");
-		System.out.println("\n"+fc);
-
+		String filename = "C:/ex0/ex2/RESULT_Merged_test_Algo1.csv";
+		runAlgo1(filename);
 	}
 
 }
