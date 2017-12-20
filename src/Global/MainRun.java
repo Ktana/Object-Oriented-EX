@@ -1,7 +1,5 @@
 package Global;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.file.Files;
@@ -10,9 +8,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFileChooser;
-
 import GUI.*;
+import KML.Placemark;
 
 public class MainRun {
 	
@@ -28,9 +25,9 @@ public class MainRun {
 		return this.folderPath;
 	}
 
-	public void saveToCSV(String folderPath)
+	public void saveToCSV()
 	{
-		String input_path = folderPath;
+		String input_path = this.folderPath;
 		String output_path = "C:/ex0/OUT/";
 
 		List<String> fileNameArray = new ArrayList<String>();
@@ -48,9 +45,9 @@ public class MainRun {
 		toCSVtoKML.mergeData(output_path +"RESULT");
 	}
 	
-	public void saveToKML(String folderPath)
+	public void saveToKML()
 	{
-		String input_path = folderPath;
+		String input_path = this.folderPath;
 		String output_path = "C:/ex0/OUT/";
 
 		List<String> fileNameArray = new ArrayList<String>();
@@ -72,27 +69,14 @@ public class MainRun {
 	}
 	
 	public void clearData() {
-		//String input_path = folderPath;
 		String output_path = "C:/ex0/OUT/";
+		
+		List<CSV_Merged_Row> mergedRowList = new ArrayList<CSV_Merged_Row>();
+		toCSVtoKML.CreateCSV_Merged_File(output_path +"RESULT_Merged.csv", mergedRowList);
 
-		//List<String> fileNameArray = new ArrayList<String>();
-		//Path folder = Paths.get(input_path);
-//		try {
-//			Files.newDirectoryStream(folder,"*.csv").forEach(s -> fileNameArray.add(s.toString()));	
-//		}
-//		catch(IOException e) {
-//			e.printStackTrace();	
-//		}
-//
-//		for (int i = 0; i < fileNameArray.size(); i++) {
-//			toCSVtoKML.readCSV(fileNameArray.get(i));
-//		}
-		toCSVtoKML.mergeData(output_path +"RESULT");
-
-		toCSVtoKML.createPlacemarkListFromCsvFile();
-		StringWriter XML_data = null;
+		StringWriter XML_data = toCSVtoKML.ExportPlacemarkListToXML();
+		XML_data.getBuffer().setLength(0);
 		toCSVtoKML.saveToKMLFile(XML_data,output_path + "RESULT.kml");
-
 	}
 
 	public static void run(){
