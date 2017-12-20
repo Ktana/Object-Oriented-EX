@@ -39,7 +39,7 @@ import javax.swing.JTextField;
 
 public class Frame1 {
 
-	public JFrame frame;
+	private JFrame frame;
 	private JTextField txtSize;
 	private double totalSizeInKB=0;
 	private int totalLinesCount=0;
@@ -62,7 +62,7 @@ public class Frame1 {
 	private JTextField txtMinlat;
 	private JTextField txtMinalt_1;
 
-	public JButton btnDir;
+	private JButton btnDir;
 	private JButton btnSaveToCSV;
 	private JButton btnClear;
 	private JButton btnCSV;
@@ -84,10 +84,9 @@ public class Frame1 {
 	private JRadioButton rdbtnLat;
 	private JRadioButton rdbtnLon;
 	private JRadioButton rdbtnAlt;
-	//private JRadioButton rdbtnAlt;
 
-	public String folderPath;
-	public JFileChooser dirChooser;
+	private String folderPath;
+	private JFileChooser dirChooser;
 	public MainRun main = new MainRun();
 
 
@@ -112,7 +111,7 @@ public class Frame1 {
 	 * Create the application.
 	 */
 	public Frame1() {
-		addDir(); //Contains saveToCSV 
+		addDir();  
 		addCSV();
 		clearData();
 		saveToCSV();
@@ -193,16 +192,7 @@ public class Frame1 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		//Save To CSV
-		//		btnSaveToCSV = new JButton("Save to CSV");
-		//		btnSaveToCSV.addActionListener(new ActionListener() {
-		//			public void actionPerformed(ActionEvent e) { 
-		//				JOptionPane.showMessageDialog(frame, "File saved to mereged CSV!");
-		//				main.saveToCSV(main.getFolderPath());
-		//			}
-		//		});
-		//		
+		
 	}
 
 	private void addCSV() {
@@ -263,8 +253,6 @@ public class Frame1 {
 		btnSaveToCSV = new JButton("Save to CSV");
 		btnSaveToCSV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { 
-//				JOptionPane.showMessageDialog(frame, "File saved to mereged CSV!");
-//				main.saveToCSV();
 				if(main.getFolderPath() == null){
 					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
 				}
