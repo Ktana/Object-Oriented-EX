@@ -49,14 +49,6 @@ public class Algo_1 {
 
 		double sig1=0, sig2=0, sig3=0;
 		int i=a.length-1;
-		boolean f = true;
-		while(i >= 0 && f) {
-			if(a[i]==0) { 
-				i--;
-			}
-			else f=false;
-		}
-
 		if(i>=0) sig1 = a[i];
 		else sig1 = -120;
 		if(i-1>=0) sig2 = a[i-1];
@@ -69,12 +61,15 @@ public class Algo_1 {
 		Full_Coordinate coo3 = new Full_Coordinate();
 		for(int j=0; j<C.length; j++) {
 			if(C[j] != null) {
-				if(C[j].getSignal() == sig1)
+				if(C[j].getSignal() == sig1 && coo1.getAlt()==1) {
 					coo1 = C[j];
-				else if(C[j].getSignal() == sig2)
+				}
+				else if(C[j].getSignal() == sig2 && coo2.getAlt()==1) {
 					coo2 = C[j];
-				else if(C[j].getSignal() == sig3)
+				}
+				else if(C[j].getSignal() == sig3 && coo3.getAlt()==1) {
 					coo3 = C[j];
+				}
 			}
 		}
 
@@ -153,6 +148,8 @@ public class Algo_1 {
 		toCSVtoKML.run();
 		String filename = "C:/ex0/ex2/RESULT_Merged_test_Algo1.csv";
 		runAlgo1(filename);
+//		String mac = "bc:ae:c5:c3:7f:89";
+//		System.out.println("\n"+algorithm_1(mac));
 	}
 
 }

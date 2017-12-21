@@ -55,61 +55,74 @@ public class Algo_2 {
 		}
 		Arrays.sort(s1);
 		//////////////////////////////////////////////////////////////////
-		List<CSV_Merged_Row> rowMergeMACList2 = new ArrayList<CSV_Merged_Row>();
-		rowMergeMACList2 = rowMergeList.stream().filter(r ->  r.compareByMAC(mac2)).collect(Collectors.toList());
-		Full_Coordinate[]C2 = new Full_Coordinate[rowMergeMACList2.size()];
-		int[]s2 = new int[rowMergeMACList2.size()];
-		index=0;
-		buffer = "";
-		for (int i = 0; i < rowMergeMACList2.size(); i++) {
-			if(rowMergeMACList2.get(i).compareByMAC(mac2)){
-				String alt = rowMergeMACList2.get(i).getAlt();
-				String lat = rowMergeMACList2.get(i).getLat();
-				String lon = rowMergeMACList2.get(i).getLon();
-				String sig = rowMergeMACList2.get(i).getMacSignal(mac2);
+		int[]s2;
+		if(!mac2.equals("00:00:00:00:00:00")) {
+			List<CSV_Merged_Row> rowMergeMACList2 = new ArrayList<CSV_Merged_Row>();
+			rowMergeMACList2 = rowMergeList.stream().filter(r ->  r.compareByMAC(mac2)).collect(Collectors.toList());
+			Full_Coordinate[]C2 = new Full_Coordinate[rowMergeMACList2.size()];
+			s2 = new int[rowMergeMACList2.size()];
+			index=0;
+			buffer = "";
+			for (int i = 0; i < rowMergeMACList2.size(); i++) {
+				if(rowMergeMACList2.get(i).compareByMAC(mac2)){
+					String alt = rowMergeMACList2.get(i).getAlt();
+					String lat = rowMergeMACList2.get(i).getLat();
+					String lon = rowMergeMACList2.get(i).getLon();
+					String sig = rowMergeMACList2.get(i).getMacSignal(mac2);
 
-				buffer = lat+","+lon+","+alt+","+sig;
-				if(buffer.equals("")) {
-					s2[index] = -120;
+					buffer = lat+","+lon+","+alt+","+sig;
+					if(buffer.equals("")) {
+						s2[index] = -120;
+					}
+					else s2[index] = Integer.parseInt(sig);
+					Full_Coordinate temp = new Full_Coordinate(buffer);
+					C2[index++] = temp; 
 				}
-				else s2[index] = Integer.parseInt(sig);
-				Full_Coordinate temp = new Full_Coordinate(buffer);
-				C2[index++] = temp; 
-			}
+			}	
 		}
-		index=0;
-		Arrays.sort(s2);		
+		else {
+			s2 = new int[1];
+			s2[0] = -120;
+		}
+		Arrays.sort(s2);
+		System.out.println(Arrays.toString(s2));
 		//////////////////////////////////////////////////////////////////
-		List<CSV_Merged_Row> rowMergeMACList3 = new ArrayList<CSV_Merged_Row>();
-		rowMergeMACList3 = rowMergeList.stream().filter(r ->  r.compareByMAC(mac3)).collect(Collectors.toList());
-		Full_Coordinate[]C3 = new Full_Coordinate[rowMergeMACList3.size()];
-		int[]s3 = new int[rowMergeMACList3.size()];
-		index=0;
-		buffer = "";
-		for (int i = 0; i < rowMergeMACList3.size(); i++) {
-			if(rowMergeMACList3.get(i).compareByMAC(mac3)){
-				String alt = rowMergeMACList3.get(i).getAlt();
-				String lat = rowMergeMACList3.get(i).getLat();
-				String lon = rowMergeMACList3.get(i).getLon();
-				String sig = rowMergeMACList3.get(i).getMacSignal(mac3);
+		int[]s3;
+		if(!mac3.equals("00:00:00:00:00:00")) {
+			List<CSV_Merged_Row> rowMergeMACList3 = new ArrayList<CSV_Merged_Row>();
+			rowMergeMACList3 = rowMergeList.stream().filter(r ->  r.compareByMAC(mac3)).collect(Collectors.toList());
+			Full_Coordinate[]C3 = new Full_Coordinate[rowMergeMACList3.size()];
+			s3 = new int[rowMergeMACList3.size()];
+			index=0;
+			buffer = "";
+			for (int i = 0; i < rowMergeMACList3.size(); i++) {
+				if(rowMergeMACList3.get(i).compareByMAC(mac3)){
+					String alt = rowMergeMACList3.get(i).getAlt();
+					String lat = rowMergeMACList3.get(i).getLat();
+					String lon = rowMergeMACList3.get(i).getLon();
+					String sig = rowMergeMACList3.get(i).getMacSignal(mac3);
 
-				buffer = lat+","+lon+","+alt+","+sig;
-				if(buffer.equals("")) {
-					s3[index] = -120;
+					buffer = lat+","+lon+","+alt+","+sig;
+					if(buffer.equals("")) {
+						s3[index] = -120;
+					}
+					else s3[index] = Integer.parseInt(sig);
+					Full_Coordinate temp = new Full_Coordinate(buffer);
+					C3[index++] = temp;
 				}
-				else s3[index] = Integer.parseInt(sig);
-				Full_Coordinate temp = new Full_Coordinate(buffer);
-				C3[index++] = temp;
 			}
 		}
-		index=0;
+		else {
+			s3 = new int[1];
+			s3[0] = -120;
+		}
 		Arrays.sort(s3);
 		//////////////////////////////////////////////////////////////////
 		int close1_s1 = s1[s1.length-1];
 		int close1_s2 = s2[s2.length-1];
 		int close1_s3 = s3[s3.length-1];
 		int close2_s1, close3_s1, close2_s2, close3_s2, close2_s3, close3_s3;
-		
+
 		if(s1.length>2) {
 			close2_s1 = s1[s1.length-2];
 			close3_s1 = s1[s1.length-3];
@@ -122,7 +135,7 @@ public class Algo_2 {
 			close2_s1 = -120;
 			close3_s1 = -120;
 		}
-		
+
 		if(s2.length>2) {
 			close2_s2 = s2[s2.length-2];
 			close3_s2 = s2[s2.length-3];
@@ -135,7 +148,7 @@ public class Algo_2 {
 			close2_s2 = -120;
 			close3_s2 = -120;
 		}
-		
+
 		if(s3.length>2) {
 			close2_s3 = s3[s3.length-2];
 			close3_s3 = s3[s3.length-3];
@@ -148,7 +161,7 @@ public class Algo_2 {
 			close2_s3 = -120;
 			close3_s3 = -120;
 		}
-		
+
 
 		double pi1 = pi(signal1,close1_s1,signal2,close1_s2,signal3,close1_s3);
 		double pi2 = pi(signal1,close2_s1,signal2,close2_s2,signal3,close2_s3);
@@ -180,50 +193,50 @@ public class Algo_2 {
 		return w1*w2*w3;
 	}
 
-//	/** private method that return the closest signal to ours. 
-//	 * @param signal that was given
-//	 * @param a	array of signals
-//	 * @return integer that is the closest signal.
-//	 */
-//	private static   int close_signal(int signal, int[]a) {
-//		//Suppose that the array is sorted
-//		int i=0, tempA=0, tempB=0;
-//		boolean b = true;
-//		while(i<a.length && b) {
-//			if(signal>=a[i]) {
-//				i++;		
-//			}
-//			else b = false;
-//		}
-//		if(i == a.length){
-//			tempA = Math.abs(a[i-1]) - Math.abs(signal);
-//			return a[i-1];
-//		}
-//		else{
-//			tempA = Math.abs(a[i]) - Math.abs(signal);
-//			if(a[i+1]!= 0) {
-//				tempB = Math.abs(signal) - Math.abs(a[i+1]);
-//				if (tempA<tempB) return a[i];
-//				else return a[i+1];
-//			}
-//
-//		}
-//		int ans = a[i];
-//		a[i] = 0;
-//		Arrays.sort(a);
-//		return ans;
-//	}
+	//	/** private method that return the closest signal to ours. 
+	//	 * @param signal that was given
+	//	 * @param a	array of signals
+	//	 * @return integer that is the closest signal.
+	//	 */
+	//	private static   int close_signal(int signal, int[]a) {
+	//		//Suppose that the array is sorted
+	//		int i=0, tempA=0, tempB=0;
+	//		boolean b = true;
+	//		while(i<a.length && b) {
+	//			if(signal>=a[i]) {
+	//				i++;		
+	//			}
+	//			else b = false;
+	//		}
+	//		if(i == a.length){
+	//			tempA = Math.abs(a[i-1]) - Math.abs(signal);
+	//			return a[i-1];
+	//		}
+	//		else{
+	//			tempA = Math.abs(a[i]) - Math.abs(signal);
+	//			if(a[i+1]!= 0) {
+	//				tempB = Math.abs(signal) - Math.abs(a[i+1]);
+	//				if (tempA<tempB) return a[i];
+	//				else return a[i+1];
+	//			}
+	//
+	//		}
+	//		int ans = a[i];
+	//		a[i] = 0;
+	//		Arrays.sort(a);
+	//		return ans;
+	//	}
 
 	/** biggest number between two numbers
-	 * @param a
-	 * @param b
+	 * @param a integer
+	 * @param b integer
 	 * @return MAX(a,b)
 	 */
 	private static int MAX(int a, int b) {
 		if(a>=b) return a;
 		return b;
 	}
-	
+
 	/**@param filename	a string  that represents a file path
 	 *@return creates new fixed file in chosen location
 	 */
@@ -239,21 +252,21 @@ public class Algo_2 {
 			while(line != null) {
 				String [] strs = line.split(",");
 				int len = strs.length;
-				if(len>=16) {
+				if(len>=17) {
 					Full_Coordinate fc = algorithm_2(strs[6], Integer.parseInt(strs[8]), strs[10], 
 							Integer.parseInt(strs[12]), strs[14], Integer.parseInt(strs[16]));
 					strs[2] = fc.LONtoString();
 					strs[3] = fc.LATtoString();
 					strs[4] = fc.ALTtoString();
 				}
-				else if(len>9 && len<=12) {
+				else if(len>9 && len<=13) {
 					Full_Coordinate fc = algorithm_2(strs[6], Integer.parseInt(strs[8]), strs[10], 
 							Integer.parseInt(strs[12]), "00:00:00:00:00:00", -120);
 					strs[2] = fc.LONtoString();
 					strs[3] = fc.LATtoString();
 					strs[4] = fc.ALTtoString();
 				}
-				else if(len<9) {
+				else if(len<=9) {
 					Full_Coordinate fc = algorithm_2(strs[6], Integer.parseInt(strs[8]), 
 							"00:00:00:00:00:00", -120, "00:00:00:00:00:00", -120);
 					strs[2] = fc.LONtoString();
@@ -283,6 +296,7 @@ public class Algo_2 {
 		toCSVtoKML.run();
 		String filename = "C:/ex0/ex2/þþRESULT_Merged_test_Algo2.csv";
 		runAlgo2(filename);
+
 	}
 
 }
