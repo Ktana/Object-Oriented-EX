@@ -168,12 +168,19 @@ public class CSV_Merged_Row {
 	public boolean compareByTime(String operator,String time)
 	{
 		if(time == "") return false;
-    	SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    	
+		SimpleDateFormat formator;
+		time = DateFormat.adjustTime(time);
+		if(DateFormat.getDateFormat(time)=="DD/MM/YYYY"){
+			 formator= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		}
+		else{
+			formator= new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+		}
     	try
     	{
-	    	Date d1 = formator.parse(this.Time);
+	    	Date d1 = formator.parse(DateFormat.adjustTime(this.Time));
 	    	Date d2 = formator.parse(time);
+	    	System.out.println("d1="+d1+", d2="+d2);
 	    	switch(operator)
 	    	{
 		    	case ">":
@@ -186,7 +193,7 @@ public class CSV_Merged_Row {
     	}
     	
     	catch(ParseException ex)
-    	{	return false; }
+    	{	System.out.println(ex.getMessage());return false; }
 	};
 	
 	public boolean compareByPlace(double lat, double lon, double alt)

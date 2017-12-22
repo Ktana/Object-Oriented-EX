@@ -2,14 +2,14 @@ package Global;
 
 public class DateFormat {
 
-	
+
 	public static String formatDate(String inDate) {
 		String outDate = "1900-01-01";
-		
+
 		inDate = inDate.replace("/", "-");
-		
+
 		String[] splitDate = inDate.split("-");
-		
+
 		if(splitDate.length == 3)
 		{
 			if(splitDate[0].length() == 2)
@@ -21,11 +21,11 @@ public class DateFormat {
 				outDate = inDate;
 			}
 		}
-		
+
 		return outDate;
 
 	}
-	
+
 	public static String adjustTime(String time)
 	{
 		String [] array = time.split(" ");
@@ -47,4 +47,55 @@ public class DateFormat {
 			return "1900-01-01 00:00:00";
 		}
 	}
+
+	public static String formatDate(String inDate, String format) {
+		String outDate = "1900-01-01";
+
+		inDate = inDate.replace("/", "-");
+
+		String[] splitDate = inDate.split("-");
+
+		if(splitDate.length == 3)
+		{
+			switch(format){
+			case "DD-MM-YYYY":
+				if(splitDate[0].length() == 2)
+				{
+					outDate = splitDate[2]+"-"+splitDate[1]+"-"+splitDate[0];
+				}
+				else
+				{
+					outDate = inDate;
+				}
+				break;
+
+			case "DD/MM/YYYY":
+				if(splitDate[0].length() == 2)
+				{
+					outDate = splitDate[2]+"/"+splitDate[1]+"/"+splitDate[0];
+				}
+				else
+				{
+					outDate = inDate.replace("-", "/");;
+				}
+				break;
+				
+			default: break;
+			}
+		}
+
+		return outDate;
+
+	}
+	
+	public static String getDateFormat(String date) {
+		if(date.indexOf("-")>-1)
+			return "DD-MM-YYYY";
+		
+		if(date.indexOf("/")>-1)
+			return "DD/MM/YYYY";
+		return "";
+	}
+
 }
+
