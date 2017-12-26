@@ -126,12 +126,12 @@ public class MainRun {
 			BufferedReader bf = new BufferedReader(fr);
 
 			String line = bf.readLine();
-			List<String> firstLine = new ArrayList<String>(Arrays.asList(line.split(" , ")));
+			System.out.println(line.length());
 			
 			fr.close();
 			bf.close();
 			
-			if(firstLine.size() == 45)
+			if(line.length() == 324)
 				return true;
 		}
 		catch (IOException e){
