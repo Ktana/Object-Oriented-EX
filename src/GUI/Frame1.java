@@ -452,7 +452,7 @@ public class Frame1 {
 		});
 
 		txtAltLonLat = new JTextField();
-		txtAltLonLat.setFont(new Font("Tahoma", Font.BOLD, 15));
+		txtAltLonLat.setFont(new Font("Tahoma", Font.BOLD, 14));
 		txtAltLonLat.setEditable(false);
 		txtAltLonLat.setText("Altitude, Longitude, Latitude");
 		txtAltLonLat.setColumns(10);
@@ -462,7 +462,6 @@ public class Frame1 {
 			public void actionPerformed(ActionEvent e) { 
 				String mac = txtMac.getText();
 				fc = main.algorhthm1(mac);
-				txtAltLonLat.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				txtAltLonLat.setText(fc.toStringGUI());
 			}
 		});
@@ -500,7 +499,7 @@ public class Frame1 {
 
 		txtAltitudeLongitudeLatitude = new JTextField();
 		txtAltitudeLongitudeLatitude.setText("Altitude, Longitude, Latitude");
-		txtAltitudeLongitudeLatitude.setFont(new Font("Tahoma", Font.BOLD, 15));
+		txtAltitudeLongitudeLatitude.setFont(new Font("Tahoma", Font.BOLD, 14));
 		txtAltitudeLongitudeLatitude.setEditable(false);
 		txtAltitudeLongitudeLatitude.setColumns(10);
 		
@@ -517,7 +516,6 @@ public class Frame1 {
 				int sig2 = Integer.parseInt(signal2);
 				int sig3 = Integer.parseInt(signal3);
 				fc = main.algorhthm2(mac1,sig1,mac2,sig2,mac3,sig3);
-				txtAltitudeLongitudeLatitude.setFont(new Font("Tahoma", Font.BOLD, 14));
 				txtAltitudeLongitudeLatitude.setText(fc.toStringGUI());
 			}
 		});
