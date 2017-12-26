@@ -119,8 +119,13 @@ public class MainRun {
 		return fc;
 	}
 	
-	public boolean isMerged()
-	{
+	public Full_Coordinate algorhthm2(String mac1, int signal1, String mac2, int signal2, String mac3, int signal3) {
+		toCSVtoKML.run();
+		Full_Coordinate fc = Algo_2.algorithm_2(mac1,signal1,mac2,signal2,mac3,signal3);
+		return fc;
+	}
+	
+	public boolean isMerged(){
 		try {
 			FileReader fr = new FileReader(this.filePath);
 			BufferedReader bf = new BufferedReader(fr);
@@ -140,7 +145,6 @@ public class MainRun {
 		return false;
 	}
 	
-	
 	public static void run(){
 		Frame1.GUIrun();
 	}
@@ -150,5 +154,3 @@ public class MainRun {
 		run();
 	}
 }
-
-
