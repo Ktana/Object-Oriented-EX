@@ -56,6 +56,7 @@ public class Full_Coordinate {
 	}
 	
 	public String toString() {return "[lat: "+lat+", lon: "+lon+", alt: "+alt+", signalW: "+signal+"]";}
+	public String toStringGUI() {return alt+", "+lon+", "+alt;}
 
 	public String LATtoString() {return String.valueOf(this.lat);}
 	public String LONtoString() {return String.valueOf(this.lon);}
