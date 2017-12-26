@@ -1,23 +1,48 @@
 package Global;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import Algorithms.*;
 import GUI.*;
-import KML.Placemark;
+
 
 public class MainRun {
 	
-	String folderPath;
+	private String folderPath;
+	private String filePath;
+	private String meregedPath;
+	private String maxTime;
+	private String minTime;
+	private String maxLAT;
+	private String minLAT;
+	private String maxLON;
+	private String minLON;
+	private String maxALT;
+	private String minALT;
+	
 
 	public void saveFolderPath(String path){
 		this.folderPath = path;
 		System.out.println(folderPath);
+	}
+	
+	public void saveFilePath(String path){
+		this.filePath = path;
+		System.out.println(filePath);
+	}
+	
+	public void saveMeregedPath(String path){
+		this.meregedPath = path;
+		System.out.println(meregedPath);
 	}
 
 	public String getFolderPath()
@@ -79,9 +104,48 @@ public class MainRun {
 		toCSVtoKML.saveToKMLFile(XML_data,output_path + "RESULT.kml");
 	}
 
+//	public void addCSV()
+//	{
+//		
+//	}
+	
+	public void submitFilter(){
+		
+	}
+	
+	public Full_Coordinate algorhthm1(String mac) {
+		toCSVtoKML.run();
+		Full_Coordinate fc = Algo_1.algorithm_1(mac);
+		return fc;
+	}
+	
+	public boolean isMerged()
+	{
+		try {
+			FileReader fr = new FileReader(this.filePath);
+			BufferedReader bf = new BufferedReader(fr);
+
+			String line = bf.readLine();
+			List<String> firstLine = new ArrayList<String>(Arrays.asList(line.split(" , ")));
+			
+			fr.close();
+			bf.close();
+			
+			if(firstLine.size() == 45)
+				return true;
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 	public static void run(){
 		Frame1.GUIrun();
 	}
+	
+	
 	public static void main(String[] args) {
 		run();
 	}
