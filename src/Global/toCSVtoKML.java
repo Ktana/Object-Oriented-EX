@@ -129,20 +129,28 @@ public class toCSVtoKML {
 		
 
 		//By Alt
-		//		    rowMergeList = rowMergeList.stream()
-		//		    	    .filter(r -> r.getAlt().compareTo("52") == 0).collect(Collectors.toList());
+//				    rowMergeList = rowMergeList.stream()
+//				    	    .filter(r -> (r.getAlt().compareTo("19") >= 0) && (r.getAlt().compareTo("24") <= 0)).collect(Collectors.toList());
 
+		//By Lat
+//	    rowMergeList = rowMergeList.stream()
+//	    	    .filter(r -> (r.getLat().compareTo("32.16") >= 0) && (r.getLat().compareTo("32.17") <= 0)).collect(Collectors.toList());
+
+		//By Lon
+//	    rowMergeList = rowMergeList.stream()
+//	    	    .filter(r -> (r.getLon().compareTo("34.81") >= 0) && (r.getLon().compareTo("34.83") <= 0)).collect(Collectors.toList());
+		
 		//By ID
 //				    rowMergeList = rowMergeList.stream()
-//				    	    .filter(r -> r.getID().contains("IPHONE")).collect(Collectors.toList());
+//				    	    .filter(r -> r.getID().contains("Lenovo")).collect(Collectors.toList());
 
 		//By Time
-		//		    rowMergeList = rowMergeList.stream()
-		//		    	    .filter(r -> r.compareByTime(">","28/10/2017  20:10:00")).collect(Collectors.toList());
+//				    rowMergeList = rowMergeList.stream()
+//				    	    .filter(r -> (r.compareByTime(">","2017-10-27 16:14:37")) && (r.compareByTime("<","2017-10-27 16:30:37"))).collect(Collectors.toList());
 
-		//By Place Lat,Lon,Alt 34.87115922	32.09115523	54 ---> "34.87115922"+"32.09115523"+"54"
+		//By Place: Lat,Lon,Alt 34.813	32.1685	54 ---> "34.87115922"+"32.09115523"+"54"
 //			rowMergeList = rowMergeList.stream()
-//					.filter(r -> r.compareByPlace(32.1685,34.813,38)).collect(Collectors.toList());
+//					.filter(r -> r.compareByPlace(32.168,34.813,38)).collect(Collectors.toList());
 		
 		//By MAC
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
@@ -150,6 +158,7 @@ public class toCSVtoKML {
 		rowMergeMACList = rowMergeList.stream()
 				.filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
 		//System.out.println(rowMergeMACList.toString());
+		
 		for (int i = 0; i < rowMergeMACList.size(); i++) {
 				String alt = rowMergeMACList.get(i).getAlt();
 				String lat = rowMergeMACList.get(i).getLat();
