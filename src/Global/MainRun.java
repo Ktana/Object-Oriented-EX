@@ -32,7 +32,7 @@ public class MainRun {
 	public static String[] PredicateType = new String[5];
 	public static String[] MinVal= new String[5];
 	public static String[] MaxVal= new String[5];
-	public static String LogicalOperator;
+	public static String LogicalOperator = "CLEAR_FILTER";
 	
 
 	public void saveFolderPath(String path){

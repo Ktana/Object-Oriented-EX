@@ -133,8 +133,15 @@ public class toCSVtoKML {
 		 * @author: http://qaru.site/questions/289/what-is-the-best-way-to-filter-a-java-collection
 		 * */
 		
-		Predicate<CSV_Merged_Row> condition = MyPredicateFactory.getPredicate(MainRun.PredicateType, MainRun.MinVal, MainRun.MaxVal, MainRun.LogicalOperator);
-		rowMergeList = rowMergeList.stream().filter(condition).collect(Collectors.toList());
+		if( MainRun.LogicalOperator.toUpperCase()=="CLEAR_FILTER")
+		{
+			rowMergeList.stream().filter(i->true).collect(Collectors.toList());	
+		}
+		else
+		{
+			Predicate<CSV_Merged_Row> condition = MyPredicateFactory.getPredicate(MainRun.PredicateType, MainRun.MinVal, MainRun.MaxVal, MainRun.LogicalOperator);
+			rowMergeList = rowMergeList.stream().filter(condition).collect(Collectors.toList());
+		}
 		//By Alt
 //				    rowMergeList = rowMergeList.stream()
 //				    	    .filter(r -> (r.getAlt().compareTo("19") >= 0) && (r.getAlt().compareTo("24") <= 0)).collect(Collectors.toList());
