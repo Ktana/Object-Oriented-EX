@@ -2,6 +2,11 @@ package Global;
 
 import Comparator.*;
 import KML.*;
+import GUI.*;
+import Predicate.*;
+import Predicate.MyPredicateFactory;
+
+import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +21,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,12 +31,12 @@ import org.jsefa.xml.namespace.QName;
 
 /** in this class we define List<CSV_row> variable that gets data from input file, and List<SCV_Merged_row> 
  * that gets data that will appear on output file.
- * readCSV function – gets file name of input path and read the information from this file into rowList object.
- * mergeData function – collects filtered data from rowList (by the signal) and make another object called 
+ * readCSV function â€“ gets file name of input path and read the information from this file into rowList object.
+ * mergeData function â€“ collects filtered data from rowList (by the signal) and make another object called 
  * rowMergeList, and now we able to filter by several criteria's (ID, time) by the comparator object that 
  * defined in SCV_Merged_row class.
- * createCSV_Merged_File function – gets output name and the mergedRowList object and creates the output file.
- * toKML function – gets the path of  Union CSV file that was created by us and create KML file into our 'OUT' folder.
+ * createCSV_Merged_File function â€“ gets output name and the mergedRowList object and creates the output file.
+ * toKML function â€“ gets the path of  Union CSV file that was created by us and create KML file into our 'OUT' folder.
  * @authors Alona + Alex 
  */
 public class toCSVtoKML {
@@ -127,7 +133,8 @@ public class toCSVtoKML {
 		 * @author: http://qaru.site/questions/289/what-is-the-best-way-to-filter-a-java-collection
 		 * */
 		
-
+		Predicate<CSV_Merged_Row> condition = MyPredicateFactory.getPredicate(MainRun.PredicateType, MainRun.MinVal, MainRun.MaxVal, MainRun.LogicalOperator);
+		rowMergeList = rowMergeList.stream().filter(condition).collect(Collectors.toList());
 		//By Alt
 //				    rowMergeList = rowMergeList.stream()
 //				    	    .filter(r -> (r.getAlt().compareTo("19") >= 0) && (r.getAlt().compareTo("24") <= 0)).collect(Collectors.toList());
