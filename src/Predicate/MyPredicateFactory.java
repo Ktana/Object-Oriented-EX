@@ -9,9 +9,9 @@ public class MyPredicateFactory {
 	public static Predicate<CSV_Merged_Row> getPredicate(String[] PredicateType, String[] MinVal, String[] MaxVal ,String LogicalOperator)
 	{
 		if(LogicalOperator == "") return  x->true;
-		if(MinVal.length < 1) return  x->true;
-		if(MaxVal.length < 1) return  x->true;
-		if(PredicateType.length < 1) return  x->true;
+		if(MinVal == null || MinVal.length < 1) return  x->true;
+		if(MaxVal == null || MaxVal.length < 1) return  x->true;
+		if(PredicateType == null || PredicateType.length < 1) return  x->true;
 		
 		ArrayList<Predicate<CSV_Merged_Row>> p = new ArrayList<Predicate<CSV_Merged_Row>>() ;
 		Predicate<CSV_Merged_Row> result = x->true;		
@@ -19,6 +19,8 @@ public class MyPredicateFactory {
 		
 		for( i=0; i< PredicateType.length;i++ )
 		{
+			if(PredicateType[i] == null)
+				continue;
 			switch(PredicateType[i].toUpperCase())
 			{
 			case "TIME":
