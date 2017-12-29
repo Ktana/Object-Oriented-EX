@@ -6,6 +6,16 @@ import Global.DateFormat;
 
 public class MyPredicateFactory {
 	static int i;
+	static String TIME_MinVal;
+	static String TIME_MaxVal;
+	static String ALT_MinVal;
+	static String ALT_MaxVal;
+	static String LAT_MinVal;
+	static String LAT_MaxVal;
+	static String LON_MinVal;
+	static String LON_MaxVal;
+	static String ID_MinVal;
+	
 	public static Predicate<CSV_Merged_Row> getPredicate(String[] PredicateType, String[] MinVal, String[] MaxVal ,String LogicalOperator)
 	{
 		if(LogicalOperator == "") return  x->true;
@@ -24,26 +34,55 @@ public class MyPredicateFactory {
 			switch(PredicateType[i].toUpperCase())
 			{
 			case "TIME":
-				prd_Tmp = r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(MinVal[i])) >=0;
-				prd_Tmp.and(r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(MaxVal[i])) <=0);
+				if(MinVal[i] != null && MaxVal[i] != null )
+				{
+					TIME_MinVal = MinVal[i];
+					TIME_MaxVal = MaxVal[i];
+				}
+				prd_Tmp = r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MinVal)) >=0;
+				prd_Tmp.and(r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MaxVal)) <=0);
+
 				break;
 			case "ALT":
-				prd_Tmp = r -> Double.parseDouble(r.getAlt()) >= Double.parseDouble(MinVal[i]);
-				prd_Tmp.and(r -> Double.parseDouble(r.getAlt()) <= Double.parseDouble(MaxVal[i]));
+				if(MinVal[i] != null && MaxVal[i] != null )
+				{
+					ALT_MinVal = MinVal[i];
+					ALT_MaxVal = MaxVal[i];
+				}
+				prd_Tmp = r -> Double.parseDouble(r.getAlt()) >= Double.parseDouble(ALT_MinVal) &&
+						Double.parseDouble(r.getAlt()) <= Double.parseDouble(ALT_MaxVal);
 				break;
 			case "LAT":
-				prd_Tmp = r -> Double.parseDouble(r.getLat()) >= Double.parseDouble(MinVal[i]);
-				prd_Tmp.and(r -> Double.parseDouble(r.getLat()) <= Double.parseDouble(MaxVal[i]));
+				if(MinVal[i] != null && MaxVal[i] != null )
+				{
+					LAT_MinVal = MinVal[i];
+					LAT_MaxVal = MaxVal[i];
+				}
+				prd_Tmp = r -> Double.parseDouble(r.getLat()) >= Double.parseDouble(LAT_MinVal) && 
+						Double.parseDouble(r.getLat()) <= Double.parseDouble(LAT_MaxVal);
 				break;
 			case "LON":
-				prd_Tmp = r -> Double.parseDouble(r.getLon()) >= Double.parseDouble(MinVal[i]);
-				prd_Tmp.and(r -> Double.parseDouble(r.getLon()) <= Double.parseDouble(MaxVal[i]));
+				if(MinVal[i] != null && MaxVal[i] != null )
+				{
+					LON_MinVal = MinVal[i];
+					LON_MaxVal = MaxVal[i];
+				}
+				prd_Tmp = r -> Double.parseDouble(r.getLon()) >= Double.parseDouble(LON_MinVal) &&
+						Double.parseDouble(r.getLon()) <= Double.parseDouble(LON_MaxVal);
 				break;
 			case "ID_INCLUDE":
-				prd_Tmp = r -> r.getID().contains(MinVal[i]);
+				if(MinVal[i] != null && MaxVal[i] != null )
+				{
+					ID_MinVal = MinVal[i];
+				}
+				prd_Tmp = r -> r.getID().contains(ID_MinVal);
 				break;
 			case "ID_EXCLUDE":
-				prd_Tmp = r -> r.getID().contains(MinVal[i]);
+				if(MinVal[i] != null && MaxVal[i] != null )
+				{
+					ID_MinVal = MinVal[i];
+				}
+				prd_Tmp = r -> r.getID().contains(ID_MinVal);
 				prd_Tmp = prd_Tmp.negate();
 				break;				
 			default:
