@@ -1,5 +1,9 @@
 package Global;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DateFormat {
 
 
@@ -97,5 +101,30 @@ public class DateFormat {
 		return "";
 	}
 
+	public static Date getDateFromString(String date)
+	{
+		if(date == "") return null;
+		
+		Date d1;
+		SimpleDateFormat formator;
+		date = DateFormat.adjustTime(date);
+		if(getDateFormat(date)=="DD/MM/YYYY"){
+			 formator= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		}
+		else{
+			formator= new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+		}
+		
+		try
+		{
+		 d1 = formator.parse(date);
+		}
+		catch(ParseException ex)
+		{	
+			System.out.println(ex.getMessage());
+			return null; 
+		}
+		return d1;
+	}
 }
 

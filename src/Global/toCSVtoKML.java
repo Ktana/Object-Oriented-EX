@@ -25,12 +25,12 @@ import org.jsefa.xml.namespace.QName;
 
 /** in this class we define List<CSV_row> variable that gets data from input file, and List<SCV_Merged_row> 
  * that gets data that will appear on output file.
- * readCSV function â€“ gets file name of input path and read the information from this file into rowList object.
- * mergeData function â€“ collects filtered data from rowList (by the signal) and make another object called 
+ * readCSV function – gets file name of input path and read the information from this file into rowList object.
+ * mergeData function – collects filtered data from rowList (by the signal) and make another object called 
  * rowMergeList, and now we able to filter by several criteria's (ID, time) by the comparator object that 
  * defined in SCV_Merged_row class.
- * createCSV_Merged_File function â€“ gets output name and the mergedRowList object and creates the output file.
- * toKML function â€“ gets the path of  Union CSV file that was created by us and create KML file into our 'OUT' folder.
+ * createCSV_Merged_File function – gets output name and the mergedRowList object and creates the output file.
+ * toKML function – gets the path of  Union CSV file that was created by us and create KML file into our 'OUT' folder.
  * @authors Alona + Alex 
  */
 public class toCSVtoKML {
