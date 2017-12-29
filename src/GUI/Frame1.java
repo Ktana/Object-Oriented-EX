@@ -368,7 +368,36 @@ public class Frame1 {
 		deviceFilter.add(rdbtnByName);
 		deviceFilter.add(rdbtnNotByName);
 
-		btnUndoFilter = new JButton("Undo Filter"); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		btnUndoFilter = new JButton("Undo Filter");
+		btnUndoFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				chkBxTime.setSelected(false);
+				chkBxLat.setSelected(false);
+				chkBxLon.setSelected(false);
+				chkBxAlt.setSelected(false);
+				chkBxID.setSelected(false);
+				
+				txtMaxAlt.setText("maxAlt");
+				txtMinAlt.setText("minAlt");
+				txtMaxLat.setText("maxLat");
+				txtMinLat.setText("minLat");
+				txtMaxLon.setText("maxLon");
+				txtMinLon.setText("minLon");
+				txtMaxTime.setText("maxTime");
+				txtMintime.setText("minTime");
+				txtName.setText("name");
+				
+				clearFilterData();
+				//main.saveFolderPath(main.getFolderPath());
+				if (main.getFolderPath() == null) {
+					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
+				} else {
+					main.saveToCSV();
+					JOptionPane.showMessageDialog(frame, "File saved to CSV!");
+				}
+				
+			}
+		});
 
 		// ButtonGroup deviceFilter = new ButtonGroup();
 		// deviceFilter.add(rdbtnByName);
@@ -431,6 +460,7 @@ public class Frame1 {
 	}
 
 	private void setFilter(String logicOperator){
+		clearFilterData();
 		MainRun.LogicalOperator=logicOperator;
 		int i=0;
 		if(chkBxTime.isSelected()){
@@ -473,6 +503,14 @@ public class Frame1 {
 			i++;
 		}
 	}
+	
+	private void clearFilterData(){
+		MainRun.LogicalOperator="CLEAR_FILTER";
+		MainRun.PredicateType = new String[5];
+		MainRun.MinVal= new String[5];
+		MainRun.MaxVal= new String[5];
+	}
+		
 	private void firstAlgorithm() {
 		lblAlgorithms = new JLabel("Algorithms");
 		lblAlgorithms.setFont(new Font("Tahoma", Font.PLAIN, 20));
