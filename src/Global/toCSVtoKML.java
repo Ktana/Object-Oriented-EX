@@ -2,11 +2,11 @@ package Global;
 
 import Comparator.*;
 import KML.*;
-import GUI.*;
-import Predicate.*;
+
+
 import Predicate.MyPredicateFactory;
 
-import java.awt.Frame;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,13 +40,21 @@ import org.jsefa.xml.namespace.QName;
  * @authors Alona + Alex 
  */
 public class toCSVtoKML {
-	private static StringBuilder sb = new StringBuilder();
-	public static List<CSV_row> rowList = new ArrayList<CSV_row>();
-	public static List<CSV_Merged_Row> rowMergeList = new ArrayList<CSV_Merged_Row>();
-	public static List<Placemark> PlacemarkList = new ArrayList<Placemark>();
-
-	public static List<CSV_Merged_Row> getRowMergeList() {
-		return rowMergeList;
+	private StringBuilder sb ;
+	private List<CSV_row> rowList ;
+	private List<CSV_Merged_Row> rowMergeList;
+	private List<Placemark> PlacemarkList;
+	
+	public toCSVtoKML()
+	{
+		this.sb = new StringBuilder();
+		this.rowList = new ArrayList<CSV_row>();
+		this.rowMergeList = new ArrayList<CSV_Merged_Row>();
+		this.PlacemarkList = new ArrayList<Placemark>();
+	}
+	
+	public List<CSV_Merged_Row> getRowMergeList() {
+		return this.rowMergeList;
 	}
 	
 	/**this function gets the path of CSV file and read it.
@@ -57,10 +65,10 @@ public class toCSVtoKML {
 	 *@credit readCSV function (surround) see: https://stackoverflow.com/questions/30073980/java-writing-strings-to-a-csv-file 
 	 *@return void
 	 */
-	public static void readCSV(String fileName){	
+	public void readCSV(String fileName){	
 		CSV_header_row header_row =null;
 		String line=null;
-
+		System.out.println("HERE");		
 		try {
 			FileReader fr = new FileReader(fileName);
 			BufferedReader bf = new BufferedReader(fr);
@@ -101,11 +109,11 @@ public class toCSVtoKML {
 	 *@credit https://metanit.com/java/tutorial/10.7.php
 	 *@return void
 	 */
-	public static void mergeData(String fileName){
+	public void mergeData(String fileName){
 		/* from https://metanit.com/java/tutorial/10.7.php
 		 * ***************Groupping**********
 		 */
-
+		
 		@SuppressWarnings("unchecked")
 		Stream<CSV_row> CSV_Stream = rowList.stream().sorted(MyComparatorFactory.getComparator(CSV_row.class, "ByLVL"));
 
@@ -133,38 +141,8 @@ public class toCSVtoKML {
 		 * @author: http://qaru.site/questions/289/what-is-the-best-way-to-filter-a-java-collection
 		 * */
 		
-		if( MainRun.LogicalOperator.toUpperCase()=="CLEAR_FILTER")
-		{
-			rowMergeList.stream().filter(i->true).collect(Collectors.toList());	
-		}
-		else
-		{
-			Predicate<CSV_Merged_Row> condition = MyPredicateFactory.getPredicate(MainRun.PredicateType, MainRun.MinVal, MainRun.MaxVal, MainRun.LogicalOperator);
-			rowMergeList = rowMergeList.stream().filter(condition).collect(Collectors.toList());
-		}
-		//By Alt
-//				    rowMergeList = rowMergeList.stream()
-//				    	    .filter(r -> (r.getAlt().compareTo("19") >= 0) && (r.getAlt().compareTo("24") <= 0)).collect(Collectors.toList());
-
-		//By Lat
-//	    rowMergeList = rowMergeList.stream()
-//	    	    .filter(r -> (r.getLat().compareTo("32.16") >= 0) && (r.getLat().compareTo("32.17") <= 0)).collect(Collectors.toList());
-
-		//By Lon
-//	    rowMergeList = rowMergeList.stream()
-//	    	    .filter(r -> (r.getLon().compareTo("34.81") >= 0) && (r.getLon().compareTo("34.83") <= 0)).collect(Collectors.toList());
-		
-		//By ID
-//				    rowMergeList = rowMergeList.stream()
-//				    	    .filter(r -> r.getID().contains("Lenovo")).collect(Collectors.toList());
-
-		//By Time
-//				    rowMergeList = rowMergeList.stream()
-//				    	    .filter(r -> (r.compareByTime(">","2017-10-27 16:14:37")) && (r.compareByTime("<","2017-10-27 16:30:37"))).collect(Collectors.toList());
-
-		//By Place: Lat,Lon,Alt 34.813	32.1685	54 ---> "34.87115922"+"32.09115523"+"54"
-//			rowMergeList = rowMergeList.stream()
-//					.filter(r -> r.compareByPlace(32.168,34.813,38)).collect(Collectors.toList());
+		Predicate<CSV_Merged_Row> condition = MyPredicateFactory.getPredicate(MainRun.PredicateType, MainRun.MinVal, MainRun.MaxVal, MainRun.LogicalOperator);
+		rowMergeList = rowMergeList.stream().filter(condition).collect(Collectors.toList());
 		
 		//By MAC
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
@@ -174,9 +152,13 @@ public class toCSVtoKML {
 		//System.out.println(rowMergeMACList.toString());
 		
 		for (int i = 0; i < rowMergeMACList.size(); i++) {
+				@SuppressWarnings("unused")
 				String alt = rowMergeMACList.get(i).getAlt();
+				@SuppressWarnings("unused")
 				String lat = rowMergeMACList.get(i).getLat();
+				@SuppressWarnings("unused")
 				String lon = rowMergeMACList.get(i).getLon();
+				@SuppressWarnings("unused")
 				String sig = rowMergeMACList.get(i).getMacSignal(mac);
 				
 				//System.out.println("("+lat+","+lon+","+alt+"),"+" Signal="+sig+"\n");
@@ -220,7 +202,7 @@ public class toCSVtoKML {
 	 *@see CSV_Merged_Row 	CSV_Merged_Row
 	 *@return void
 	 */
-	public static void CreateCSV_Merged_File(String fileName,List<CSV_Merged_Row> mergedRowList){
+	public void CreateCSV_Merged_File(String fileName,List<CSV_Merged_Row> mergedRowList){
 		//Write in file
 		PrintWriter pw = null;
 		try {
@@ -303,7 +285,7 @@ public class toCSVtoKML {
 	 *@param fileName	a string  that represents a file path
 	 *@return name of the file without the file format.
 	 */
-	private static String getFName(String fileName) {
+	public String getFName(String fileName) {
 		int lastPos= fileName.lastIndexOf(".");
 		if(lastPos < 0) return fileName;
 		return fileName.substring(0, lastPos);
@@ -315,7 +297,7 @@ public class toCSVtoKML {
 	 *@param rowList	an object that was created for that function.
 	 *@return void
 	 */
-	public static void writeToCsv(String fileName,List<CSV_row> rowList){
+	public void writeToCsv(String fileName,List<CSV_row> rowList){
 		//Write in file
 		PrintWriter pw = null;
 		try {
@@ -356,7 +338,7 @@ public class toCSVtoKML {
 	 * This function creates the format of KML and assembles it as a full KML string
 	 * */
 
-	public static StringWriter ExportPlacemarkListToXML() {
+	public StringWriter ExportPlacemarkListToXML() {
 		XmlSerializer serializer = XmlIOFactory.createFactory(Placemark.class).createSerializer();
 		StringWriter writer = new StringWriter();
 		serializer.open(writer);
@@ -378,7 +360,7 @@ public class toCSVtoKML {
 	 * original file we got
 	 **/
 
-	public static void createPlacemarkListFromCsvFile(){
+	public void createPlacemarkListFromCsvFile(){
 		final String cdata = "<![CDATA[{0}]]>"; 
 		for (int i = 0; i < rowList.size(); i++) {
 			String name = cdata.replace("{0}", rowList.get(i).getSSID());
@@ -400,7 +382,7 @@ public class toCSVtoKML {
  * @param StringWriter XML_data, String fileName
  * this function writes into KML file of the name it gets the data it got
  **/
-	public static void saveToKMLFile(StringWriter XML_data, String fileName){
+	public void saveToKMLFile(StringWriter XML_data, String fileName){
 		//Write in file
 		PrintWriter pw = null;
 		try {
@@ -413,7 +395,7 @@ public class toCSVtoKML {
 		pw.close();
 	}
 
-	public static void run() {
+	public void run() {
 		String input_path = "C:/ex0";
 		String output_path = "C:/ex0/OUT/";
 
@@ -435,12 +417,24 @@ public class toCSVtoKML {
 		StringWriter XML_data = ExportPlacemarkListToXML();
 		saveToKMLFile(XML_data,output_path + "RESULT.kml");
 	}
+
+	public StringBuilder getSb() {
+		return sb;
+	}
+
+	public List<CSV_row> getRowList() {
+		return rowList;
+	}
+
+	public List<Placemark> getPlacemarkList() {
+		return PlacemarkList;
+	}
 		
 	
 	/////////////////////////////////MAIN://///////////////////////////////////
 	
-	public static void main(String[] args){
-		run();
-	}
+//	public void main(String[] args){
+//		run();
+//	}
 	
 }

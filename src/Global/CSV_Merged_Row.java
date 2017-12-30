@@ -64,61 +64,18 @@ public class CSV_Merged_Row {
 	
 	@SuppressWarnings("unchecked")
     public static Comparator<CSV_Merged_Row> LONComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, "ByLON");
-//	public static Comparator<CSV_Merged_Row> LONComparator = new Comparator< CSV_Merged_Row >() {
-//        @Override
-//        public int compare(CSV_Merged_Row r1, CSV_Merged_Row r2) {
-//        	if(r1.getLon() == "" || r2.getLon() == "") 
-//        		return 0;
-//        	return Double.compare(Double.parseDouble (r1.getLon()) , Double.parseDouble (r2.getLon()));
-//        }
-//    };
+
     @SuppressWarnings("unchecked")
     public static Comparator<CSV_Merged_Row> LATComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, "ByLAT");
-//    public static Comparator<CSV_Merged_Row> LATComparator = new Comparator< CSV_Merged_Row >() {
-//        @Override
-//        public int compare(CSV_Merged_Row r1, CSV_Merged_Row r2) {
-//        	if(r1.getLat() == "" || r2.getLat() == "") 
-//        		return 0;
-//        	return Double.compare(Double.parseDouble (r1.getLat()) , Double.parseDouble (r2.getLat()));
-//        }
-//    };
+
     @SuppressWarnings("unchecked")
     public static Comparator<CSV_Merged_Row> ALTComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, "ByALT");
-//    public static Comparator<CSV_Merged_Row> ALTComparator = new Comparator< CSV_Merged_Row >() {
-//        @Override
-//        public int compare(CSV_Merged_Row r1, CSV_Merged_Row r2) {
-//        	if(r1.getAlt() == "" || r2.getAlt() == "") return 0;
-//			return (int)(Integer.parseInt(r1.getAlt()) - Integer.parseInt(r2.getAlt()));
-//        }
-//    };
     
     @SuppressWarnings("unchecked")
     public static Comparator<CSV_Merged_Row> TIMEComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, "ByTIME");
 	
-//    public static Comparator<CSV_Merged_Row> TIMEComparator = new Comparator< CSV_Merged_Row >() {
-//        @Override
-//        public int compare(CSV_Merged_Row r1, CSV_Merged_Row r2) {
-//        	if(r1.getTime() == "" || r2.getTime() == "") return 0;
-//        	SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm");
-//        	try
-//        	{
-//        	Date d1 = formator.parse(r1.getTime());
-//        	Date d2 = formator.parse(r2.getTime());
-//        	return d1.compareTo(d2);
-//        	}
-//        	
-//        	catch(ParseException ex)
-//        	{	return 0; }
-//        }
-//    };
     @SuppressWarnings("unchecked")
     public static Comparator<CSV_Merged_Row> IDComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, "ByID");
-//    public static Comparator<CSV_Merged_Row> IDComparator = new Comparator< CSV_Merged_Row >() {
-//        @Override
-//        public int compare(CSV_Merged_Row r1, CSV_Merged_Row r2) {
-//			return (r1.getID().compareTo(r2.getID()));
-//        }
-//    };
    
     
     
@@ -180,7 +137,6 @@ public class CSV_Merged_Row {
     	{
 	    	Date d1 = formator.parse(DateFormat.adjustTime(this.Time));
 	    	Date d2 = formator.parse(time);
-	    	System.out.println("d1="+d1+", d2="+d2);
 	    	switch(operator)
 	    	{
 		    	case ">":
