@@ -18,13 +18,13 @@ public class MyPredicateFactory {
 	
 	public static Predicate<CSV_Merged_Row> getPredicate(String[] PredicateType, String[] MinVal, String[] MaxVal ,String LogicalOperator)
 	{
-		if(LogicalOperator == "") return  x->true;
+		if(LogicalOperator == null || LogicalOperator == "" || LogicalOperator.toUpperCase()=="CLEAR_FILTER") return  x->true;
 		if(MinVal == null || MinVal.length < 1) return  x->true;
 		if(MaxVal == null || MaxVal.length < 1) return  x->true;
 		if(PredicateType == null || PredicateType.length < 1) return  x->true;
 		
 		ArrayList<Predicate<CSV_Merged_Row>> p = new ArrayList<Predicate<CSV_Merged_Row>>() ;
-		Predicate<CSV_Merged_Row> result = x->true;		
+		Predicate<CSV_Merged_Row> result = x->LogicalOperator.toUpperCase()!="OR";		
 		Predicate<CSV_Merged_Row> prd_Tmp= x->true;
 		
 		for( i=0; i< PredicateType.length;i++ )
@@ -39,8 +39,8 @@ public class MyPredicateFactory {
 					TIME_MinVal = MinVal[i];
 					TIME_MaxVal = MaxVal[i];
 				}
-				prd_Tmp = r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MinVal)) >=0 &&
-						DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MaxVal)) <=0;
+				prd_Tmp = r -> (DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MinVal)) >=0 &&
+						DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MaxVal)) <=0);
 
 				break;
 			case "ALT":
