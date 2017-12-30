@@ -51,16 +51,14 @@ public class MyComparatorFactory extends MyComparator {
 						@Override
 						public int compare(CSV_row r1, CSV_row r2) {
 							if(r1.getFirstSeen() == "" || r2.getFirstSeen() == "") return 0;
-							SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 							try
 							{
-								Date d1 = formator.parse(r1.getFirstSeen());
-								Date d2 = formator.parse(r2.getFirstSeen());
+								Date d1 = DateFormat.getDateFromString(r1.getFirstSeen());
+								Date d2 = DateFormat.getDateFromString(r2.getFirstSeen());
 								return d1.compareTo(d2);
 							}
-	
-							catch(ParseException ex)
-							{	return 0; }
+							catch(Exception ex)
+					        {	return 0; }
 						}
 					};
 	
@@ -82,15 +80,14 @@ public class MyComparatorFactory extends MyComparator {
 			        @Override
 			        public int compare(CSV_Merged_Row r1, CSV_Merged_Row r2) {
 			        	if(r1.getTime() == "" || r2.getTime() == "") return 0;
-			        	SimpleDateFormat formator= new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			        	try
 			        	{
-			        	Date d1 = formator.parse(r1.getTime());
-			        	Date d2 = formator.parse(r2.getTime());
+			        	Date d1 = DateFormat.getDateFromString(r1.getTime());
+			        	Date d2 = DateFormat.getDateFromString(r2.getTime());
 			        	return d1.compareTo(d2);
 			        	}
 			        	
-			        	catch(ParseException ex)
+			        	catch(Exception ex)
 			        	{	return 0; }
 			        }
 			    };
