@@ -39,8 +39,8 @@ public class MyPredicateFactory {
 					TIME_MinVal = MinVal[i];
 					TIME_MaxVal = MaxVal[i];
 				}
-				prd_Tmp = r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MinVal)) >=0;
-				prd_Tmp.and(r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MaxVal)) <=0);
+				prd_Tmp = r -> DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MinVal)) >=0 &&
+						DateFormat.getDateFromString(r.getTime()).compareTo(DateFormat.getDateFromString(TIME_MaxVal)) <=0;
 
 				break;
 			case "ALT":
