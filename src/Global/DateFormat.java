@@ -32,6 +32,11 @@ public class DateFormat {
 
 	public static String adjustTime(String time)
 	{
+		do
+		{ //replace double blanks
+			time = time.replace("  ", " ");
+		}while(time.contains("  "));
+		
 		String [] array = time.split(" ");
 		switch(array.length)
 		{
@@ -112,7 +117,7 @@ public class DateFormat {
 			 formator= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		}
 		else{
-			formator= new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+			formator= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		}
 		
 		try
