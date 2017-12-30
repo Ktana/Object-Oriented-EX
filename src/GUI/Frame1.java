@@ -371,11 +371,11 @@ public class Frame1 {
 		btnUndoFilter = new JButton("Undo Filter");
 		btnUndoFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				chkBxTime.setSelected(false);
-				chkBxLat.setSelected(false);
-				chkBxLon.setSelected(false);
-				chkBxAlt.setSelected(false);
-				chkBxID.setSelected(false);
+//				chkBxTime.setSelected(false);
+//				chkBxLat.setSelected(false);
+//				chkBxLon.setSelected(false);
+//				chkBxAlt.setSelected(false);
+//				chkBxID.setSelected(false);
 				
 				txtMaxAlt.setText("maxAlt");
 				txtMinAlt.setText("minAlt");
@@ -388,14 +388,12 @@ public class Frame1 {
 				txtName.setText("name");
 				
 				clearFilterData();
-				//main.saveFolderPath(main.getFolderPath());
 				if (main.getFolderPath() == null) {
 					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
 				} else {
 					main.saveToCSV();
-					JOptionPane.showMessageDialog(frame, "File saved to CSV!");
+					JOptionPane.showMessageDialog(frame, "Filter cleared, File saved to CSV!");
 				}
-				
 			}
 		});
 
@@ -410,15 +408,12 @@ public class Frame1 {
 			public void actionPerformed(ActionEvent e) {
 				setFilter("AND");
 				
-				chkBxTime.setSelected(false);
-				chkBxLat.setSelected(false);
-				chkBxLon.setSelected(false);
-				chkBxAlt.setSelected(false);
-				chkBxID.setSelected(false);
-				
-				
-				
-				
+//				chkBxTime.setSelected(false);
+//				chkBxLat.setSelected(false);
+//				chkBxLon.setSelected(false);
+//				chkBxAlt.setSelected(false);
+//				chkBxID.setSelected(false);
+
 				if (main.getFolderPath() == null) {
 					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
 				} else {
@@ -433,11 +428,18 @@ public class Frame1 {
 			public void actionPerformed(ActionEvent e) {
 				setFilter("NOT");
 				
-				chkBxTime.setSelected(false);
-				chkBxLat.setSelected(false);
-				chkBxLon.setSelected(false);
-				chkBxAlt.setSelected(false);
-				chkBxID.setSelected(false);
+//				chkBxTime.setSelected(false);
+//				chkBxLat.setSelected(false);
+//				chkBxLon.setSelected(false);
+//				chkBxAlt.setSelected(false);
+//				chkBxID.setSelected(false);
+				
+				if (main.getFolderPath() == null) {
+					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
+				} else {
+					main.saveToCSV();
+					JOptionPane.showMessageDialog(frame, "File saved to CSV!");
+				}
 				
 				
 			}
@@ -447,12 +449,18 @@ public class Frame1 {
 		btnOrFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setFilter("OR");
-				chkBxTime.setSelected(false);
-				chkBxLat.setSelected(false);
-				chkBxLon.setSelected(false);
-				chkBxAlt.setSelected(false);
-				chkBxID.setSelected(false);
+//				chkBxTime.setSelected(false);
+//				chkBxLat.setSelected(false);
+//				chkBxLon.setSelected(false);
+//				chkBxAlt.setSelected(false);
+//				chkBxID.setSelected(false);
 				
+				if (main.getFolderPath() == null) {
+					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
+				} else {
+					main.saveToCSV();
+					JOptionPane.showMessageDialog(frame, "File saved to CSV!");
+				}
 			
 
 			}
@@ -540,13 +548,13 @@ public class Frame1 {
 		btnSubmitMac.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String mac = txtMac.getText();
-				//if(mac == null){
+				if(mac == null){
 					fc = main.algorhthm1(mac);
 					txtAltLonLat.setText(fc.toStringGUI());
-//				}
-//				else{
-//					JOptionPane.showMessageDialog(frame, "Enter MAC to run Algorithm 1!");
-//				}
+				}
+				else{
+					JOptionPane.showMessageDialog(frame, "Enter MAC to run Algorithm 1!");
+				}
 			}
 		});
 	}
