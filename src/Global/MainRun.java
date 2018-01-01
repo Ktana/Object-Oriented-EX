@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import Algorithms.*;
 import GUI.*;
@@ -21,14 +23,9 @@ public class MainRun {
 	private String folderPath;
 	private String filePath;
 	private String meregedPath;
-	private String maxTime;
-	private String minTime;
-	private String maxLAT;
-	private String minLAT;
-	private String maxLON;
-	private String minLON;
-	private String maxALT;
-	private String minALT;
+	
+	private Thread thread;
+	private static final int NTHREDS = 10;
 	
 	public static String[] PredicateType = new String[5];
 	public static String[] MinVal= new String[5];
@@ -38,11 +35,45 @@ public class MainRun {
 	public void saveFolderPath(String path){
 		this.folderPath = path;
 		System.out.println(folderPath);
+		thread = new Thread(()->{
+			FileChecker fileChecker = new FileChecker(path);
+			for(;;){
+				try{
+					if (Thread.interrupted()) 
+						throw new InterruptedException();
+				} catch (InterruptedException e) {
+					return;
+				}
+				//System.out.println("thread works!");
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				/**HERE
+				 * make a list of FileInfo -> run on a folder -> find file -> 
+				 * -> check if this file is in the list -> check for size and time modified-> if modified do{}
+				 * and update list parameters 
+				 * -> if not in list -> save to list
+				 * 
+				 * now we run on list in loop -> check if file in the list is not in the folder -> delete
+				 */
+				fileChecker.workerProsses();
+			}
+		});
+		ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
+		executor.execute(thread);
+
 	}
 	
 	public void saveFilePath(String path){
 		this.filePath = path;
 		System.out.println(filePath);
+	}
+	
+	public String getFilePath(){
+		return this.filePath;
+		
 	}
 	
 	public void saveMeregedPath(String path){
@@ -53,6 +84,11 @@ public class MainRun {
 	public String getFolderPath()
 	{
 		return this.folderPath;
+	}
+	
+	public Thread getThread()
+	{
+		return this.thread;
 	}
 
 	public void saveToCSV()
@@ -217,6 +253,7 @@ public class MainRun {
 	
 	
 	public static void run(){
+		Frame1 Frame1 = new Frame1();
 		Frame1.GUIrun();
 	}
 	
