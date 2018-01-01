@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_o4f7QOTeEee7p50wNjfM8w" name="ObjOria_Ex0">
+  <ownedComment xmi:type="uml:Comment" xmi:id="_1TPkUOcFEeex0pO3tzSkwg">
+    <body>PROJECT class diagram - Alex&amp;Alona</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_V8ni4OcJEeex0pO3tzSkwg">
+    <body>PROJECT collaboration diagram - Alex&amp;Alona</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_AGJT8OcLEeex0pO3tzSkwg" annotatedElement="_fHgdwOcMEeex0pO3tzSkwg">
+    <body>CSV_Merged_row</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_Dhh1sOcLEeex0pO3tzSkwg" annotatedElement="_fHgdwOcMEeex0pO3tzSkwg">
+    <body>CSV_Header_row</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_Gdl-MOcLEeex0pO3tzSkwg" annotatedElement="_fHgdwOcMEeex0pO3tzSkwg">
+    <body>CSV_row</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_JpOzwOcLEeex0pO3tzSkwg" annotatedElement="_fHgdwOcMEeex0pO3tzSkwg">
+    <body>DateFormat</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_7Bgf8OcLEeex0pO3tzSkwg" annotatedElement="_fHFR4OcKEeex0pO3tzSkwg _fHgdwOcMEeex0pO3tzSkwg">
+    <body>PRODECE csv&#xD;
+merged file</body>
+  </ownedComment>
+  <ownedComment xmi:type="uml:Comment" xmi:id="_UAPOYOcMEeex0pO3tzSkwg" annotatedElement="_-Gfl0OcJEeex0pO3tzSkwg">
+    <body>PRODUCE kml&#xD;
+merged file</body>
+  </ownedComment>
+  <packagedElement xmi:type="uml:Package" xmi:id="_zJ5SkOTeEee7p50wNjfM8w" name="KML">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_kc-oQOb5Eeex0pO3tzSkwg">
+      <body>Those classes are used for outside library of KML production</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Class" xmi:id="_C0zsQOTfEee7p50wNjfM8w" name="Point">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_dLpdIOTfEee7p50wNjfM8w" name="toString"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_gi4esOTfEee7p50wNjfM8w" name="Point(String CurrentLongitude,String CurrentLatitude)"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_NJzxMOTfEee7p50wNjfM8w" name="private String coordinates;"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ptLEAOTfEee7p50wNjfM8w" name="Placemark">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_XykLIOb5Eeex0pO3tzSkwg" name="Placemark(String name,String description,String styleUrl,Point point,TimeStamp timeStamp)"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_vQaqIOTfEee7p50wNjfM8w" name="String name"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_xf4LUOTfEee7p50wNjfM8w" name="String description"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_zqg24OTfEee7p50wNjfM8w" name="String styleUrl =&quot;#green&quot;;"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_13JGgOTfEee7p50wNjfM8w" name="Point Point;"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_9FbSIOTfEee7p50wNjfM8w" name="TimeStamp TimeStamp"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_vVUi0OTgEee7p50wNjfM8w" name="TimeSramp">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_hJxyIOb5Eeex0pO3tzSkwg" name="TimeStamp(String date)"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_fQANEOb5Eeex0pO3tzSkwg" name="String when"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_WR1iwOb6Eeex0pO3tzSkwg" name="Junit">
+    <packagedElement xmi:type="uml:Class" xmi:id="_d8QQwOb6Eeex0pO3tzSkwg" name="JunitTesting">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_kMLWsOb6Eeex0pO3tzSkwg" name="test_readCSV"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ldJPUOb6Eeex0pO3tzSkwg" name="test_readCSV_RequiredFields()"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_m6hMQOb6Eeex0pO3tzSkwg" name="test_Mereged_RequiredFields()"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_n_c0AOb6Eeex0pO3tzSkwg" name="test_writeToCSV"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_pFf2EOb6Eeex0pO3tzSkwg" name="test_writeToCSV_byRows"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_qWY2MOb6Eeex0pO3tzSkwg" name="test_writeToKML"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_rdlHwOb6Eeex0pO3tzSkwg" name="test_writeToKML_byRows"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_I9-qkOb7Eeex0pO3tzSkwg" name="Global">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_xFMsAOcEEeex0pO3tzSkwg">
+      <body>This is the class that runs the program:</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Class" xmi:id="_QUuOoOb7Eeex0pO3tzSkwg" name="CSV_header_row">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_hEbtMOb7Eeex0pO3tzSkwg" name="CSV_header_row(String wifi, String appRelease, String model, String release, String device, String display, String board, String brand)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iMTUMOb7Eeex0pO3tzSkwg" name="public CSV_header_row()"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_UGyLAOb7Eeex0pO3tzSkwg" name="String wifi"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_VspVkOb7Eeex0pO3tzSkwg" name="String appRelease"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_XAaqkOb7Eeex0pO3tzSkwg" name="String model"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_ZpTYYOb7Eeex0pO3tzSkwg" name="String release"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_a2OegOb7Eeex0pO3tzSkwg" name="String device"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_bwWkcOb7Eeex0pO3tzSkwg" name="String display"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_dRSywOb7Eeex0pO3tzSkwg" name="String board"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_ebkNgOb7Eeex0pO3tzSkwg" name="String brand"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nwumEOb7Eeex0pO3tzSkwg" name="CSV_Merged_Row">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ybkYIOb7Eeex0pO3tzSkwg" name="CSV_Merged_Row(String prefix, String suffix)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_0UY68Ob7Eeex0pO3tzSkwg" name="Comparator&lt;CSV_Merged_Row> LONComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, &quot;ByLON&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2G3lMOb7Eeex0pO3tzSkwg" name="public static Comparator&lt;CSV_Merged_Row> LATComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, &quot;ByLAT&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_3VyPYOb7Eeex0pO3tzSkwg" name="Comparator&lt;CSV_Merged_Row> ALTComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, &quot;ByALT&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_5E3nYOb7Eeex0pO3tzSkwg" name="Comparator&lt;CSV_Merged_Row> TIMEComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, &quot;ByTIME&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_6pVDwOb7Eeex0pO3tzSkwg" name="Comparator&lt;CSV_Merged_Row> IDComparator = MyComparatorFactory.getComparator(CSV_Merged_Row.class, &quot;ByID&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_8XcLYOb7Eeex0pO3tzSkwg" name="String arrayToString(String array[])"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_96eEYOb7Eeex0pO3tzSkwg" name="compareByTime(String operator,String time)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="__JrCcOb7Eeex0pO3tzSkwg" name="compareByPlace(double lat, double lon, double alt)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_AXm1MOb8Eeex0pO3tzSkwg" name="compareByMAC(String mac)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_CSZG4Ob8Eeex0pO3tzSkwg" name="String getMacSignal(String mac)"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_r4VUoOb7Eeex0pO3tzSkwg" name="String Time"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_s95OgOb7Eeex0pO3tzSkwg" name="String ID"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_uBOTwOb7Eeex0pO3tzSkwg" name="String Lat"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_u1m-EOb7Eeex0pO3tzSkwg" name="String Lon"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_vs8OsOb7Eeex0pO3tzSkwg" name="String Alt"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_wcfcUOb7Eeex0pO3tzSkwg" name="String Extension"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_QPFEMOb8Eeex0pO3tzSkwg" name="CSV_row">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_oEDVQOb8Eeex0pO3tzSkwg" name="CSV_row(String MAC, String SSID, String AuthMode, String FirstSeen, String Channel, String RSSI, String CurrentLatitude, String CurrentLongitude, String AltitudeMeters, String AccuracyMeters, String Type,CSV_header_row header)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_rOGPYOb8Eeex0pO3tzSkwg" name="Comparator&lt;CSV_row> LONComparator = MyComparatorFactory.getComparator(CSV_row.class,&quot;ByLON&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_s1ttcOb8Eeex0pO3tzSkwg" name="Comparator&lt;CSV_row> LATComparator = MyComparatorFactory.getComparator(CSV_row.class,&quot;ByLAT&quot;);"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_t5sS8Ob8Eeex0pO3tzSkwg" name="Comparator&lt;CSV_row> CHNLComparator = MyComparatorFactory.getComparator(CSV_row.class,&quot;ByCHNL&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_vHwBgOb8Eeex0pO3tzSkwg" name="Comparator&lt;CSV_row> TIMEComparator = MyComparatorFactory.getComparator(CSV_row.class,&quot;ByTIME&quot;)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_wxIaIOb8Eeex0pO3tzSkwg" name="Comparator&lt;CSV_row> LVLComparator = MyComparatorFactory.getComparator(CSV_row.class,&quot;ByLVL&quot;)"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_YoK2EOb8Eeex0pO3tzSkwg" name="String MAC"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_Z8zGsOb8Eeex0pO3tzSkwg" name="String SSID"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_a--VYOb8Eeex0pO3tzSkwg" name="String AuthMode"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_bw3FUOb8Eeex0pO3tzSkwg" name=" String FirstSeen"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_ci6NUOb8Eeex0pO3tzSkwg" name="String Channel"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_dtpiIOb8Eeex0pO3tzSkwg" name="String RSSI"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_ekrQwOb8Eeex0pO3tzSkwg" name=" String CurrentLatitude"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_fmAK4Ob8Eeex0pO3tzSkwg" name=" String CurrentLongitude"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_gWGyIOb8Eeex0pO3tzSkwg" name="String AltitudeMeters"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_hELZEOb8Eeex0pO3tzSkwg" name="String AccuracyMeters"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_hwpdgOb8Eeex0pO3tzSkwg" name="String Type"/>
+      <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_llIbwOb8Eeex0pO3tzSkwg" name="private CSV_header_row HeaderRow"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_-HaewOb8Eeex0pO3tzSkwg" name="DateFormat">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_GzfeEOb9Eeex0pO3tzSkwg" name="String formatDate(String inDate)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ICKQoOb9Eeex0pO3tzSkwg" name="String adjustTime(String time)"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_P56QAOb9Eeex0pO3tzSkwg" name="Full_Coordinate">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_gHGQUOb9Eeex0pO3tzSkwg" name="Full_Coordinate"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_g8JpAOb9Eeex0pO3tzSkwg" name="Full_Coordinate(double lat, double lon, double alt, double signal)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iN5kwOb9Eeex0pO3tzSkwg" name="Full_Coordinate(Full_Coordinate fc)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_jZuesOb9Eeex0pO3tzSkwg" name="Full_Coordinate(String fc)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_lSbFsOb9Eeex0pO3tzSkwg" name="String toString"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_YIIOoOb9Eeex0pO3tzSkwg" name="double lat"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_ZJp9EOb9Eeex0pO3tzSkwg" name="double lon"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_Z8FfkOb9Eeex0pO3tzSkwg" name="double alt"/>
+      <nestedClassifier xmi:type="uml:DataType" xmi:id="_cGL_oOb9Eeex0pO3tzSkwg" name="double signal"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_0qCI4Ob9Eeex0pO3tzSkwg" name="toCSVtoKML">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_A3e9MOb-Eeex0pO3tzSkwg" name="List&lt;CSV_Merged_Row> getRowMergeList"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_C7rpkOb-Eeex0pO3tzSkwg" name="readCSV(String fileName)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EnwJ0Ob-Eeex0pO3tzSkwg" name="mergeData(String fileName)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_HhunoOb-Eeex0pO3tzSkwg" name="CreateCSV_Merged_File(String fileName,List&lt;CSV_Merged_Row> mergedRowList)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_JQsq4Ob-Eeex0pO3tzSkwg" name="String getFName(String fileName)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_KizzAOb-Eeex0pO3tzSkwg" name="writeToCsv(String fileName,List&lt;CSV_row> rowList)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_MEBuIOb-Eeex0pO3tzSkwg" name="StringWriter ExportPlacemarkListToXML()"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_NahnAOb-Eeex0pO3tzSkwg" name="createPlacemarkListFromCsvFile()"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_OyFP0Ob-Eeex0pO3tzSkwg" name="saveToKMLFile(StringWriter XML_data, String fileName)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_QCAmoOb-Eeex0pO3tzSkwg" name="run"/>
+      <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_5pyncOb9Eeex0pO3tzSkwg" name="private static StringBuilder sb = new StringBuilder()"/>
+      <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_73mi0Ob9Eeex0pO3tzSkwg" name="public static List&lt;CSV_row> rowList = new ArrayList&lt;CSV_row>()"/>
+      <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_9Ko4AOb9Eeex0pO3tzSkwg" name="public static List&lt;CSV_Merged_Row> rowMergeList = new ArrayList&lt;CSV_Merged_Row>()"/>
+      <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_-a9QYOb9Eeex0pO3tzSkwg" name="public static List&lt;Placemark> PlacemarkList = new ArrayList&lt;Placemark>()"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_esikkOcCEeex0pO3tzSkwg" name="Comparator">
+    <packagedElement xmi:type="uml:Class" xmi:id="_n3vv4OcCEeex0pO3tzSkwg" name="MyComparator">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_w_btIOcCEeex0pO3tzSkwg" name="compareTo(T obj)"/>
+      <nestedClassifier xmi:type="uml:Interface" xmi:id="_uMfEYOcCEeex0pO3tzSkwg" name="MyComparator&lt;T> implements Comparable &lt;T> "/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_4p3CMOcCEeex0pO3tzSkwg" name="MyComparatorFactory">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_-lFqgOcCEeex0pO3tzSkwg" name="Comparator getComparator(Class usedClass, String compareBy)"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_H8GdMOcDEeex0pO3tzSkwg" name="Algorithms">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Q55eoOcDEeex0pO3tzSkwg" name="Algo_1">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_X2Z9wOcDEeex0pO3tzSkwg" name="algorithm_1(String mac)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_aJDV0OcDEeex0pO3tzSkwg" name="runAlgo1(String filename)"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_doFogOcDEeex0pO3tzSkwg" name="Algo_2">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iSjzkOcDEeex0pO3tzSkwg" name="algorithm_2(String mac1, int signal1, String mac2, int signal2, String mac3, int signal3)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_lFJ3AOcDEeex0pO3tzSkwg" name="MAX(int a, int b)"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_m2tUMOcDEeex0pO3tzSkwg" name="runAlgo2(String filename)"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_zqxVMOcGEeex0pO3tzSkwg" name="Interaction1">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_1v9gEOcGEeex0pO3tzSkwg" name="Lifeline1"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Activity" xmi:id="_30KMcOcGEeex0pO3tzSkwg" name="Activity1"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_gquEUOcJEeex0pO3tzSkwg" name="Compatator package">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_sL0wAOcJEeex0pO3tzSkwg">
+      <body>myComparator</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_wT6mwOcJEeex0pO3tzSkwg">
+      <body>myComparatorFactory</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_E-PZYOcNEeex0pO3tzSkwg" name="use for comparing data" client="_gquEUOcJEeex0pO3tzSkwg" supplier="_fHgdwOcMEeex0pO3tzSkwg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_4_hsAOcJEeex0pO3tzSkwg" name="Jsefa package">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_H8HnIOcKEeex0pO3tzSkwg">
+      <body>outside package</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_Y6kFQOcKEeex0pO3tzSkwg" name="use" client="_4_hsAOcJEeex0pO3tzSkwg" supplier="_-Gfl0OcJEeex0pO3tzSkwg"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zJsZsOcMEeex0pO3tzSkwg" name="use for kml" client="_4_hsAOcJEeex0pO3tzSkwg" supplier="_o4f7QOTeEee7p50wNjfM8w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_-Gfl0OcJEeex0pO3tzSkwg" name="KML package">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_DG92EOcKEeex0pO3tzSkwg">
+      <body>point</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_ONRcIOcKEeex0pO3tzSkwg">
+      <body>placeMark</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_SJjrgOcKEeex0pO3tzSkwg">
+      <body>timeStamp</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_fHFR4OcKEeex0pO3tzSkwg" name="Algorithms package">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_cUGFgOcNEeex0pO3tzSkwg">
+      <body>Algo1</body>
+    </ownedComment>
+    <ownedComment xmi:type="uml:Comment" xmi:id="_ek2nMOcNEeex0pO3tzSkwg">
+      <body>Algo2</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_fHgdwOcMEeex0pO3tzSkwg" name="toCSVtoKML">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_irUiwOcMEeex0pO3tzSkwg">
+      <body>MAIN</body>
+    </ownedComment>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_mZ0_YOcNEeex0pO3tzSkwg" name="Junit package">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_sST1sOcNEeex0pO3tzSkwg">
+      <body>tests the &#xD;
+program</body>
+    </ownedComment>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_zGPAkOcNEeex0pO3tzSkwg" name="tests the program" client="_mZ0_YOcNEeex0pO3tzSkwg" supplier="_fHgdwOcMEeex0pO3tzSkwg"/>
+  </packagedElement>
+</uml:Model>
