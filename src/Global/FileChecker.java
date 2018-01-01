@@ -135,6 +135,7 @@ public class FileChecker {
 			MainRun main = new MainRun();
 			main.saveFolderPath(this.folder);
 			main.saveToCSV();
+			main.saveToKML();
 			////////////////////
 		}
 	}
