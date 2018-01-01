@@ -15,6 +15,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -104,17 +106,40 @@ public class Frame1 {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void main(String[] args) {
 		GUIrun();
 	}
+	
+	public MainRun getMainRun()
+	{
+		return this.main;
+	}
 
-	public static void GUIrun() {
+	public void GUIrun() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				Frame1 window = new Frame1();
 				window.frame.setVisible(true);
+				window.frame.addWindowListener(new WindowAdapter() {
+
+					@Override
+		            public void windowClosing(WindowEvent e) {
+		                System.out.println("A is closing");
+		                if(main.getThread() != null){
+		                	main.getThread().interrupt();
+		                }
+		            }
+
+//		            @Override
+//		            public void windowClosed(WindowEvent e) {
+//		                System.out.println("A has closed");
+//		            }
+
+		        });
 			}
 		});
+		
+		
 	}
 
 	/**
@@ -325,34 +350,83 @@ public class Frame1 {
 		txtMaxLon = new JTextField();
 		txtMaxLon.setText("maxLon");
 		txtMaxLon.setColumns(10);
+		txtMaxLon.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMaxLon.getText().equals("maxLon"))
+					txtMaxLon.setText("");
+			}
+		});
 
 		txtMaxAlt = new JTextField();
 		txtMaxAlt.setText("maxAlt");
 		txtMaxAlt.setColumns(10);
+		txtMaxAlt.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMaxAlt.getText().equals("maxAlt"))
+					txtMaxAlt.setText("");
+			}
+		});
 
 		txtMaxLat = new JTextField();
 		txtMaxLat.setText("maxLat");
 		txtMaxLat.setColumns(10);
+		txtMaxLat.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMaxLat.getText().equals("maxLat"))
+					txtMaxLat.setText("");
+			}
+		});
+		
 
 		txtMaxTime = new JTextField();
 		txtMaxTime.setText("maxTime");
 		txtMaxTime.setColumns(10);
+		txtMaxTime.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMaxTime.getText().equals("maxTime"))
+					txtMaxTime.setText("");
+			}
+		});
 
 		txtMintime = new JTextField();
 		txtMintime.setText("minTime");
 		txtMintime.setColumns(10);
+		txtMintime.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMintime.getText().equals("minTime"))
+					txtMintime.setText("");
+			}
+		});
 
 		txtMinLat = new JTextField();
-		txtMinLat.setText("minAlt");
+		txtMinLat.setText("minLat");
 		txtMinLat.setColumns(10);
+		txtMinLat.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMinLat.getText().equals("minLat"))
+					txtMinLat.setText("");
+			}
+		});
 
 		txtMinLon = new JTextField();
 		txtMinLon.setText("minLon");
 		txtMinLon.setColumns(10);
+		txtMinLon.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMinLon.getText().equals("minLon"))
+					txtMinLon.setText("");
+			}
+		});
 
 		txtMinAlt = new JTextField();
 		txtMinAlt.setText("minAlt");
 		txtMinAlt.setColumns(10);
+		txtMinAlt.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMinAlt.getText().equals("minAlt"))
+					txtMinAlt.setText("");
+			}
+		});
 
 		lblDevice = new JLabel("Device");
 		lblDevice.setFont(new Font("Tahoma", Font.BOLD, 16));
@@ -360,6 +434,12 @@ public class Frame1 {
 		txtName = new JTextField();
 		txtName.setText("name");
 		txtName.setColumns(10);
+		txtName.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtName.getText().equals("name"))
+					txtName.setText("");
+			}
+		});
 		
 		rdbtnByName = new JRadioButton("Includes Name");
 		rdbtnByName.setSelected(true);
@@ -371,22 +451,6 @@ public class Frame1 {
 		btnUndoFilter = new JButton("Undo Filter");
 		btnUndoFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				chkBxTime.setSelected(false);
-//				chkBxLat.setSelected(false);
-//				chkBxLon.setSelected(false);
-//				chkBxAlt.setSelected(false);
-//				chkBxID.setSelected(false);
-				
-				txtMaxAlt.setText("maxAlt");
-				txtMinAlt.setText("minAlt");
-				txtMaxLat.setText("maxLat");
-				txtMinLat.setText("minLat");
-				txtMaxLon.setText("maxLon");
-				txtMinLon.setText("minLon");
-				txtMaxTime.setText("maxTime");
-				txtMintime.setText("minTime");
-				txtName.setText("name");
-				
 				clearFilterData();
 				if (main.getFolderPath() == null) {
 					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
@@ -407,13 +471,6 @@ public class Frame1 {
 		btnAndFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setFilter("AND");
-				
-//				chkBxTime.setSelected(false);
-//				chkBxLat.setSelected(false);
-//				chkBxLon.setSelected(false);
-//				chkBxAlt.setSelected(false);
-//				chkBxID.setSelected(false);
-
 				if (main.getFolderPath() == null) {
 					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
 				} else {
@@ -427,13 +484,6 @@ public class Frame1 {
 		btnNotFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setFilter("NOT");
-				
-//				chkBxTime.setSelected(false);
-//				chkBxLat.setSelected(false);
-//				chkBxLon.setSelected(false);
-//				chkBxAlt.setSelected(false);
-//				chkBxID.setSelected(false);
-				
 				if (main.getFolderPath() == null) {
 					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
 				} else {
@@ -449,12 +499,6 @@ public class Frame1 {
 		btnOrFilter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setFilter("OR");
-//				chkBxTime.setSelected(false);
-//				chkBxLat.setSelected(false);
-//				chkBxLon.setSelected(false);
-//				chkBxAlt.setSelected(false);
-//				chkBxID.setSelected(false);
-				
 				if (main.getFolderPath() == null) {
 					JOptionPane.showMessageDialog(frame, "Choose a folder path!");
 				} else {
@@ -530,13 +574,15 @@ public class Frame1 {
 		 * @output coordinate
 		 */
 		txtMac = new JTextField();
-		txtMac.setText("MAC");
+		txtMac.setText("Mac");
 		txtMac.setColumns(10);
 		txtMac.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent e) {
-				txtMac.setText("");
+				if(txtMac.getText().equals("Mac"))
+					txtMac.setText("");
 			}
 		});
+		
 
 		txtAltLonLat = new JTextField();
 		txtAltLonLat.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -548,12 +594,12 @@ public class Frame1 {
 		btnSubmitMac.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String mac = txtMac.getText();
-				if(mac == null){
+				if(main.getFilePath() != null && mac != null){
 					fc = main.algorhthm1(mac);
 					txtAltLonLat.setText(fc.toStringGUI());
 				}
 				else{
-					JOptionPane.showMessageDialog(frame, "Enter MAC to run Algorithm 1!");
+					JOptionPane.showMessageDialog(frame, "Enter MAC and upload file to run Algorithm 1!");
 				}
 			}
 		});
@@ -569,26 +615,62 @@ public class Frame1 {
 		txtMac_1 = new JTextField();
 		txtMac_1.setText("Mac1");
 		txtMac_1.setColumns(10);
+		txtMac_1.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMac_1.getText().equals("Mac1"))
+					txtMac_1.setText("");
+			}
+		});
 
 		txtMac_2 = new JTextField();
 		txtMac_2.setText("Mac2");
 		txtMac_2.setColumns(10);
+		txtMac_2.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMac_2.getText().equals("Mac2"))
+					txtMac_2.setText("");
+			}
+		});
 
 		txtMac_3 = new JTextField();
 		txtMac_3.setText("Mac3");
 		txtMac_3.setColumns(10);
+		txtMac_3.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtMac_3.getText().equals("Mac3"))
+					txtMac_3.setText("");
+			}
+		});
 
 		txtSignal = new JTextField();
 		txtSignal.setText("Signal1");
 		txtSignal.setColumns(10);
+		txtSignal.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtSignal.getText().equals("Signal1"))
+					txtSignal.setText("");
+			}
+		});
 
 		txtSignal_1 = new JTextField();
 		txtSignal_1.setText("Signal2");
 		txtSignal_1.setColumns(10);
+		txtSignal_1.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtSignal_1.getText().equals("Signal2"))
+					txtSignal_1.setText("");
+			}
+		});
 
 		txtSignal_2 = new JTextField();
 		txtSignal_2.setText("Signal3");
 		txtSignal_2.setColumns(10);
+		txtSignal_2.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				if(txtSignal_2.getText().equals("Signal3"))
+					txtSignal_2.setText("");
+			}
+		});
 
 		txtAltitudeLongitudeLatitude = new JTextField();
 		txtAltitudeLongitudeLatitude.setText("Altitude, Longitude, Latitude");
@@ -605,11 +687,17 @@ public class Frame1 {
 				String signal1 = txtSignal.getText();
 				String signal2 = txtSignal_1.getText();
 				String signal3 = txtSignal_2.getText();
-				int sig1 = Integer.parseInt(signal1);
-				int sig2 = Integer.parseInt(signal2);
-				int sig3 = Integer.parseInt(signal3);
-				fc = main.algorhthm2(mac1, sig1, mac2, sig2, mac3, sig3);
-				txtAltitudeLongitudeLatitude.setText(fc.toStringGUI());
+				if(main.getFilePath() != null && mac1 != null && !mac1.equals("Mac1") && mac2 != null && !mac2.equals("Mac2") && mac3 != null && !mac3.equals("Mac3")&& signal1 != null && !signal1.equals("Signal1") && signal2 != null && !signal2.equals("Signal2") && signal3 != null && !signal3.equals("Signal3")){
+					int sig1 = Integer.parseInt(signal1);
+					int sig2 = Integer.parseInt(signal2);
+					int sig3 = Integer.parseInt(signal3);
+					fc = main.algorhthm2(mac1, sig1, mac2, sig2, mac3, sig3);
+					txtAltitudeLongitudeLatitude.setText(fc.toStringGUI());
+				}
+				else{
+					JOptionPane.showMessageDialog(frame, "Enter all the data to run Algorithm 2 and upload a file!");
+				}
+				
 			}
 		});
 
