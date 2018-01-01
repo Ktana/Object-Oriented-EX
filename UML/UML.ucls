@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="Global.DateFormat" project="Ex2" file="/Ex2/src/Global/DateFormat.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="90" width="108" x="298" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="GUI.FolderFilter" project="Ex2" file="/Ex2/src/GUI/FolderFilter.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="126" width="157" x="444" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="KML.Placemark" project="Ex2" file="/Ex2/src/KML/Placemark.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="252" width="312" x="1880" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="org.jsefa.Deserializer" project="Ex2" 
+    file="/Ex2/src/org/jsefa/Deserializer.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="162" width="208" x="639" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="5" language="java" name="Global.CSV_row" project="Ex2" file="/Ex2/src/Global/CSV_row.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="540" width="608" x="2230" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="Global.MainRun" project="Ex2" file="/Ex2/src/Global/MainRun.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="396" width="358" x="3439" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="Global.toCSVtoKML" project="Ex2" file="/Ex2/src/Global/toCSVtoKML.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="342" width="389" x="2793" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="Algorithms.Algo_1" project="Ex2" file="/Ex2/src/Algorithms/Algo_1.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="90" width="106" x="885" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="org.jsefa.Serializer" project="Ex2" file="/Ex2/src/org/jsefa/Serializer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="162" width="270" x="1029" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="KML.Point" project="Ex2" file="/Ex2/src/KML/Point.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="144" width="159" x="1782" y="1783"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="Algorithms.Algo_2" project="Ex2" file="/Ex2/src/Algorithms/Algo_2.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="90" width="106" x="1337" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="Global.CSV_Merged_Row" project="Ex2" file="/Ex2/src/Global/CSV_Merged_Row.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="738" width="306" x="2876" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="Global.CSV_header_row" project="Ex2" file="/Ex2/src/Global/CSV_header_row.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="396" width="436" x="2230" y="1783"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="org.jsefa.SerializationException" project="Ex2" 
+    file="/Ex2/src/org/jsefa/SerializationException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="126" width="261" x="1481" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="Global.FileInfo" project="Ex2" file="/Ex2/src/Global/FileInfo.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="270" width="206" x="4444" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <interface id="16" language="java" name="org.jsefa.IOFactory" project="Ex2" file="/Ex2/src/org/jsefa/IOFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="108" width="212" x="1780" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </interface>  
+  <class id="17" language="java" name="Comparator.MyComparator" project="Ex2" 
+    file="/Ex2/src/Comparator/MyComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="108" width="157" x="3220" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="Predicate.MyPredicateFactory" project="Ex2" 
+    file="/Ex2/src/Predicate/MyPredicateFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="90" width="166" x="2030" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="GUI.Frame1" project="Ex2" file="/Ex2/src/GUI/Frame1.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1296" width="255" x="3637" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="org.jsefa.DeserializationException" project="Ex2" 
+    file="/Ex2/src/org/jsefa/DeserializationException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="234" width="351" x="4073" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="Global.Full_Coordinate" project="Ex2" file="/Ex2/src/Global/Full_Coordinate.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="486" width="290" x="3835" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="KML.TimeStamp" project="Ex2" file="/Ex2/src/KML/TimeStamp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="144" width="136" x="1979" y="1783"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="Junit.JunitTesting" project="Ex2" file="/Ex2/src/Junit/JunitTesting.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="236" x="2234" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="Comparator.MyComparatorFactory" project="Ex2" 
+    file="/Ex2/src/Comparator/MyComparatorFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="90" width="181" x="3220" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="Global.FileChecker" project="Ex2" file="/Ex2/src/Global/FileChecker.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="180" width="188" x="4462" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="org.jsefa.IOFactoryException" project="Ex2" 
+    file="/Ex2/src/org/jsefa/IOFactoryException.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="108" width="247" x="2508" y="-327"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="org.jsefa.ObjectPathElement" project="Ex2" 
+    file="/Ex2/src/org/jsefa/ObjectPathElement.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="180" width="243" x="4163" y="1007"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="true" static="false"/>      
+      <operations public="true" package="true" protected="false" private="true" static="false"/>    
+    </display>  
+  </class>  
+  <association id="28">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="29" name="rowList"/>      
+      <multiplicity id="30" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="32" name="rowMergeList"/>      
+      <multiplicity id="33" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="35" name="TimeStamp"/>      
+      <multiplicity id="36" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="37">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="17"/>  
+  </generalization>  
+  <association id="38">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="39" name="fileInfoList"/>      
+      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="42" name="objectPath"/>      
+      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="45" name="main"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="48" name="Point"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="51" name="fc"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="54" name="PlacemarkList"/>      
+      <multiplicity id="55" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="57" name="HeaderRow"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="false" private="true" static="false"/>    
+    <operations public="true" package="true" protected="false" private="true" static="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
