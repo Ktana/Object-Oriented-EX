@@ -1,8 +1,12 @@
 package Global;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,6 +19,7 @@ import java.util.concurrent.Executors;
 
 import Algorithms.*;
 import GUI.*;
+import Predicate.Filter;
 
 
 
@@ -22,6 +27,7 @@ public class MainRun {
 	
 	private String folderPath;
 	private String filePath;
+	private String binPath;
 	private String meregedPath;
 	
 	private Thread thread;
@@ -79,6 +85,11 @@ public class MainRun {
 	public void saveMeregedPath(String path){
 		this.meregedPath = path;
 		System.out.println(meregedPath);
+	}
+	
+	public void saveBinPath(String path){
+		this.binPath = path;
+		System.out.println(binPath);
 	}
 
 	public String getFolderPath()
@@ -155,7 +166,22 @@ public class MainRun {
 	}
 	
 	
-	
+	public void uploadBinFile(){
+		try {
+			String input_path = this.binPath;
+			@SuppressWarnings("resource")
+			ObjectInputStream readBin = new ObjectInputStream(new FileInputStream(input_path));
+			Filter filter = (Filter) readBin.readObject();
+			readBin.close();
+			System.out.println(filter.toString());
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 	public Full_Coordinate algorhthm1(String mac) {
 		String output_path = this.meregedPath;
 		String line=null;
