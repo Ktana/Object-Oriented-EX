@@ -1,16 +1,13 @@
 package GUI;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import Global.Full_Coordinate;
+import Algorithms.Full_Coordinate;
 import Global.MainRun;
-
+import Predicate.Filter;
 import java.awt.Component;
-
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -18,8 +15,11 @@ import java.awt.event.FocusEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,6 +79,8 @@ public class Frame1 {
 	private JRadioButton rdbtnByName;
 	private JRadioButton rdbtnNotByName;
 	private JButton btnOrFilter;
+	private JButton btnSaveFilter;
+	private JButton btnUploadFilter;
 
 	private JLabel lblOfAp;
 	private JLabel lblDataSize;
@@ -102,6 +104,9 @@ public class Frame1 {
 	private JTextField txtName;
 	private JButton btnUndoFilter;
 	private Full_Coordinate fc;
+	
+	private int i =0;
+	
 
 	/**
 	 * Launch the application.
@@ -119,9 +124,9 @@ public class Frame1 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				Frame1 window = new Frame1();
+				window.frame.pack();
 				window.frame.setVisible(true);
 				window.frame.addWindowListener(new WindowAdapter() {
-
 					@Override
 		            public void windowClosing(WindowEvent e) {
 		                System.out.println("A is closing");
@@ -509,6 +514,44 @@ public class Frame1 {
 
 			}
 		});
+		
+		btnSaveFilter = new JButton("Save Filter");
+		btnSaveFilter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean TimechkBx = chkBxTime.isSelected();
+				String TIME_MinVal = txtMintime.getText();
+				String TIME_MaxVal = txtMaxTime.getText();
+				boolean AltchkBx =  chkBxAlt.isSelected();
+				String ALT_MinVal = txtMinAlt.getText();
+				String ALT_MaxVal = txtMaxAlt.getText();
+				boolean LATchkBx = chkBxLat.isSelected();
+				String LAT_MinVal = txtMinLat.getText();
+				String LAT_MaxVal = txtMaxLat.getText();
+				boolean LONchkBx = chkBxLon.isSelected();
+				String LON_MinVal = txtMinLon.getText();
+				String LON_MaxVal = txtMaxLon.getText();
+				boolean IDchkBx = chkBxID.isSelected();
+				String ID_MinVal = txtName.getText();
+				
+				Filter filter = new Filter( TimechkBx, TIME_MinVal, TIME_MaxVal, AltchkBx, ALT_MinVal, ALT_MaxVal, LATchkBx, LAT_MinVal,
+						 LAT_MaxVal,  LONchkBx, LON_MinVal, LON_MaxVal, IDchkBx, ID_MinVal);
+		
+				String binFileName = "C:/ex0/OUT/filter"+i+".bin";
+				i++;
+				try{
+					ObjectOutputStream filterWrite = new ObjectOutputStream(new FileOutputStream(binFileName));
+					filterWrite.writeObject(filter);
+					filterWrite.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				
+				JOptionPane.showMessageDialog(frame, "Filter saved to bin file!");
+				
+			}
+		});
+		
+		btnUploadFilter = new JButton("Upload Filter");
 	}
 
 	private void setFilter(String logicOperator){
@@ -715,97 +758,90 @@ public class Frame1 {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(btnSaveToCSV, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnClear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnCSV, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnDir, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+								.addComponent(btnSaveToKml, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnUndoFilter, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblDataSize, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblOfAp, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(12)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(btnSaveToCSV, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnClear, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnCSV, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnDir, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-											.addComponent(btnSaveToKml, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-											.addComponent(btnUndoFilter, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblOfAp, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblTime)
-										.addComponent(lblLatitude, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(7)
+											.addGap(12)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 												.addGroup(groupLayout.createSequentialGroup()
-													.addGap(1)
-													.addComponent(lblLongtitude)
-													.addPreferredGap(ComponentPlacement.UNRELATED)
-													.addComponent(txtMaxLon, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
-												.addGroup(groupLayout.createSequentialGroup()
-													.addGap(5)
+													.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+														.addComponent(txtMaxTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+														.addComponent(txtMaxLon, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+														.addGroup(groupLayout.createSequentialGroup()
+															.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+																.addComponent(lblAltitude)
+																.addComponent(lblDevice, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
+															.addGap(27)
+															.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+																.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+																.addComponent(txtMaxAlt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+														.addComponent(txtMaxLat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+													.addGap(18)
 													.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 														.addGroup(groupLayout.createSequentialGroup()
-															.addComponent(btnAndFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-															.addPreferredGap(ComponentPlacement.UNRELATED)
-															.addComponent(btnNotFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-															.addPreferredGap(ComponentPlacement.UNRELATED)
-															.addComponent(btnOrFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+															.addComponent(txtMinLat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+															.addPreferredGap(ComponentPlacement.RELATED)
+															.addComponent(chkBxLat, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
 														.addGroup(groupLayout.createSequentialGroup()
-															.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-																.addComponent(txtMaxLat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																.addComponent(txtMaxTime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																.addGroup(groupLayout.createSequentialGroup()
-																	.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																		.addComponent(lblAltitude)
-																		.addComponent(lblDevice, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-																	.addGap(27)
-																	.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																		.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-																		.addComponent(txtMaxAlt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-															.addGap(18)
+															.addComponent(txtMintime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+															.addPreferredGap(ComponentPlacement.RELATED)
+															.addComponent(chkBxTime, GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE))
+														.addGroup(groupLayout.createSequentialGroup()
+															.addComponent(txtMinLon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+															.addPreferredGap(ComponentPlacement.RELATED)
+															.addComponent(chkBxLon))
+														.addComponent(rdbtnNotByName, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
+														.addGroup(groupLayout.createSequentialGroup()
 															.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 																.addGroup(groupLayout.createSequentialGroup()
-																	.addComponent(rdbtnByName, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-																	.addPreferredGap(ComponentPlacement.RELATED)
-																	.addComponent(chkBxID, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-																.addGroup(groupLayout.createSequentialGroup()
 																	.addComponent(txtMinAlt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																	.addPreferredGap(ComponentPlacement.RELATED)
-																	.addComponent(chkBxAlt, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
+																	.addPreferredGap(ComponentPlacement.RELATED))
 																.addGroup(groupLayout.createSequentialGroup()
-																	.addComponent(txtMintime, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																	.addPreferredGap(ComponentPlacement.RELATED)
-																	.addComponent(chkBxTime, GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-																.addComponent(rdbtnNotByName, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-																.addGroup(groupLayout.createSequentialGroup()
-																	.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-																		.addGroup(groupLayout.createSequentialGroup()
-																			.addComponent(txtMinLat, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																			.addGap(3))
-																		.addGroup(groupLayout.createSequentialGroup()
-																			.addComponent(txtMinLon, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-																			.addPreferredGap(ComponentPlacement.RELATED)))
-																	.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-																		.addComponent(chkBxLon)
-																		.addGroup(groupLayout.createSequentialGroup()
-																			.addComponent(chkBxLat, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-																			.addGap(1)))))))
-													.addPreferredGap(ComponentPlacement.RELATED))
+																	.addComponent(rdbtnByName, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+																	.addGap(21)))
+															.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+																.addComponent(chkBxID, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+																.addComponent(chkBxAlt, GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)))))
 												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(btnAndFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addComponent(btnNotFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.UNRELATED)
 													.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-														.addComponent(txtNumoflines, 158, 158, 158)
-														.addGroup(groupLayout.createSequentialGroup()
-															.addPreferredGap(ComponentPlacement.RELATED)
-															.addComponent(txtSize, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-													.addGap(219)))))
-									.addGap(94))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblDataSize, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)))
+														.addComponent(btnSaveFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+														.addComponent(btnOrFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
+														.addComponent(btnUploadFilter, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))))
+											.addPreferredGap(ComponentPlacement.RELATED))
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+											.addComponent(lblTime, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addGroup(groupLayout.createSequentialGroup()
+												.addGap(8)
+												.addComponent(lblLongtitude)))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(7)
+											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(txtNumoflines, Alignment.LEADING)
+												.addComponent(txtSize, Alignment.LEADING))
+											.addGap(242)))
+									.addGap(79))
+								.addComponent(lblLatitude, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE))
 							.addGap(0))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
 							.addGap(211)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -841,117 +877,126 @@ public class Frame1 {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblAlgorithms, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnDir, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblAlgorithms, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnDir, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnCSV, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnSaveToCSV, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnSaveToKml, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-											.addComponent(lblTime)
-											.addComponent(txtMac, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-											.addComponent(btnSubmitMac, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(8)
-											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(chkBxTime, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-												.addGroup(groupLayout.createSequentialGroup()
-													.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-														.addComponent(txtMaxTime, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-														.addComponent(txtMintime, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-													.addGap(7)))))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(15)
-											.addComponent(txtAltLonLat, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-											.addGap(22)
-											.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(txtMac_1, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-												.addComponent(txtSignal, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(txtMac_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-												.addComponent(txtSignal_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(txtMac_3, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-												.addComponent(txtSignal_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-												.addGroup(groupLayout.createSequentialGroup()
-													.addGap(5)
-													.addComponent(chkBxLat, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
-												.addComponent(txtMinLat, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-											.addGap(13)
-											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-												.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-													.addComponent(lblLongtitude, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-													.addComponent(txtMaxLon, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-													.addComponent(txtMinLon, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-												.addComponent(chkBxLon))
-											.addGap(11)
-											.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-												.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-													.addComponent(lblAltitude, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-													.addComponent(txtMaxAlt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-													.addComponent(txtMinAlt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-												.addComponent(chkBxAlt))
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-												.addComponent(lblDevice, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-												.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-												.addComponent(rdbtnByName)
-												.addComponent(chkBxID))
-											.addGap(2)))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(rdbtnNotByName)
-										.addComponent(btnSubmit, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))))
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnAndFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-											.addComponent(btnNotFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-											.addComponent(btnOrFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)))
-									.addGap(18)
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(lblDataSize, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtSize, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(36)
-									.addComponent(txtAltitudeLongitudeLatitude, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)))
-							.addGap(7))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnCSV, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblLatitude, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 								.addComponent(txtMaxLat, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-							.addGap(170)
-							.addComponent(btnUndoFilter, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-							.addGap(77)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnClear, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSaveToCSV, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSaveToKml, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblTime)
+									.addComponent(txtMac, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnSubmitMac, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(8)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(chkBxTime, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(txtMintime, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+												.addComponent(txtMaxTime, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+											.addGap(7)))))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(15)
+									.addComponent(txtAltLonLat, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+									.addGap(22)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtMac_1, GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+										.addComponent(txtSignal, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtMac_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtSignal_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtMac_3, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtSignal_2, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(5)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(txtMinLat, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+										.addComponent(chkBxLat, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+											.addComponent(lblLongtitude, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+											.addComponent(txtMinLon, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+											.addComponent(txtMaxLon, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(chkBxLon)
+											.addGap(8)))
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(11)
+											.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblAltitude, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+												.addComponent(txtMaxAlt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+												.addComponent(txtMinAlt, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(18)
+											.addComponent(chkBxAlt)))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+											.addComponent(lblDevice, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+											.addComponent(txtName, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+											.addComponent(rdbtnByName))
+										.addComponent(chkBxID))
+									.addGap(2)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(rdbtnNotByName)
+								.addComponent(btnSubmit, GroupLayout.PREFERRED_SIZE, 39, GroupLayout.PREFERRED_SIZE))))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnAndFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnUndoFilter, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnNotFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnOrFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(18)
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtSize, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblDataSize, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnSaveFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnUploadFilter, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(36)
+							.addComponent(txtAltitudeLongitudeLatitude, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)))
+					.addGap(8)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtNumoflines, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtNumoflines, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblOfAp, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-					.addGap(9)
+					.addGap(7)
 					.addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
 					.addGap(32))
 		);
 		frame.getContentPane().setLayout(groupLayout);
+		frame.setResizable(false);
 	}
 
 	public int countLines(String filename) throws IOException {
