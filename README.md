@@ -2,12 +2,13 @@
 ## Names: Alex Fishman & Alona Kondratenko
 
 ### Input:
-folder path that contains several CSV format files, those files contains data from Wiggle_WIFI application. The folder contains also another folder named 'OUT'.
+Folder path that contains several CSV format files, those files contains data from Wiggle_WIFI application. The folder contains also another folder named 'OUT' which will contain the output. 
+Through the GUI you can choose to filter (and/or) the data by time, latitude, altitude, longitude (and/or/not) by device name, also you can enter up to 3 mac's and signals to estimate the coordinates.
 
 ### Output:  
--Can provide one big CSV file that contain data from all CSV's in the folder, this Union CSV is filtered by several categories that will be explained later.
+-Can provide one big CSV file that contain data from all CSV's in the folder, this Union CSV is filtered by several categories that were written above.
 
--Can provide KML file (with or without the filter) from the data in CSV file/s and be open on google earth.
+-Can provide KML file (with or without the filter) from the data in CSV file/s and be opened through google earth (also allows to use the time bar).
 
 ### How the output works: 
 the program takes all the CSV format files that there is on the given path and creates new CSV file with the fields: time, model, longitude, altitude, latitude. The Union CSV is filtered by time and ID.
@@ -15,7 +16,7 @@ the program takes all the CSV format files that there is on the given path and c
 ### The chosen fields: 
 6 permanent columns that represents the time and the coordinates, and 40 dynamic columns that filtered by the strongest signal (he is a part of the data). In addition – the file can be filtered by tome and ID.
 
-## The program combined from 6 packages plus one pack from the internet:
+## The program contains 7 packages plus one package from the internet:
 ### Global package:
 -**_CSVheaderrow_** – describes the head line (the labels) on the input file, it contains private Strings that matching the labels on the original file, getters of the values and one constructor that gets the relevant values from the header line.
 Main use: saving data about the devise that collect the data.
@@ -33,9 +34,7 @@ Contains private String variables: 5 key labels and one more " extends " key tha
 The class contains five comparators (ID, time, alt, lon, lat) for each comparator object  has been done @Override to the Compare function.
 The class also contains CompareByTime function and CompareByPlace function that we will use on the filter.
 
--**_Full_Coortinate_** - class that represents coordinate that include altitude, longitude and latitude and also MAC's signal of this specific coordinate.
-
--**_DateFormat_** - class that keeps the format of date.
+-**_DateFormat_** - class that keeps the distinct format of the date.
 
 -**_toCSVtoKML_** in this class we define List<CSV_row> variable that gets data from input file, and List<SCV_Merged_row> that gets data that will appear on output file. It contains the following functions:
 
@@ -53,11 +52,16 @@ The class also contains CompareByTime function and CompareByPlace function that 
 
 -_saveToKMLFile_ - this function writes into KML file of the name it gets the data it got.
 
+-**_FileInfo_** - A class that represents each of the input files in WigleWIFI format.
+
+-**_FileChecker_** - A class that "watches" over the input files and updates the output file accordingly.
+
+-**_MainRun_** - The main function to run in eclipse that handles all the program accordingly. Also creats a "Watcher Thread". 
 
 ### Compatator package:
 -**_MyComparator_** - class that implements comparator.
 
--**_MyComparatorFactory_** - class that contains all the comparators together.
+-**_MyComparatorFactory_** - class that "generates" all the comparators.
 
 ### KML package:
 -**_Placemark_** - class that keeps the format of place - all the data of specific point (of place).
@@ -71,6 +75,13 @@ The class also contains CompareByTime function and CompareByPlace function that 
 
 -**_Algo_2_** -  Second Algorithm that takes 3 MAC's and 3 signals, then returns one coordinate that closest to them all. this coordinate represents a place on map that we can't really see.
 
+-**_Full_Coortinate_** - A class that represents coordinate that include altitude, longitude and latitude and also MAC's signal of this specific coordinate.
+
+### Predicate package:
+-**_MyPredicateFactory_** - Creats the filters by And/Or/Not. The predicate aids in determaining the relation between terms.
+
+-**_Filter_** - Class that implements the Serializable interface to write and save the filter object into a bin file.
+
 ### Junit package.
 
 ### org.jsefa package:
@@ -81,7 +92,8 @@ o	Its creates the exact file that we need
 o	We can view the source files
 o	It makes it easier to debug
 
-### GUI package (not used yet):
--**_FolderFilter_** - 
--**_Frame1_** -
+### GUI package:
+-**_Frame1_** - Contains the GUI with all it's buttons, fields and action listeners.
+
+-**_FolderFilter_** - Not used at the time.
 
