@@ -82,6 +82,11 @@ The class also contains CompareByTime function and CompareByPlace function that 
 
 -**_Filter_** - Class that implements the Serializable interface to write and save the filter object into a bin file.
 
+### GUI package:
+-**_Frame1_** - Contains the GUI with all it's buttons, fields and action listeners.
+
+-**_FolderFilter_** - Not used at the time.
+
 ### Junit package.
 
 ### org.jsefa package:
@@ -91,9 +96,4 @@ o	Its free to use
 o	Its creates the exact file that we need
 o	We can view the source files
 o	It makes it easier to debug
-
-### GUI package:
--**_Frame1_** - Contains the GUI with all it's buttons, fields and action listeners.
-
--**_FolderFilter_** - Not used at the time.
 
