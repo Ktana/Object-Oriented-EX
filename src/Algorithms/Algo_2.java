@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 
 public class Algo_2 {
-
 	/** Second Algorithm that takes 3 MAC's and 3 signals, then returns one coordinate that closest to them all.
 	 * this coordinate represents a place on map that we can't really see.
 	 * @param mac1	MAC contains 6 pairs of hexadecimal numbers and separated by ':' 
@@ -27,11 +26,11 @@ public class Algo_2 {
 	 * @see Full_Coordinate
 	 * @author Alona+Alex
 	 */
-	public static   Full_Coordinate algorithm_2(String mac1, int signal1, String mac2, int signal2, String mac3, int signal3) {
+	public static Full_Coordinate algorithm_2(String mac1, int signal1, String mac2, int signal2, String mac3, int signal3, List<CSV_Merged_Row> rowMergeList) {
 		//////////////////////////////////////////////////////////////////
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
-		toCSVtoKML toCSVtoKML = new toCSVtoKML();
-		List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
+//		toCSVtoKML toCSVtoKML = new toCSVtoKML();
+//		List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
 		//System.out.println(rowMergeList.toString());
 		rowMergeMACList = rowMergeList.stream().filter(r ->  r.compareByMAC(mac1)).collect(Collectors.toList());
 		Full_Coordinate[]C1 = new Full_Coordinate[rowMergeMACList.size()];
@@ -118,9 +117,22 @@ public class Algo_2 {
 		}
 		Arrays.sort(s3);
 		//////////////////////////////////////////////////////////////////
-		int close1_s1 = s1[s1.length-1];
-		int close1_s2 = s2[s2.length-1];
-		int close1_s3 = s3[s3.length-1];
+		int close1_s2 , close1_s1, close1_s3;
+		if(s1.length > 0)
+			close1_s1 = s1[s1.length-1];
+		else
+			close1_s1 = -120;
+		
+		if(s2.length > 0)
+			close1_s2 = s2[s2.length-1];
+		else
+			close1_s2 = -120;
+		
+		if(s3.length > 0)
+			close1_s3 = s3[s3.length-1];
+		else
+			close1_s3 = -120;
+		
 		int close2_s1, close3_s1, close2_s2, close3_s2, close2_s3, close3_s3;
 
 		if(s1.length>2) {
@@ -166,9 +178,9 @@ public class Algo_2 {
 		double pi1 = pi(signal1,close1_s1,signal2,close1_s2,signal3,close1_s3);
 		double pi2 = pi(signal1,close2_s1,signal2,close2_s2,signal3,close2_s3);
 		double pi3 = pi(signal1,close3_s1,signal2,close3_s2,signal3,close3_s3);	
-		Full_Coordinate coo1 = Algo_1.algorithm_1(mac1);
-		Full_Coordinate coo2 = Algo_1.algorithm_1(mac2);
-		Full_Coordinate coo3 = Algo_1.algorithm_1(mac3);
+		Full_Coordinate coo1 = Algo_1.algorithm_1(mac1 , rowMergeList);
+		Full_Coordinate coo2 = Algo_1.algorithm_1(mac2 , rowMergeList);
+		Full_Coordinate coo3 = Algo_1.algorithm_1(mac3 , rowMergeList);
 
 		Full_Coordinate final_coo = new Full_Coordinate();
 		final_coo.setSignal(pi1 + pi2 + pi3);
@@ -240,7 +252,7 @@ public class Algo_2 {
 	/**@param filename	a string  that represents a file path
 	 *@return creates new fixed file in chosen location
 	 */
-	public static void runAlgo2(String filename) {
+	public static void runAlgo2(String filename , List<CSV_Merged_Row> rowMergeList) {
 		String line=null;
 		try {
 			PrintWriter pw = new PrintWriter(new File("C:/ex0/ex2/out/MAC_Algo2.csv"));
@@ -254,21 +266,21 @@ public class Algo_2 {
 				int len = strs.length;
 				if(len>=17) {
 					Full_Coordinate fc = algorithm_2(strs[6], Integer.parseInt(strs[8]), strs[10], 
-							Integer.parseInt(strs[12]), strs[14], Integer.parseInt(strs[16]));
+							Integer.parseInt(strs[12]), strs[14], Integer.parseInt(strs[16]) , rowMergeList);
 					strs[2] = fc.LONtoString();
 					strs[3] = fc.LATtoString();
 					strs[4] = fc.ALTtoString();
 				}
 				else if(len>9 && len<=13) {
 					Full_Coordinate fc = algorithm_2(strs[6], Integer.parseInt(strs[8]), strs[10], 
-							Integer.parseInt(strs[12]), "00:00:00:00:00:00", -120);
+							Integer.parseInt(strs[12]), "00:00:00:00:00:00", -120 , rowMergeList);
 					strs[2] = fc.LONtoString();
 					strs[3] = fc.LATtoString();
 					strs[4] = fc.ALTtoString();
 				}
 				else if(len<=9) {
 					Full_Coordinate fc = algorithm_2(strs[6], Integer.parseInt(strs[8]), 
-							"00:00:00:00:00:00", -120, "00:00:00:00:00:00", -120);
+							"00:00:00:00:00:00", -120, "00:00:00:00:00:00", -120 , rowMergeList);
 					strs[2] = fc.LONtoString();
 					strs[3] = fc.LATtoString();
 					strs[4] = fc.ALTtoString();
@@ -291,13 +303,13 @@ public class Algo_2 {
 	}
 
 
-
+/*
 	public static void main(String[] args) {
 		toCSVtoKML toCSVtoKML = new toCSVtoKML();
 		toCSVtoKML.run();
 		String filename = "C:/ex0/ex2/þþRESULT_Merged_BM3_Algo2.csv";
-		runAlgo2(filename);
+		//runAlgo2(filename);
 
 	}
-
+*/
 }
