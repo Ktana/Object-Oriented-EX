@@ -98,6 +98,7 @@ public class CSV_Merged_Row {
 	public String getAlt() {return Alt;}
 	public String getExtension() {return Extension;}
 	
+
 	public String getMAC1() { String [] mac = this.Extension.split(","); return mac[1];}
 	public String getMAC2() {String [] mac = this.Extension.split(","); if(mac.length>5){if(!mac[5].isEmpty()) return mac[5];}return "";}
 	public String getMAC3() {String [] mac = this.Extension.split(","); if(mac.length>9){if(!mac[9].isEmpty()) return mac[9];}return "";}
@@ -108,9 +109,10 @@ public class CSV_Merged_Row {
 	public String getMAC8() {String [] mac = this.Extension.split(","); if(mac.length>29){if(!mac[29].isEmpty()) return mac[29];}return "";}
 	public String getMAC9() {String [] mac = this.Extension.split(","); if(mac.length>33){if(!mac[33].isEmpty()) return mac[33];}return "";}
 	public String getMAC10(){String [] mac = this.Extension.split(","); if(mac.length>37){if(!mac[37].isEmpty()) return mac[37];}return "";}
+
 	
-	
-	public String getSignal1() { String [] signal = this.Extension.split(","); return signal[3];}
+	public String getSignal1() { String [] signal = this.Extension.split(","); if(!signal[3].isEmpty()) return signal[3]; return "";}
+	//return signal[3];}}
 	public String getSignal2() {String [] signal = this.Extension.split(","); if(signal.length>5){if(!signal[7].isEmpty()) return signal[7];}return "";}
 	public String getSignal3() {String [] signal = this.Extension.split(","); if(signal.length>9){if(!signal[11].isEmpty()) return signal[11];}return "";}
 	public String getSignal4() {String [] signal = this.Extension.split(","); if(signal.length>13){if(!signal[15].isEmpty()) return signal[15];}return "";}
@@ -162,7 +164,6 @@ public class CSV_Merged_Row {
 	}
 
 	public boolean compareByMAC(String mac) {
-		// TODO Auto-generated method stub
 		if((this.getMAC1() == "") &&
 		(this.getMAC2() == "") &&
 		(this.getMAC3() == "") &&
@@ -174,31 +175,37 @@ public class CSV_Merged_Row {
 		(this.getMAC9() == "") &&
 		(this.getMAC10() == ""))
 			return false;
-		
-		if(this.getMAC1().compareTo(mac) == 0)
+				
+		if(this.getMAC1().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC2().compareTo(mac) == 0)
+		if(this.getMAC2().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC3().compareTo(mac) == 0)
+		if(this.getMAC3().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC4().compareTo(mac) == 0)
+		if(this.getMAC4().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC5().compareTo(mac) == 0)
+		if(this.getMAC5().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC6().compareTo(mac) == 0)
+		if(this.getMAC6().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC7().compareTo(mac) == 0)
+		if(this.getMAC7().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC8().compareTo(mac) == 0)
+		if(this.getMAC8().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC9().compareTo(mac) == 0)
+		if(this.getMAC9().trim().compareTo(mac.trim()) == 0)
 			return true;
-		if(this.getMAC10().compareTo(mac) == 0)
+		if(this.getMAC10().trim().compareTo(mac.trim()) == 0)
 			return true;
 		
 		return false;
 	}
 	
+	@Override
+	public String toString() {
+		return "CSV_Merged_Row [Time=" + Time + ", ID=" + ID + ", Lat=" + Lat + ", Lon=" + Lon + ", Alt=" + Alt
+				+ ", Extension=" + Extension + "]";
+	}
+
 	public String getMacSignal(String mac) {
 		// TODO Auto-generated method stub
 		
