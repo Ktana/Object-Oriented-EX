@@ -3,10 +3,18 @@ package Global;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/**
+ * The class deals with errors that occur because of date format problems.
+ * @author Alex Fishman
+ *
+ */
 public class DateFormat {
 
-
+/**
+ * Generates the sent date param as required in my program
+ * @param inDate
+ * @return inDate in the format I need it to be
+ */
 	public static String formatDate(String inDate) {
 		String outDate = "1900-01-01";
 
@@ -25,11 +33,14 @@ public class DateFormat {
 				outDate = inDate;
 			}
 		}
-
 		return outDate;
-
 	}
-
+	
+	/**
+	 * Adjusting time to "my requirements".
+	 * @param time
+	 * @return time as String in my required format.
+	 */
 	public static String adjustTime(String time)
 	{
 		do
@@ -57,6 +68,12 @@ public class DateFormat {
 		}
 	}
 
+	/**
+	 * Generates the date in the correct format
+	 * @param inDate
+	 * @param format
+	 * @return the correct date as a String
+	 */
 	public static String formatDate(String inDate, String format) {
 		String outDate = "1900-01-01";
 
@@ -97,6 +114,12 @@ public class DateFormat {
 
 	}
 	
+	/**
+	 * Determines what is the format of the current gotten date.
+	 * created to solve the date format problems.
+	 * @param date
+	 * @return it's structure
+	 */
 	public static String getDateFormat(String date) {
 		if(date.indexOf("-")>-1)
 			return "DD-MM-YYYY";
@@ -106,6 +129,11 @@ public class DateFormat {
 		return "";
 	}
 
+	/**
+	 * Parsing function
+	 * @param date
+	 * @return the same date in Date format
+	 */
 	public static Date getDateFromString(String date)
 	{
 		if(date == "") return null;

@@ -11,13 +11,25 @@ import java.util.List;
 
 import GUI.Frame1;
 
+/**
+ * The class behaves like a watcher after the file/s of my "database".
+ * It detect's the changes that were made and updates accordingly. 
+ * @author Alex Fishman
+ *
+ */
 public class FileChecker {
+	
 
 	private List<FileInfo> fileInfoList;
 	private String folder;
 	private List<String> fileNameArray = new ArrayList<String>();
 	private String errorMsg = "";
-		
+	
+	/**
+	 * The function get's the folder path and start's the watch after each of it's files.
+	 * If there are no CSV's to watch after in the chosen folder - it will print a console msg.
+	 * @param folderPath
+	 */
 	public FileChecker(String folderPath){
 		this.fileInfoList = new ArrayList<FileInfo>();
 		this.folder = folderPath;
@@ -45,9 +57,12 @@ public class FileChecker {
 			//e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-
 	}
-
+/**
+ * The flag here is a detection that we want to watch over a single given CSV file.
+ * @param folderPath
+ * @param fileFlag
+ */
 	public FileChecker(String folderPath, String fileFlag){
 		
 		this.fileInfoList = new ArrayList<FileInfo>();
@@ -86,6 +101,10 @@ public class FileChecker {
 
 	}
 	
+	/**
+	 * The worker is the one that when change is detected updates the file's created from the database
+	 * that changed accordingly.
+	 */
 	public void workerProsses(){
 		
 		fileNameArray = new ArrayList<String>();
@@ -168,15 +187,10 @@ public class FileChecker {
 		if(!errorMsg.equals("")){
 			System.out.println(errorMsg);
 			errorMsg ="";
-			/////////////////////
-//			Frame1 folderPath = new Frame1();
-			
 			MainRun main = new MainRun();
-			
 			main.saveFolderPath(this.folder);
 			main.saveToCSV();
 			main.saveToKML();
-			////////////////////
 		}
 	}
 
@@ -241,15 +255,14 @@ public class FileChecker {
 		if(!errorMsg.equals("")){
 			System.out.println(errorMsg);
 			errorMsg ="";
-			/////////////////////
-//			Frame1 folderPath = new Frame1();
-			
-			MainRun main = new MainRun();
-			
-			////////////////////
 		}
 	}
 
+	/**
+	 * Check if the file we got is already being watched or if it's a new file.
+	 * @param file
+	 * @return if the file exist's it's index in the array list will be returned, else -1.
+	 */
 	public int existsInFileInfo(String file)
 	{
 		for (int i = 0; i < fileInfoList.size(); i++) {
@@ -258,5 +271,4 @@ public class FileChecker {
 		}
 		return -1;
 	}
-
 }

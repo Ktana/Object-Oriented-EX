@@ -1,7 +1,5 @@
 package Global;
 
-
-
  /** describes the head line (the labels) on the input file, 
  * it contains private Strings that matching the labels on the original file, 
  * getters of the values and one constructor that gets the relevant values from the header line.
@@ -19,6 +17,9 @@ public class CSV_header_row
 	private String board  = "";
 	private String brand  = "";
 	
+	/**
+	 * Empty constractor - default values
+	 */
 	
 	public CSV_header_row()
 	{
@@ -32,6 +33,17 @@ public class CSV_header_row
 		this.brand= "";
 	}
 
+	/**
+	 * Constructor that initialises from values sent 
+	 * @param wifi
+	 * @param appRelease
+	 * @param model
+	 * @param release
+	 * @param device
+	 * @param display
+	 * @param board
+	 * @param brand
+	 */
 	public CSV_header_row(String wifi, String appRelease, String model, String release, String device, String display, String board, String brand)
 	{
 		this.wifi= wifi;
