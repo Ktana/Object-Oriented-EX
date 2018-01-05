@@ -2,7 +2,11 @@ package Global;
 
 import java.nio.file.attribute.FileTime;
 import java.util.Date;
-
+/**
+ * A class that holds a file's size, name and time modified.
+ * @author Alex Fishman
+ *
+ */
 public class FileInfo {
 
 	private double fileSize;
@@ -15,6 +19,12 @@ public class FileInfo {
 		this.time = null; 
 	}
 	
+	/**
+	 * Constructor 
+	 * @param fileSize
+	 * @param fileName
+	 * @param fileTime
+	 */
 	public FileInfo(double fileSize, String fileName, FileTime fileTime){
 		this.fileSize = fileSize;
 		this.fileName = fileName;
