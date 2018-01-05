@@ -45,6 +45,9 @@ public class toCSVtoKML {
 	private List<CSV_Merged_Row> rowMergeList;
 	private List<Placemark> PlacemarkList;
 	
+	/**
+	 * Constructor 
+	 */
 	public toCSVtoKML()
 	{
 		this.sb = new StringBuilder();
@@ -110,8 +113,8 @@ public class toCSVtoKML {
 	 *@return void
 	 */
 	public void mergeData(String fileName){
-		/* from https://metanit.com/java/tutorial/10.7.php
-		 * ***************Groupping**********
+		/**@author  https://metanit.com/java/tutorial/10.7.php
+		 * ***************Groupping***************
 		 */
 		
 		@SuppressWarnings("unchecked")
@@ -130,7 +133,6 @@ public class toCSVtoKML {
 				String CHANEL = csv_row.getChannel();
 				String SIGNAL = csv_row.getRSSI();
 				suffix = suffix + ","+SSID+","+MAC+","+CHANEL+","+SIGNAL;
-				//System.out.println("\nsuffix="+suffix);
 			}
 
 			rowMergeList.add(new CSV_Merged_Row(prefix,suffix));
@@ -149,7 +151,6 @@ public class toCSVtoKML {
 		String mac="3c:1e:04:03:7f:17";//"ec:8c:a2:48:f1:98";////"3c:1e:04:03:7f:17" 14:cc:20:c8:83:9c;
 		rowMergeMACList = rowMergeList.stream()
 				.filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
-		//System.out.println(rowMergeMACList.toString());
 		
 		for (int i = 0; i < rowMergeMACList.size(); i++) {
 				@SuppressWarnings("unused")
@@ -160,23 +161,21 @@ public class toCSVtoKML {
 				String lon = rowMergeMACList.get(i).getLon();
 				@SuppressWarnings("unused")
 				String sig = rowMergeMACList.get(i).getMacSignal(mac);
-				
-				//System.out.println("("+lat+","+lon+","+alt+"),"+" Signal="+sig+"\n");
 		}
 		
 		
 
-		//Comparator from https://javadevblog.com/primer-sortirovki-s-pomoshh-yu-java-comparable-i-comparator.html
+		/**
+		 * Comparator 
+		 * @author https://javadevblog.com/primer-sortirovki-s-pomoshh-yu-java-comparable-i-comparator.html
+		 */
+		
 		//Sort by TIME
 		Collections.sort(rowMergeList, CSV_Merged_Row.TIMEComparator);
 		//Sort by ID
 		Collections.sort(rowMergeList, CSV_Merged_Row.IDComparator);
 
 		CreateCSV_Merged_File(getFName(fileName) + "_Merged.csv",rowMergeList);
-		/*
-		 ******************************************
-		 */
-
 
 		//Sort by CHNL
 		//Collections.sort(rowList, CSV_row.CHNLComparator );
@@ -351,7 +350,6 @@ public class toCSVtoKML {
 		serializer.getLowLevelSerializer().writeEndElement();
 
 		serializer.close(true);
-		//System.out.println(writer);
 		return writer;
 	}
 
@@ -366,9 +364,7 @@ public class toCSVtoKML {
 			String name = cdata.replace("{0}", rowList.get(i).getSSID());
 			String description = "BSSID: <b>"+rowList.get(i).getMAC()+
 					"</b><br/>Capabilities: <b>[ESS]</b><br/>Frequency: <b>"+rowList.get(i).getChannel()+
-					"</b><br/>Timestamp: <b></b>"//<br/>Date: <b>"
-					+rowList.get(i).getFirstSeen();
-					//"</b>";
+					"</b><br/>Timestamp: <b></b>"+rowList.get(i).getFirstSeen();
 			description = cdata.replace("{0}", description);
 			String CurrentLongitude = rowList.get(i).getCurrentLongitude();
 			String CurrentLattitude = rowList.get(i).getCurrentLatitude();
@@ -429,12 +425,4 @@ public class toCSVtoKML {
 	public List<Placemark> getPlacemarkList() {
 		return PlacemarkList;
 	}
-		
-	
-	/////////////////////////////////MAIN://///////////////////////////////////
-	
-//	public void main(String[] args){
-//		run();
-//	}
-	
 }
