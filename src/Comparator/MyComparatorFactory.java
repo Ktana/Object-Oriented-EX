@@ -6,7 +6,21 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 
+/**
+ * Class extends the MyComparator raw type class.
+ * Generates all the comparators in the project 
+ * @author Alex Fishman
+ *
+ */
 public class MyComparatorFactory extends MyComparator {
+	
+	/**
+	 * Class extends the MyComparator raw type class.
+	 * Generates all the comparators in the project 
+	 * @param usedClass - the class of "compareBy"
+	 * @param compareBy - 
+	 * @return "the sort condition" - how to compare between the elements 
+	 */
 
 	public static Comparator getComparator(Class usedClass, String compareBy)
 	{
