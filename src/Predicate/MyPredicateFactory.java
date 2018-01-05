@@ -4,6 +4,11 @@ import java.util.function.Predicate;
 import Global.CSV_Merged_Row;
 import Global.DateFormat;
 
+/**
+ * Class that generate's the condition's for the filter in the GUI 
+ * @author Alex Fishman
+ *
+ */
 public class MyPredicateFactory {
 	static int i;
 	static String TIME_MinVal;
@@ -16,6 +21,14 @@ public class MyPredicateFactory {
 	static String LON_MaxVal;
 	static String ID_MinVal;
 	
+	/**
+	 * Determines the condition the user wanted to filter by.
+	 * @param PredicateType
+	 * @param MinVal
+	 * @param MaxVal
+	 * @param LogicalOperator
+	 * @return the condition of the filter
+	 */
 	public static Predicate<CSV_Merged_Row> getPredicate(String[] PredicateType, String[] MinVal, String[] MaxVal ,String LogicalOperator)
 	{
 		if(LogicalOperator == null || LogicalOperator == "" || LogicalOperator.toUpperCase()=="CLEAR_FILTER") return  x->true;
@@ -111,6 +124,4 @@ public class MyPredicateFactory {
 		}
 		return result;
 	}
-	
-	
 }
