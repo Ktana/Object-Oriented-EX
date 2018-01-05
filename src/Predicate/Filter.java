@@ -3,6 +3,11 @@ package Predicate;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
+/**
+ * A class to implement the Serializable interface
+ * @author Alex Fishman
+ *
+ */
 public class Filter implements Serializable{
 	public boolean TimechkBx;
 	public String TIME_MinVal;
@@ -19,6 +24,9 @@ public class Filter implements Serializable{
 	public boolean IDchkBx;
 	public String ID_MinVal;
 	
+	/**
+	 * A blank constructor - dafault values
+	 */
 	public Filter(){
 		 this.TimechkBx = false;
 		 this.TIME_MinVal = null;
@@ -36,6 +44,23 @@ public class Filter implements Serializable{
 		 this.ID_MinVal = null;
 	}
 	
+	/**
+	 * Constructor from data 
+	 * @param TimechkBx
+	 * @param TIME_MinVal
+	 * @param TIME_MaxVal
+	 * @param AltchkBx
+	 * @param ALT_MinVal
+	 * @param ALT_MaxVal
+	 * @param LATchkBx
+	 * @param LAT_MinVal
+	 * @param LAT_MaxVal
+	 * @param LONchkBx
+	 * @param LON_MinVal
+	 * @param LON_MaxVal
+	 * @param IDchkBx
+	 * @param ID_MinVal
+	 */
 	public Filter(boolean TimechkBx, String TIME_MinVal, String TIME_MaxVal, boolean AltchkBx, String ALT_MinVal, String ALT_MaxVal, boolean LATchkBx, String LAT_MinVal,
 					String LAT_MaxVal, boolean LONchkBx, String LON_MinVal, String LON_MaxVal, boolean IDchkBx, String ID_MinVal){
 		
