@@ -5,7 +5,7 @@ import org.jsefa.xml.annotation.XmlElement;
 
 @XmlDataType(defaultElementName = "Point")
 /**
- * A class to get the automatic KML generator to create a place mark tag with all it's fields
+ * A class to get the automatic KML generator to create a point tag with all it's fields
  * @author Alex Fishman
  *
  */
