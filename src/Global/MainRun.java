@@ -20,8 +20,11 @@ import java.util.concurrent.Executors;
 import Algorithms.*;
 import GUI.*;
 import Predicate.Filter;
-
-
+/**
+ * The main class you run for the program to work.
+ * @author Alex Fishman
+ *
+ */
 
 public class MainRun {
 	
@@ -39,6 +42,10 @@ public class MainRun {
 	public static String[] MaxVal= new String[5];
 	public static String LogicalOperator;
 	
+	/**
+	 * Saves the folder path for further use - also initialises the watcher thread
+	 * @param path
+	 */
 	public void saveFolderPath(String path){
 		this.folderPath = path;
 		System.out.println(folderPath);
@@ -69,11 +76,14 @@ public class MainRun {
 			}
 		});
 		ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
-		//if(!Thread.interrupted())
 			executor.execute(thread);
 
 	}
 	
+	/**
+	 * Saves the file path for further use - also initialises the watcher thread
+	 * @param path
+	 */
 	public void saveFilePath(String path){
 		this.filePath = path;
 		System.out.println(filePath);
@@ -92,19 +102,10 @@ public class MainRun {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				/**HERE
-				 * make a list of FileInfo -> run on a folder -> find file -> 
-				 * -> check if this file is in the list -> check for size and time modified-> if modified do{}
-				 * and update list parameters 
-				 * -> if not in list -> save to list
-				 * 
-				 * now we run on list in loop -> check if file in the list is not in the folder -> delete
-				 */
 				fileChecker.workerFileProsses();
 			}
 		});
 		ExecutorService executor = Executors.newFixedThreadPool(NTHREDS);
-		//if(!Thread.interrupted())
 			executor.execute(thread_files);
 
 		
@@ -115,11 +116,19 @@ public class MainRun {
 		
 	}
 	
+	/**
+	 * Saves the merged table path
+	 * @param path
+	 */
 	public void saveMeregedPath(String path){
 		this.meregedPath = path;
 		System.out.println(meregedPath);
 	}
 	
+	/**
+	 * Saves the bin file path
+	 * @param path
+	 */
 	public void saveBinPath(String path){
 		this.binPath = path;
 		System.out.println(binPath);
@@ -140,7 +149,9 @@ public class MainRun {
 		return this.thread_files;
 	}
 	
-	
+	/**
+	 * Collects all the data needed from previous pushed buttons to create a Merged CSV
+	 */
 	public void saveToCSV()
 	{
 		String input_path = this.folderPath;
@@ -161,6 +172,9 @@ public class MainRun {
 		toCSVtoKML.mergeData(output_path +"RESULT");
 	}
 	
+	/**
+	 * Collects all the data needed from previous pushed buttons to create a KML
+	 */
 	public void saveToKML()
 	{
 		String input_path = this.folderPath;
@@ -184,6 +198,9 @@ public class MainRun {
 		toCSVtoKML.saveToKMLFile(XML_data,output_path + "RESULT.kml");
 	}
 	
+	/**
+	 * Clears all the data created in a Merged CSV and the KML
+	 */
 	public void clearData() {
 		String output_path = "C:/ex0/OUT/";
 		toCSVtoKML toCSVtoKML = new toCSVtoKML();
@@ -195,16 +212,9 @@ public class MainRun {
 		toCSVtoKML.saveToKMLFile(XML_data,output_path + "RESULT.kml");
 	}
 
-//	public void addCSV()
-//	{
-//		
-//	}
-	
-	public void submitFilter(){
-		
-	}
-	
-	
+	/**
+	 * Upload the bin file saved (containing the filter object) and print's it in the console
+	 */
 	public void uploadBinFile(){
 		try {
 			String input_path = this.binPath;
@@ -221,11 +231,14 @@ public class MainRun {
 			e.printStackTrace();
 		}
 	}
-	public void algorhthm1() {//b4:ee:b4:36:d2:b0 Full_Coordinate
+	
+	/**
+	 * Generat's the CSV file containing the MAC's coordinates
+	 */
+	public void algorhthm1() {
 		String output_path = this.meregedPath;
 		String line=null;
-		
-		//toCSVtoKML toCSVtoKML = new toCSVtoKML();
+	
 		try {
 			FileReader fr = new FileReader(output_path);
 			BufferedReader bf = new BufferedReader(fr);
@@ -238,25 +251,18 @@ public class MainRun {
 				String [] strs = line.split(",");
 				if(strs.length < 45){
 				String prefix = strs[0]+","+strs[1]+","+strs[2]+","+strs[3]+","+strs[4];
-				//
 				for(int i=5; i<strs.length; i++) {
-					if(strs[i].equals("")) strs[i] = "NaN"; //Defect
+					if(strs[i].equals("")) strs[i] = "NaN"; 
 					if(i<strs.length-1)
 						sufix = sufix + strs[i]+",";
 					else
 						sufix = sufix + strs[i];
 				}
-				for(int i=strs.length; i<=40; i++) //Defect
+				for(int i=strs.length; i<=40; i++) 
 					sufix = sufix + ",";
 							
 				CSV_Merged_Row row= new CSV_Merged_Row( prefix, sufix );
 				rowMergeList.add(row);
-				//
-//					String prefix = strs[0]+","+strs[1]+","+strs[2]+","+strs[3]+",";
-//					String sufix = strs[4]+","+strs[5]+","+strs[6]+","+strs[7]+","+strs[8]+","+strs[9]+","+strs[10]+","+strs[11]+","+strs[12]+","+strs[13]+","+strs[14]+","+strs[15]+","+strs[16]+","+strs[17]+","+strs[18]+","+strs[19]+","+strs[20]+","+strs[21]+","+strs[22]+","+strs[23]+","+strs[24]+","+strs[25]+","+strs[26]+","+strs[27]+","+strs[28]+","+strs[29]+","+strs[30]+","+strs[31]+","+strs[32]+","+strs[33]+","+strs[34]+","+strs[35]+","+strs[36]+","+strs[37]+","+strs[38]+","+strs[39]+","+strs[40]+","+strs[41]+","+strs[42]+","+strs[43]+","+strs[44];
-//					CSV_Merged_Row row= new CSV_Merged_Row( prefix, sufix );
-//					List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
-//					rowMergeList.add(row);
 				}
 				else{
 					//Do nothing: row is not valid (there are not enough columns in file )
@@ -266,21 +272,27 @@ public class MainRun {
 			}
 			fr.close();
 			bf.close();
-//			Full_Coordinate fc = null;
+
 			System.out.println(rowMergeList.toString());
 			Algo_1.runAlgo1(output_path, rowMergeList);
-//			return fc;
+
 		}
 		catch (IOException e){
 			//e.printStackTrace();
 			System.out.println("File is opened!!!!");
-//			return null;
 		}
-	//	toCSVtoKML.run();
-//		Full_Coordinate fc = Algo_1.algorithm_1(mac, rowMergeList);
-//		return fc;
 	}
 	
+	/**
+	 * Generates the coordinates of the MAC's and Signals given by the user.
+	 * @param mac1
+	 * @param signal1
+	 * @param mac2
+	 * @param signal2
+	 * @param mac3
+	 * @param signal3
+	 * @return
+	 */
 	public Full_Coordinate algorhthm2(String mac1, int signal1, String mac2, int signal2, String mac3, int signal3) {
 		String output_path = this.meregedPath;
 		String line=null;
@@ -297,7 +309,6 @@ public class MainRun {
 				String [] strs = line.split(",");
 				if(strs.length < 45){
 				String prefix = strs[0]+","+strs[1]+","+strs[2]+","+strs[3]+","+strs[4];
-				//
 				for(int i=5; i<strs.length; i++) {
 					if(strs[i].equals("")) strs[i] = "NaN"; //Defect
 					if(i<strs.length-1)
@@ -309,12 +320,6 @@ public class MainRun {
 					sufix = sufix + ",";
 				CSV_Merged_Row row= new CSV_Merged_Row( prefix, sufix );
 				rowMergeList.add(row);
-				//
-//					String prefix = strs[0]+","+strs[1]+","+strs[2]+","+strs[3]+",";
-//					String sufix = strs[4]+","+strs[5]+","+strs[6]+","+strs[7]+","+strs[8]+","+strs[9]+","+strs[10]+","+strs[11]+","+strs[12]+","+strs[13]+","+strs[14]+","+strs[15]+","+strs[16]+","+strs[17]+","+strs[18]+","+strs[19]+","+strs[20]+","+strs[21]+","+strs[22]+","+strs[23]+","+strs[24]+","+strs[25]+","+strs[26]+","+strs[27]+","+strs[28]+","+strs[29]+","+strs[30]+","+strs[31]+","+strs[32]+","+strs[33]+","+strs[34]+","+strs[35]+","+strs[36]+","+strs[37]+","+strs[38]+","+strs[39]+","+strs[40]+","+strs[41]+","+strs[42]+","+strs[43]+","+strs[44];
-//					CSV_Merged_Row row= new CSV_Merged_Row( prefix, sufix );
-//					List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
-//					rowMergeList.add(row);
 				}
 				else{
 					//Do nothing: row is not valid (there are not enough columns in file )
@@ -324,21 +329,18 @@ public class MainRun {
 			}
 			fr.close();
 			bf.close();
-//			Full_Coordinate fc = null;
 			return Algo_2.algorithm_2(mac1,signal1,mac2,signal2,mac3,signal3,rowMergeList);
-			
-					//Algo_1.runAlgo1(output_path, rowMergeList);
-//			return fc;
 		}
 		catch (IOException e){
 			e.printStackTrace();
 			return null;
 		}
-		//toCSVtoKML.run();
-		//Full_Coordinate fc = Algo_2.algorithm_2(mac1,signal1,mac2,signal2,mac3,signal3);
-		
 	}
 	
+	/**
+	 * Method check's if the file is a merged one.
+	 * @return true if the file is MERGED false otherwise
+	 */
 	public boolean isMerged()
 	{
 		try {
@@ -359,13 +361,18 @@ public class MainRun {
 		return false;
 	}
 	
-	
+	/**
+	 * Runs the GUI
+	 */
 	public static void run(){
 		Frame1 Frame1 = new Frame1();
 		Frame1.GUIrun();
 	}
 	
-	
+	/**
+	 * Main method
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		run();
 	}
