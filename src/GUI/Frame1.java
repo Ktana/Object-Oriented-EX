@@ -41,7 +41,11 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JCheckBox;
-
+/**
+ * Class that generates the GUI
+ * @author Alex Fishman
+ *
+ */
 public class Frame1 {
 
 	private JFrame frame;
@@ -109,7 +113,7 @@ public class Frame1 {
 
 
 	/**
-	 * Launch the application.
+	 * Main method to launch the GUI application.
 	 */
 	public void main(String[] args) {
 		GUIrun();
@@ -120,6 +124,10 @@ public class Frame1 {
 		return this.main;
 	}
 
+	/**
+	 * Method to create a visible GUI window and run it - and if the thread is invoked - interrupt
+	 * when window is closed
+	 */
 	public void GUIrun() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -133,25 +141,15 @@ public class Frame1 {
 						if(main.getThread() != null){
 							main.getThread().interrupt();
 						}
-						if(main.getThreadFiles() != null){
-							main.getThreadFiles().interrupt();
-						}
 					}
-
-					//		            @Override
-					//		            public void windowClosed(WindowEvent e) {
-					//		                System.out.println("A has closed");
-					//		            }
-
 				});
 			}
 		});
-
-
 	}
 
 	/**
-	 * Create the application.
+	 * Run's all the button's with it's action Listeners.
+	 * Initialize the contents of the frame.
 	 */
 	public Frame1() {
 		addDir();
@@ -166,7 +164,7 @@ public class Frame1 {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Takes care of the add directory button - when you choose a folder path.
 	 */
 	public void addDir() {
 		try {
@@ -204,7 +202,7 @@ public class Frame1 {
 					dirChooser.setFileFilter(null);
 					dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 					dirChooser.setCurrentDirectory(null); // null sets default
-					// directory
+					
 					int returnVal = dirChooser.showOpenDialog(null);
 					if (returnVal == JFileChooser.APPROVE_OPTION) {
 						folderPath = dirChooser.getSelectedFile().getPath();
@@ -236,6 +234,9 @@ public class Frame1 {
 
 	}
 
+	/**
+	 * Takes care of the add a single CSV file button - when you choose a file path.
+	 */
 	private void addCSV() {
 		// CSV button
 		btnCSV = new JButton("Add CSV File");
@@ -273,8 +274,6 @@ public class Frame1 {
 							// ;
 							txtSize.setText(sizeInKB + "KB");
 							main.saveMeregedPath(chooser.getSelectedFile().getPath());
-							// Here we should count the num of different MACs in
-							// table
 						}
 
 					} else {
@@ -285,6 +284,10 @@ public class Frame1 {
 		});
 	}
 
+	/**
+	 * Button that clears all the data from the creater KML or CSV.
+	 * If there is nothing to clear - it will generate a clear CSV and KML files.
+	 */
 	private void clearData() {
 		// Clear Data
 		btnClear = new JButton("Clear Data");
@@ -297,6 +300,9 @@ public class Frame1 {
 
 	}
 
+	/**
+	 * Creates the merged CSV file from the folder path you chose earlier.
+	 */
 	private void saveToCSV() {
 		// Save To CSV
 		btnSaveToCSV = new JButton("Save to CSV");
@@ -312,6 +318,9 @@ public class Frame1 {
 		});
 	}
 
+	/**
+	 * Creates the KML file from the folder path you chose earlier.
+	 */
 	private void saveToKML() {
 		btnSaveToKml = new JButton("Save to KML");
 		btnSaveToKml.addActionListener(new ActionListener() {
@@ -327,6 +336,9 @@ public class Frame1 {
 
 	}
 
+	/**
+	 * Take's care of the filter submit buttons, radio buttons and check boxes that are selected.
+	 */
 	private void filterMenu() {
 		// Filter Menu
 		lblNewLabel = new JLabel("Filter By Fields");
@@ -469,9 +481,6 @@ public class Frame1 {
 			}
 		});
 
-		// ButtonGroup deviceFilter = new ButtonGroup();
-		// deviceFilter.add(rdbtnByName);
-		// deviceFilter.add(rdbtnNotByName);
 		/**
 		 * Submit filter buttons
 		 */
@@ -579,6 +588,10 @@ public class Frame1 {
 		});
 	}
 
+	/**
+	 * Set's the filters you choose to create the merged filtered CSV
+	 * @param logicOperator
+	 */
 	private void setFilter(String logicOperator){
 		clearFilterData();
 		MainRun.LogicalOperator=logicOperator;
@@ -624,6 +637,9 @@ public class Frame1 {
 		}
 	}
 
+	/**
+	 * Clear's the filter data you choose earlier
+	 */
 	private void clearFilterData(){
 		MainRun.LogicalOperator="CLEAR_FILTER";
 		MainRun.PredicateType = new String[5];
@@ -631,6 +647,12 @@ public class Frame1 {
 		MainRun.MaxVal= new String[5];
 	}
 
+	/**
+	 * First algorithm GUI implementation:
+	 * Creates a CSV Mac-and-Coordinate file
+	 * @input three different mac's
+	 * @output coordinate
+	 */
 	private void firstAlgorithm() {
 		lblAlgorithms = new JLabel("Algorithms");
 		lblAlgorithms.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -645,11 +667,8 @@ public class Frame1 {
 		btnSubmitMac = new JButton("Submit MAC");
 		btnSubmitMac.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//String mac = txtMac.getText();
-				if(main.getFilePath() != null ){//&& mac != null){
-//					fc =
+				if(main.getFilePath() != null ){
 							main.algorhthm1();
-//					txtAltLonLat.setText(fc.toStringGUI());
 				}
 				else{
 					JOptionPane.showMessageDialog(frame, "Enter MAC and upload file to run Algorithm 1!");
@@ -658,13 +677,14 @@ public class Frame1 {
 		});
 	}
 
+	/**
+	 * Second algorithm GUI implementation
+	 * 
+	 * @input three different mac's
+	 * @output coordinate
+	 */
 	private void secondAlgorithm() {
-		/**
-		 * Second algorithm GUI implementation
-		 * 
-		 * @input three different mac's
-		 * @output coordinate
-		 */
+		
 		txtMac_1 = new JTextField();
 		txtMac_1.setText("Mac1");
 		txtMac_1.setColumns(10);
@@ -744,8 +764,8 @@ public class Frame1 {
 					int sig1 = Integer.parseInt(signal1);
 					int sig2 = Integer.parseInt(signal2);
 					int sig3 = Integer.parseInt(signal3);
-					Full_Coordinate fuc = main.algorhthm2(mac1, sig1, mac2, sig2, mac3, sig3);
-					txtAltitudeLongitudeLatitude.setText(fuc.toStringGUI());
+					fc = main.algorhthm2(mac1, sig1, mac2, sig2, mac3, sig3);
+					txtAltitudeLongitudeLatitude.setText(fc.toStringGUI());
 				}
 				else{
 					JOptionPane.showMessageDialog(frame, "Enter all the data to run Algorithm 2 and upload a file!");
@@ -756,11 +776,11 @@ public class Frame1 {
 
 	}
 
+	/**
+	 * Takes care of the Layout of the window
+	 */
 	private void groupLayout() {
-		/**
-		 * Layout of the window
-		 */
-
+		
 		JList list = new JList();
 		
 		lblFirstAlgorithm = new JLabel("First Algorithm");
