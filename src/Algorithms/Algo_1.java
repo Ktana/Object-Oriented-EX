@@ -24,8 +24,6 @@ public class Algo_1 {
 	public static Full_Coordinate algorithm_1(String mac, List<CSV_Merged_Row> rowMergeList) {
 		//////////// sort By MAC: /////////////////////////////
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
-		//toCSVtoKML toCSVtoKML = new toCSVtoKML();
-		//List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
 		rowMergeMACList = rowMergeList.stream().filter(r ->  r.compareByMAC(mac)).collect(Collectors.toList());
 		String buffer = "";
 		Full_Coordinate[]C = new Full_Coordinate[rowMergeMACList.size()];
@@ -101,18 +99,14 @@ public class Algo_1 {
 		return final_coo;
 	}
 
-	/**@param filename a string  that represents a file path
+	/**@param filename a string  that represents a file path and a rowMergeList
 	 *@return creates new file in chosen location, this file contains all MAC's and coordinates
 	 */
 	public static void runAlgo1(String filename, List<CSV_Merged_Row> rowMergeList) {
 		String line=null;
 		try {
 			PrintWriter pw = new PrintWriter(new File("C:/ex0/CombData/out/MAC_Algo1_1.csv"));
-			//			FileReader fr = new FileReader(filename);
-			//			BufferedReader bf = new BufferedReader(fr);
 			StringBuilder sb = new StringBuilder();
-			//			line = bf.readLine();
-			//			line = bf.readLine();
 			sb.append("MAC");
 			sb.append(',');
 			sb.append("Alt");
@@ -121,14 +115,11 @@ public class Algo_1 {
 			sb.append(',');
 			sb.append("Lon");
 			sb.append('\n');
-			//			while(line != null) {
-			//				String [] strs = line.split(",");
-			//				for(int i=6; i<strs.length; i=i+4) {
 			for(int i=0; i<rowMergeList.size(); i++){
 				Full_Coordinate fc;
 				if(!rowMergeList.get(i).getMAC1().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC1(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC1());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC1(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC1());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -138,8 +129,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC2().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC2(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC2());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC2(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC2());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -149,8 +140,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC3().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC3(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC3());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC3(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC3());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -160,8 +151,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC4().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC4(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC4());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC4(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC4());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -182,8 +173,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC6().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC6(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC6());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC6(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC6());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -193,8 +184,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC7().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC7(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC7());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC7(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC7());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -204,8 +195,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC8().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC8(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC8());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC8(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC8());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -215,8 +206,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC9().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC9(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC9());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC9(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC9());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -226,8 +217,8 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 				if(!rowMergeList.get(i).getMAC10().equals("")){
-					fc = algorithm_1(rowMergeList.get(i).getMAC10(), rowMergeList);//strs[i]
-					sb.append(rowMergeList.get(i).getMAC10());//strs[i]
+					fc = algorithm_1(rowMergeList.get(i).getMAC10(), rowMergeList);
+					sb.append(rowMergeList.get(i).getMAC10());
 					sb.append(',');
 					sb.append(fc.getAlt());
 					sb.append(',');
@@ -237,25 +228,11 @@ public class Algo_1 {
 					sb.append('\n');
 				}
 			}
-			//				line = bf.readLine();
-			//			}
-			//			fr.close();
-			//			bf.close();
 			pw.write(sb.toString());
 			pw.close();
 		}
 		catch (IOException e){e.printStackTrace();}
 
-		System.out.println("Done running Algo1 --> Location: C:\\ex0\\OUT");
+		System.out.println("Done running Algo1 --> Location: C:/ex0/CombData/out");
 	}
-/*
-	public static void main(String[] args) {
-		toCSVtoKML toCSVtoKML = new toCSVtoKML();
-		toCSVtoKML.run();//C:\ex0\CombData/RESULT_Merged_BM2_Algo1
-		//		String filename = "C:/ex0/CombData/RESULT_Merged_test_Algo1.csv";
-		//		runAlgo1(filename);
-		String mac = "90:a7:c1:0c:4d:14";
-		//System.out.println("\n"+algorithm_1(mac));
-	}
-*/
 }

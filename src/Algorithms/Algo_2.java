@@ -29,9 +29,6 @@ public class Algo_2 {
 	public static Full_Coordinate algorithm_2(String mac1, int signal1, String mac2, int signal2, String mac3, int signal3, List<CSV_Merged_Row> rowMergeList) {
 		//////////////////////////////////////////////////////////////////
 		List<CSV_Merged_Row> rowMergeMACList = new ArrayList<CSV_Merged_Row>();
-//		toCSVtoKML toCSVtoKML = new toCSVtoKML();
-//		List<CSV_Merged_Row> rowMergeList = toCSVtoKML.getRowMergeList();
-		//System.out.println(rowMergeList.toString());
 		rowMergeMACList = rowMergeList.stream().filter(r ->  r.compareByMAC(mac1)).collect(Collectors.toList());
 		Full_Coordinate[]C1 = new Full_Coordinate[rowMergeMACList.size()];
 		int index = 0;
@@ -189,8 +186,7 @@ public class Algo_2 {
 		final_coo.setLon((coo1.getLon()*pi1 + coo2.getLon()*pi2 + coo3.getLon()*pi3)/final_coo.getSignal());
 		return final_coo;
 	}
-
-
+	
 	private static   double pi(int signal1,int close_s1,int signal2,int close_s2,int signal3,int close_s3 ) {
 		int df1, df2, df3;
 		if(close_s1== -120) df1 = 80;
@@ -205,39 +201,39 @@ public class Algo_2 {
 		return w1*w2*w3;
 	}
 
-	//	/** private method that return the closest signal to ours. 
-	//	 * @param signal that was given
-	//	 * @param a	array of signals
-	//	 * @return integer that is the closest signal.
-	//	 */
-	//	private static   int close_signal(int signal, int[]a) {
-	//		//Suppose that the array is sorted
-	//		int i=0, tempA=0, tempB=0;
-	//		boolean b = true;
-	//		while(i<a.length && b) {
-	//			if(signal>=a[i]) {
-	//				i++;		
-	//			}
-	//			else b = false;
-	//		}
-	//		if(i == a.length){
-	//			tempA = Math.abs(a[i-1]) - Math.abs(signal);
-	//			return a[i-1];
-	//		}
-	//		else{
-	//			tempA = Math.abs(a[i]) - Math.abs(signal);
-	//			if(a[i+1]!= 0) {
-	//				tempB = Math.abs(signal) - Math.abs(a[i+1]);
-	//				if (tempA<tempB) return a[i];
-	//				else return a[i+1];
-	//			}
-	//
-	//		}
-	//		int ans = a[i];
-	//		a[i] = 0;
-	//		Arrays.sort(a);
-	//		return ans;
-	//	}
+		/** private method that return the closest signal to ours. 
+		 * @param signal that was given
+		 * @param a	array of signals
+		 * @return integer that is the closest signal.
+		 */
+		private static   int close_signal(int signal, int[]a) {
+			//Suppose that the array is sorted
+			int i=0, tempA=0, tempB=0;
+			boolean b = true;
+			while(i<a.length && b) {
+				if(signal>=a[i]) {
+					i++;		
+				}
+				else b = false;
+			}
+			if(i == a.length){
+				tempA = Math.abs(a[i-1]) - Math.abs(signal);
+				return a[i-1];
+			}
+			else{
+				tempA = Math.abs(a[i]) - Math.abs(signal);
+				if(a[i+1]!= 0) {
+					tempB = Math.abs(signal) - Math.abs(a[i+1]);
+					if (tempA<tempB) return a[i];
+					else return a[i+1];
+				}
+	
+			}
+			int ans = a[i];
+			a[i] = 0;
+			Arrays.sort(a);
+			return ans;
+		}
 
 	/** biggest number between two numbers
 	 * @param a integer
@@ -249,7 +245,7 @@ public class Algo_2 {
 		return b;
 	}
 
-	/**@param filename	a string  that represents a file path
+	/**@param filename a string  that represents a file path and a rowMergedList
 	 *@return creates new fixed file in chosen location
 	 */
 	public static void runAlgo2(String filename , List<CSV_Merged_Row> rowMergeList) {
@@ -302,14 +298,4 @@ public class Algo_2 {
 		System.out.println("Done running Algo2 --> Location: C:/ex0/ex2/out/");
 	}
 
-
-/*
-	public static void main(String[] args) {
-		toCSVtoKML toCSVtoKML = new toCSVtoKML();
-		toCSVtoKML.run();
-		String filename = "C:/ex0/ex2/þþRESULT_Merged_BM3_Algo2.csv";
-		//runAlgo2(filename);
-
-	}
-*/
 }

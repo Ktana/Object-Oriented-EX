@@ -1,7 +1,7 @@
 package Algorithms;
 import java.util.Scanner;
 
-/**this class represents coordinate that include altitude,
+/**this class represents coordinate that includes altitude,
  *longitude and latitude and also MAC's signal of this coordinate.
  * @author Alona+Alex
  */
@@ -12,7 +12,7 @@ public class Full_Coordinate {
 	private double alt;
 	private double signal;
 	
-	/**empty constractor
+	/**empty constractor - default values 
 	 * @author Alona+Alex
 	 */
 	public Full_Coordinate() {
@@ -71,19 +71,5 @@ public class Full_Coordinate {
 	public void setLon(double lon) {this.lon = lon;}
 	public void setAlt(double alt) {this.alt = alt;}
 	public void setSignal(double signal) {this.signal = signal;}
-
-	public void main(String[] args){
-		String f_c = "34.80985384,32.16233648,24,-90";
-		Full_Coordinate fc = new Full_Coordinate(f_c);
-		System.out.println(fc);
-		Full_Coordinate fc2 = new Full_Coordinate(fc);
-		System.out.println(fc2);
-		Full_Coordinate fc3 = new Full_Coordinate();
-		System.out.println(fc3);	
-		String test = fc.SignaltoString();
-		System.out.println(test);
-		fc3.setSignal(-4);
-		System.out.println(fc3);
-	}
 
 }
