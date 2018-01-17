@@ -14,9 +14,9 @@ Through the GUI you can choose to filter (and/or) the data by time, latitude, al
 the program takes all the CSV format files that there is on the given path and creates new CSV file with the fields: time, model, longitude, altitude, latitude. The Union CSV is filtered by time and ID.
 
 ### The chosen fields: 
-6 permanent columns that represents the time and the coordinates, and 40 dynamic columns that filtered by the strongest signal (he is a part of the data). In addition – the file can be filtered by tome and ID.
+6 permanent columns that represents the time and the coordinates, and 40 dynamic columns that filtered by the strongest signal (he is a part of the data). In addition – the file can be filtered by time and ID.
 
-## The program contains 7 packages plus one package from the internet:
+## The program contains 8 packages and two packages from the internet:
 ### Global package:
 -**_CSVheaderrow_** – describes the head line (the labels) on the input file, it contains private Strings that matching the labels on the original file, getters of the values and one constructor that gets the relevant values from the header line.
 Main use: saving data about the devise that collect the data.
@@ -87,7 +87,13 @@ The class also contains CompareByTime function and CompareByPlace function that 
 
 -**_FolderFilter_** - Not used at the time.
 
+### Database package:
+-**_MySQL_101_** - Provides the connection to the tables in mySQL (vary spesific ones because of the table's structure) and fetches all the data there is then adds it to the existing data you already uploaded via GUI.
+
 ### Junit package.
+
+### lib package: 
+Contains the mySQL connection JAR.
 
 ### org.jsefa package:
 For writing KML file, we used A library named "org.jsefa" that we found on the internet (this library included in src folder on Github).
