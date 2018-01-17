@@ -5,6 +5,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Algorithms.Full_Coordinate;
+import Database.MySQL_101;
 import Global.MainRun;
 import Predicate.Filter;
 import java.awt.Component;
@@ -40,6 +41,7 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
+import javax.swing.JPasswordField;
 /**
  * Class that generates the GUI
  * @author Alex Fishman
@@ -117,11 +119,11 @@ public class Frame1 {
 	private JTextField txtIp;
 	private JTextField txtUser;
 	private JTextField txtPort;
-	private JTextField txtPassword;
+	private JPasswordField txtPassword;
 	private JButton btnConnect;
 	private JLabel lblTable;
 	private JTextField txtTableName;
-
+	
 
 	/**
 	 * Main method to launch the GUI application.
@@ -134,7 +136,7 @@ public class Frame1 {
 	{
 		return this.main;
 	}
-
+	
 	/**
 	 * Method to create a visible GUI window and run it - and if the thread is invoked - interrupt
 	 * when window is closed
@@ -798,65 +800,59 @@ public class Frame1 {
 		lblIp.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		txtIp = new JTextField();
-		txtIp.setText("IP");
+		txtIp.setText("5.29.193.52");
 		txtIp.setColumns(10);
 		txtIp.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent e) {
-				if(txtIp.getText().equals("IP"))
-					txtIp.setText("");
-			}
+//			public void focusGained(FocusEvent e) {
+//				if(txtIp.getText().equals("IP"))
+//					txtIp.setText("");
+//			}
 		});
 		
 		lblUser = new JLabel("User");
 		lblUser.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		txtUser = new JTextField();
-		txtUser.setText("username");
+		txtUser.setText("oop1");
 		txtUser.setColumns(10);
 		txtUser.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent e) {
-				if(txtUser.getText().equals("username"))
-					txtUser.setText("");
-			}
+//			public void focusGained(FocusEvent e) {
+//				if(txtUser.getText().equals("username"))
+//					txtUser.setText("");
+//			}
 		});
 		
 		lblPort = new JLabel("Port");
 		lblPort.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		txtPort = new JTextField();
-		txtPort.setText("port");
+		txtPort.setText("3306");
 		txtPort.setColumns(10);
 		txtPort.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent e) {
-				if(txtPort.getText().equals("port"))
-					txtPort.setText("");
-			}
+//			public void focusGained(FocusEvent e) {
+//				if(txtPort.getText().equals("port"))
+//					txtPort.setText("");
+//			}
 		});
 		
 		lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
-		txtPassword = new JTextField();
-		txtPassword.setText("password");
+		txtPassword = new JPasswordField();
+		txtPassword.setText("Lambda1();");
 		txtPassword.setColumns(10);
-		txtPassword.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent e) {
-				if(txtPassword.getText().equals("password"))
-					txtPassword.setText("");
-			}
-		});
 		
 		lblTable = new JLabel("Table");
 		lblTable.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		txtTableName = new JTextField();
-		txtTableName.setText("table name");
+		txtTableName.setText("ex4_db");
 		txtTableName.setColumns(10);
 		txtTableName.addFocusListener(new FocusAdapter() {
-			public void focusGained(FocusEvent e) {
-				if(txtTableName.getText().equals("table name"))
-					txtTableName.setText("");
-			}
+//			public void focusGained(FocusEvent e) {
+//				if(txtTableName.getText().equals("table name"))
+//					txtTableName.setText("");
+//			}
 		});
 		
 		btnConnect = new JButton("Connect");
@@ -868,9 +864,16 @@ public class Frame1 {
 				String password = txtPassword.getText();
 				String tableName = txtTableName.getText();
 				if(!ip.isEmpty() && !ip.equals("IP") && !port.isEmpty() && !port.equals("port") && !user.isEmpty() && !user.equals("username")&& !password.isEmpty() && !password.equals("password") && !tableName.isEmpty() && !tableName.equals("table name")){
-					/*
-					 * Here we should connect to the database!
-					 * */
+					MySQL_101 connector = new MySQL_101( ip,  user,  password,  port,  tableName);
+					boolean isDBConnected = connector.isConnected();
+					if(isDBConnected){
+						JOptionPane.showMessageDialog(frame, "Connected to Database!");
+						main.setDBParams( ip,  user,  password,  port,  tableName);
+					}
+					else
+						JOptionPane.showMessageDialog(frame, "Was not able to connect!");
+					main.setIsDBConnected(isDBConnected);
+					
 				}
 				else{
 					JOptionPane.showMessageDialog(frame, "Fill all the fields to connect!");
