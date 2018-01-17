@@ -255,6 +255,9 @@ public class FileChecker {
 		if(!errorMsg.equals("")){
 			System.out.println(errorMsg);
 			errorMsg ="";
+			MainRun main = new MainRun();
+			main.saveMeregedPath(filePath.toString());
+			main.algorhthm1();
 		}
 	}
 
