@@ -1,6 +1,7 @@
 package Global;
 
 import Comparator.*;
+import Database.MySQL_101;
 import KML.*;
 
 
@@ -44,6 +45,7 @@ public class toCSVtoKML {
 	private List<CSV_row> rowList ;
 	private List<CSV_Merged_Row> rowMergeList;
 	private List<Placemark> PlacemarkList;
+	private MySQL_101 mySQLconnector = null ;
 	
 	/**
 	 * Constructor 
@@ -54,6 +56,16 @@ public class toCSVtoKML {
 		this.rowList = new ArrayList<CSV_row>();
 		this.rowMergeList = new ArrayList<CSV_Merged_Row>();
 		this.PlacemarkList = new ArrayList<Placemark>();
+	}
+	
+	public toCSVtoKML(String ip, String user, String password, String port, String tableName)
+	{
+		this.sb = new StringBuilder();
+		this.rowList = new ArrayList<CSV_row>();
+		this.rowMergeList = new ArrayList<CSV_Merged_Row>();
+		this.PlacemarkList = new ArrayList<Placemark>();
+		this.mySQLconnector = new MySQL_101(ip, user, password, port, tableName);
+		
 	}
 	
 	public List<CSV_Merged_Row> getRowMergeList() {
@@ -137,7 +149,12 @@ public class toCSVtoKML {
 
 			rowMergeList.add(new CSV_Merged_Row(prefix,suffix));
 		} 
-
+		
+		//add the data from the Database
+		if(mySQLconnector != null){
+			mySQLconnector.test_101(this.rowMergeList);
+		}
+		
 		/**
 		 * Filter 
 		 * @author: http://qaru.site/questions/289/what-is-the-best-way-to-filter-a-java-collection

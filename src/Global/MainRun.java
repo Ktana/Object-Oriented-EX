@@ -11,6 +11,7 @@ import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -18,8 +19,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import Algorithms.*;
+import Database.MySQL_101;
 import GUI.*;
 import Predicate.Filter;
+import GUI.*;
 /**
  * The main class you run for the program to work.
  * @author Alex Fishman
@@ -32,6 +35,11 @@ public class MainRun {
 	private String filePath;
 	private String binPath;
 	private String meregedPath;
+	private  String _ip; //= "5.29.193.52";
+	private  String _user; //= "oop1";
+	private String _port; //= "3306";
+	private  String _password; //= "Lambda1();";
+	private  String _table; //= "test101";
 	
 	private Thread thread;
 	private Thread thread_files;
@@ -41,7 +49,20 @@ public class MainRun {
 	public static String[] MinVal= new String[5];
 	public static String[] MaxVal= new String[5];
 	public static String LogicalOperator;
+	private boolean isDBConnected = false;
 	
+	public void setIsDBConnected(boolean flag)
+	{
+		this.isDBConnected = flag;
+	}
+	
+	public void setDBParams(String ip,String  user,String password,String  port,String  tableName){
+		this._ip = ip;
+		this._user = user;
+		this._password = password;
+		this._port = port;
+		this._table = tableName;
+	}
 	/**
 	 * Saves the folder path for further use - also initialises the watcher thread
 	 * @param path
@@ -156,7 +177,13 @@ public class MainRun {
 	{
 		String input_path = this.folderPath;
 		String output_path = "C:/ex0/OUT/";
-		toCSVtoKML toCSVtoKML = new toCSVtoKML();
+		toCSVtoKML toCSVtoKML;
+		if(isDBConnected){
+			toCSVtoKML = new toCSVtoKML(this._ip, this._user, this._password, this._port, this._table);
+		}
+		else
+			toCSVtoKML = new toCSVtoKML();
+		
 		List<String> fileNameArray = new ArrayList<String>();
 		Path folder = Paths.get(input_path);
 		try {
@@ -179,7 +206,13 @@ public class MainRun {
 	{
 		String input_path = this.folderPath;
 		String output_path = "C:/ex0/OUT/";
-		toCSVtoKML toCSVtoKML = new toCSVtoKML();
+		toCSVtoKML toCSVtoKML;
+		if(isDBConnected){
+			toCSVtoKML = new toCSVtoKML(this._ip, this._user, this._password, this._port, this._table);
+		}
+		else
+			toCSVtoKML = new toCSVtoKML();
+		
 		List<String> fileNameArray = new ArrayList<String>();
 		Path folder = Paths.get(input_path);
 		try {
